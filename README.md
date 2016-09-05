@@ -10,7 +10,7 @@ Toda experiencia, buena o mala, sirve para aprender. En nuestro país, el terrem
 * Has todos los cambios necesarios para añadir una nueva característica o arreglar un bug en un nuevo branch.
 * Prueba tus cambios localmente
 * cambia el número de versión de la aplicación e indica los nuevos cambios realizados en el archivo CHANGELOG.md
-* has commit de tus cambios y realiza el respectivo rebase con la rama master actualizada.
+* has commit de tus cambios y realiza el respectivo rebase con la rama master actualizada. (considerar esta [forma de hacer commit](https://tree.taiga.io/support/integrations/changing-elements-status-via-commit-message/))
 * prueba DE NUEVO los cambios hechos localmente
 * has push de tus cambios a un nuevo branch remoto con un nombre significativo
 * crea un pull request y COMUNICA al equipo de desarrolladores para que revisen tus cambios hechos y que puedan agregar alguna observación
