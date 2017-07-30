@@ -1,0 +1,47 @@
+.intern{
+	padding-left: 4%;
+	padding-right: 4%;
+}
+
+ hr.featurette-divider{
+	margin-top: 3%;
+	margin-bottom: 3%;
+	border: dotted #505170;
+	background-color: #505170;
+	border-width:  0.11em ;
+
+}
+
+
+.top{
+	padding-top: 4%;
+}
+
+.bottom{
+	padding-bottom: 10%;
+}
+
+.titulo {
+	margin-top: 5%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	border-style: dotted;
+	border-color: #505170;
+	border-left: none;
+	border-right: none;
+
+}
+
+.helpMappers{
+	margin-top: 5%;
+	text-align: center;
+}
+
+.titulo2 {
+	margin-top: 5%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	box-sizing: content-box;
+
+
+}

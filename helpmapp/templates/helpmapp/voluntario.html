@@ -1,19 +1,21 @@
+
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<title> helpMapp - Quiero ser Voluntario</title>
-		<link rel="stylesheet" href="../styles/principal.css">
-		<link href="../dist/css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
-		<link href="../styles/index.css" rel="stylesheet">
-		<link href="../styles/hdft.css" rel="stylesheet">
-		<link href="../styles/voluntario.css" rel="stylesheet">
+		<link href="{% static 'styles/index.css' %}" rel="stylesheet">
+		<link href="{% static 'styles/hdft.css' %}" rel="stylesheet">
+		<link href="{% static 'styles/voluntario.css' %}" rel="stylesheet">
 		<link rel="icon" href="https://goo.gl/bJHmja">
 		<!-- Important Owl stylesheet -->
-	    <link rel="stylesheet" href="../styles/owl.carousel.css">
+	    <link rel="stylesheet" href="{% static 'styles/owl.carousel.css' %}">
 	    <!-- Default Theme -->
-	    <link rel="stylesheet" href="../styles/owl.theme.css">
+	    <link rel="stylesheet" href="{% static 'styles/owl.theme.css' %}">
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +31,7 @@
 				</div>
 				
 				<div id="navbar" class="navbar-collapse collapse" >
-					<img src="../img/helpMapp.jpg" class="header-icon" alt="helpMapp-logo">
+					<img src="{% static 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
 					<ul class="nav navbar-nav navbar-right ">
 						<li><a href="index.html"> Inicio </a></li>
 						<li ><a href="donar.html" > Donar</a></li>
@@ -61,7 +63,7 @@
 			    <div class="carousel-inner" role="listbox">
 
 			      <div class="item active" >
-			        <img src = "../img/3.jpg" alt="start" >
+			        <img src = "{% static 'img/3.jpg' %}" alt="start" >
 			        <div class="caption_st" >
 						<h1>Voluntarios Telefónica</h1>
 			          <h3>"Una experiencia de amor"</h3>
@@ -70,7 +72,7 @@
 			      </div>
 
 			      <div class="item">
-			        <img src = "../img/2.jpg"  alt="service" >
+			        <img src = "{% static 'img/2.jpg' %}"  alt="service" >
 			        <div class="caption_st">
 						<h1>Voluntarios Cruz Roja</h1>
 			          <h3>"Ecuador en una palabra: unión"</h3>
@@ -80,7 +82,7 @@
 			      </div>
 
 			      <div class="item">
-			        <img src = "../img/1.jpg"  alt="dog" >
+			        <img src = "{% static 'img/1.jpg' %}"  alt="dog" >
 			        <div class="caption_st">
 								<h1>Bomberos Voluntarios</h1>
 			          <h3>"Dios ha sido nuestra fuerza"</h3>

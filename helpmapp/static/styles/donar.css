@@ -1,0 +1,14 @@
+h2{
+	border-top-right-radius: 5%;
+	border-bottom-right-radius: 5%;
+}
+
+.donar-left h2 {
+	padding-bottom: 5%;
+}
+
+#map {		
+ 	height: 480px;		
+	width: 600px;
+	margin: 5%;
+}		
