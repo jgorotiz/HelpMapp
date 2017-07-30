@@ -17,7 +17,7 @@
     <title>helpMapp</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -44,10 +44,10 @@
             </div>
             
             <div id="navbar" class="navbar-collapse collapse" >
-              <img src="../img/helpMapp.jpg" class="header-icon" alt="helpMapp-logo">
+              <img src="{% 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
               <ul class="nav navbar-nav navbar-right ">
 
-                <li><a href="index.html"> Inicio </a></li>
+                <li><a href="{% url 'helpmapp.views.show_index' %}"> Inicio </a></li>
                 <li ><a href="donar.html" > Donar</a></li>
                 <li><a href="statistics.html"> Estadísticas</a></li>
                 <li><a href="voluntario.html" > Voluntario</a></li>
