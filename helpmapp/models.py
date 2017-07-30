@@ -5,7 +5,7 @@ from django.db import models
 
 class HelpMapper(models.Model):
 	id_HelpMapper = models.CharField( primary_key=True,max_length=16)
-    nombre_usuario = models.CharField(max_length=12)
+	nombre_usuario = models.CharField(max_length=12)
     contrasenia = models.CharField(min_length=6,max_length=15)
     correo = models.EmailField(max_length=100)
     estado = models.IntegerField(max_digits=1)
