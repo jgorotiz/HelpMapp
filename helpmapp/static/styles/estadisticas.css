@@ -1,0 +1,16 @@
+#estadisticas{
+	display: inline-flex;
+	align-content: center;
+}
+
+.imagen-estaditica{
+	margin: 20px;
+}
+
+.crappers{
+	padding-bottom: 4em;
+}
+
+#tabla{
+	align-content: center;
+}
