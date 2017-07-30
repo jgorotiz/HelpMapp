@@ -2,12 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-class Component(models.Model):
-    description = models.CharField(max_length=50)
-    def __str__(self):
-        return self.description
-
-<<<<<<< HEAD
 #IntegerField
 class HelpMapper(models.Model):
 	id_HelpMapper = models.CharField( primary_key=True,max_length=16)
@@ -27,7 +21,6 @@ class HabilidadHelpMapper(models.Model):
 	id_HelpMapper = models.CharField(max_length=16)
 	id_Hablidad = models.CharField(max_length=16)
 
-
 class Habilidad(models.Model):
 	id_Habilidad = models.CharField( primary_key=True,max_length=16)
 	nombre_habilidad = models.CharField(max_length=100)
@@ -38,12 +31,6 @@ class cambioInventario(models.Model):
 	cantidad = models.DecimalField(default=0,max_digits=6,decimal_places=2)
 	id_producto = models.CharField(max_length=16)
 	fecha = models.DateField(default=datetime.date.today)
-
-	
-
-
-
-=======
 
 class Administrador(models.Model):
 	idAdministrador = models.CharField(primary_key=True,max_length=16)
@@ -78,7 +65,6 @@ class CentroDeAcopio(models.Model):
     def __str__(self):
         return self.idCentro
 
-
 class Producto(models.Model):
 	idProducto = models.CharField(primary_key=True,max_length=16)	
 	nombreProducto = models.CharField(max_length=30)
@@ -104,5 +90,4 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.idCategoria
->>>>>>> c8f49ede6bc19390a26a4e5507e1d7d50e2f25d2
 
