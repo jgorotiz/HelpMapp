@@ -2,9 +2,17 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from .form import VoluntaryForm
-def show_index(request):
+def mostrar_indice(request):
     return render(request,'helpmapp/cliente/index.html')
 
+def donar(request):
+    return render(request,'helpmapp/cliente/donar.html')
+
+def estadisticas(request):
+    return render(request,'helpmapp/cliente/index.html')
+
+def mostrar_tutoriales(request):
+    return render(request,'helpmapp/cliente/index.html')
 
 def get_name(request):
     # if this is a POST request we need to process the form data
