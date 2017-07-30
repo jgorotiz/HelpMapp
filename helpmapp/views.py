@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from .form import VoluntaryForm
+def show_index(request):
+    return render(request,'helpmapp/cliente/index.html')
+
 
 def get_name(request):
     # if this is a POST request we need to process the form data
@@ -15,11 +18,11 @@ def get_name(request):
                    
         	 # redirect to a new URL:
             data = form.cleaned_data
-            print data['nombre']
-            print data['apellido']
-            print data['cedula']
+            print (data['nombre'])
+            print (data['apellido'])
+            print (data['cedula'])
             #print data['GENDER_CHOICES']
-            print data['trabajo_campo']
+            print (data['trabajo_campo'])
             return HttpResponseRedirect('/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
