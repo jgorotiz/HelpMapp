@@ -14,6 +14,12 @@ def get_name(request):
             # ...
                    
         	 # redirect to a new URL:
+            data = form.cleaned_data
+            print data['nombre']
+            print data['apellido']
+            print data['cedula']
+            #print data['GENDER_CHOICES']
+            print data['trabajo_campo']
             return HttpResponseRedirect('/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
@@ -24,4 +30,7 @@ def get_name(request):
 def show_name(request):
 	
 	return render(request,'helpmapp/prueba.html')
-    	
+
+
+def saveData():
+    return
