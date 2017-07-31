@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +14,10 @@
     <title>helpMapp - Estadísticas</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/donar.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/hdft.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -21,9 +26,6 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="../styles/hdft.css" rel="stylesheet">
-    <link href="../styles/donar.css" rel="stylesheet">
-    <link href="../styles/estadisticas.css" rel="stylesheet">
 
   </head>
 <body>
@@ -41,7 +43,7 @@
             </div>
             
             <div id="navbar" class="navbar-collapse collapse" >
-              <img src="../img/helpMapp.jpg" class="header-icon" alt="helpMapp-logo">
+              <img src="{% static 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
               <ul class="nav navbar-nav navbar-right ">
 
                 <li><a href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
@@ -163,11 +165,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <script>window.jQuery || document.write('<script src="../js/tests/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="{% static 'dist/js/bootstrap.min.js' %}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKUreK6wFQ5A4NFLa15dZSEH85f5XytWo&callback=initMap"
     async defer></script>
-    <script src="../js/filtrar.js"></script>
-    <script src="../js/estadisticas.js"></script>
+    <script src="{% static 'js/filtrar.js' %}"></script>
+    <script src="{% static 'js/estadisticas.js' %}"></script>
 
 </body>
 
