@@ -3,6 +3,22 @@ import datetime
 # Create your models here.
 
 
+class CentroDeAcopio(models.Model):
+	id_Centro = models.CharField(primary_key=True,max_length=16)	
+	nombreUPC = models.CharField(max_length=30)
+	direccion = models.CharField(max_length=100)
+	latitud = models.DecimalField(default=0,max_digits=15,decimal_places=10)
+	longitud = models.DecimalField(default=0,max_digits=15,decimal_places=10)
+	provincia = models.CharField(max_length=30)
+	canton = models.CharField(max_length=30)
+	estado = models.IntegerField()
+
+	def save(self,*args, **kwargs):
+		super(CentroDeAcopio,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.id_Centro
+
 class HelpMapper(models.Model):
 	id_HelpMapper = models.CharField( primary_key=True,max_length=16)
 	nombreUsuario = models.CharField(max_length=12)
@@ -22,18 +38,6 @@ class HelpMapper(models.Model):
 	def __str__(self):
 		return self.id_HelpMapper
 
-
-class HabilidadHelpMapper(models.Model):
-	id_HabilidadHelpMapper = models.CharField( primary_key=True,max_length=16)
-	id_HelpMapper = models.ForeignKey(HelpMapper, to_field='id_HelpMapper')
-	id_Hablidad = models.ForeignKey(Habilidad, to_field='id_Hablidad')
-
-	def save(self,*args, **kwargs):
-		super(HabilidadHelpMapper,self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.id_HabilidadHelpMapper
-
 class Habilidad(models.Model):
 	id_Habilidad = models.CharField( primary_key=True,max_length=16)
 	nombreHabilidad = models.CharField(max_length=100)
@@ -43,6 +47,42 @@ class Habilidad(models.Model):
 
 	def __str__(self):
 		return self.id_Habilidad
+
+class HabilidadHelpMapper(models.Model):
+	id_HabilidadHelpMapper = models.CharField( primary_key=True,max_length=16)
+	id_HelpMapper = models.ForeignKey(HelpMapper, to_field='id_HelpMapper')
+	id_Hablidad = models.ForeignKey(Habilidad, to_field='id_Habilidad')
+
+	def save(self,*args, **kwargs):
+		super(HabilidadHelpMapper,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.id_HabilidadHelpMapper
+
+class Categoria(models.Model):
+	id_Categoria = models.CharField(primary_key=True,max_length=16)	
+	nombreCategoria = models.CharField(max_length=30)
+	unidad = models.CharField(max_length=20)
+
+	def save(self,*args, **kwargs):
+		super(Categoria,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.id_Categoria
+
+class Producto(models.Model):
+	id_Producto = models.CharField(primary_key=True,max_length=16)	
+	nombreProducto = models.CharField(max_length=30)
+	cantidad = models.DecimalField(default=0,max_digits=8,decimal_places=2)
+	id_Categoria = models.ForeignKey(Categoria, to_field='id_Categoria')
+	id_Centro = models.ForeignKey(CentroDeAcopio, to_field='id_Centro')
+
+	def save(self,*args, **kwargs):
+		super(Producto,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.id_Producto
+
 
 class CambioInventario(models.Model):
 	id_CambioInventario = models.CharField(primary_key=True,max_length=16)
@@ -71,45 +111,3 @@ class Administrador(models.Model):
 
 	def __str__(self):
 		return self.id_Administrador
-
-
-class CentroDeAcopio(models.Model):
-	id_Centro = models.CharField(primary_key=True,max_length=16)	
-	nombreUPC = models.CharField(max_length=30)
-	direccion = models.CharField(max_length=100)
-	latitud = models.DecimalField(default=0,max_digits=15,decimal_places=10)
-	longitud = models.DecimalField(default=0,max_digits=15,decimal_places=10)
-	provincia = models.CharField(max_length=30)
-	canton = models.CharField(max_length=30)
-	estado = models.IntegerField()
-
-	def save(self,*args, **kwargs):
-		super(CentroDeAcopio,self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.id_Centro
-
-class Producto(models.Model):
-	id_Producto = models.CharField(primary_key=True,max_length=16)	
-	nombreProducto = models.CharField(max_length=30)
-	cantidad = models.DecimalField(default=0,max_digits=8,decimal_places=2)
-	id_Categoria = models.ForeignKey(Categoria, to_field='id_Categoria')
-	id_Centro = models.ForeignKey(CentroDeAcopio, to_field='id_Centro')
-
-	def save(self,*args, **kwargs):
-		super(Producto,self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.id_Producto
-
-class Categoria(models.Model):
-	id_Categoria = models.CharField(primary_key=True,max_length=16)	
-	nombreCategoria = models.CharField(max_length=30)
-	unidad = models.CharField(max_length=20)
-
-	def save(self,*args, **kwargs):
-		super(Categoria,self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.id_Categoria
-
