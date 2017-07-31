@@ -8,5 +8,7 @@ urlpatterns = [
         url(r'^donar/', views.donar,name="donar"),
         url(r'^estadistica/', views.estadisticas,name="estadisticas"),
         url(r'^tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
-
+        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
+        url(r'^integrantes/', views.mostrar_sobreNosotros,name="mostrar_nsobreNosotros"),
+        
     ]

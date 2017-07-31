@@ -9,10 +9,16 @@ def donar(request):
     return render(request,'helpmapp/cliente/donar.html')
 
 def estadisticas(request):
-    return render(request,'helpmapp/cliente/index.html')
+    return render(request,'helpmapp/cliente/statistics.html')
 
 def mostrar_tutoriales(request):
-    return render(request,'helpmapp/cliente/index.html')
+    return render(request,'helpmapp/cliente/tutoriales.html')
+
+def mostrar_voluntario(request):
+    return render(request,'helpmapp/cliente/voluntario.html')
+
+def mostrar_sobreNosotros(request):
+    return render(request,'helpmapp/cliente/aboutus.html')
 
 def get_name(request):
     # if this is a POST request we need to process the form data
