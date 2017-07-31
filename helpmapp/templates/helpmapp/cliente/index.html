@@ -10,14 +10,16 @@
     <meta name="author" content="Fabricio Layedra">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo">
     <link rel="icon" href="https://goo.gl/bJHmja">
-    <link href="{% static 'styles/index.css' %}" rel="stylesheet">
-    <link href="{% static 'styles/hdft.css' %}" rel="stylesheet">
-    <link href="{% static 'styles/carousel.css' %}" rel="stylesheet">
 
+
+    
     <title>helpMapp</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/index.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/hdft.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -47,7 +49,7 @@
               <img src="{% static 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
               <ul class="nav navbar-nav navbar-right ">
 
-                <li><a href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
+                <li><a id = "hola" href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
                 <li ><a href="{% url 'helpmapp.views.donar' %}" > Donar</a></li>
                 <li><a href="{% url 'helpmapp.views.estadisticas' %}"> Estadísticas</a></li>
                 <li><a href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>
@@ -244,19 +246,19 @@
         <!-- Three columns of text below the carousel -->
         <div class="row">
           <div class="col-lg-4">
-            <img class="img-circle" src="../img/minint.jpg" alt="ministeriointerior" width="140" height="140">
+            <img class="img-circle" src="{% static 'img/minint.jpg' %}" alt="ministeriointerior" width="140" height="140">
             <h2>Ministerio del Interior</h2>
             <p>Ministerio a cargo del control del orden público en la zona de desastre.</p>
             <p><a class="btn btn-info btn-socket" href="https://www.ministeriointerior.gob.ec/" role="button">Ir</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
-            <img class="img-circle" src="../img/sngr.jpg" alt="sngr" width="140" height="140">
+            <img class="img-circle" src="{% static 'img/sngr.jpg' %}"alt="sngr" width="140" height="140">
             <h2>Secretaría Nacional de Gestión de Riesgos</h2>
             <p>Ente coordinador y ejecutador de entrega de donaciones en situaciones de emergencia.</p>
             <p><a class="btn btn-info btn-socket" href="https://www.gestionderiesgos.gob.ec/" role="button">Ir</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
-            <img class="img-circle" src="../img/policia.jpg" alt="policia" width="140" height="140">
+            <img class="img-circle" src="{% static 'img/policia.jpg' %}" alt="policia" width="140" height="140">
             <h2>Policía Nacional del Ecuador</h2>
             <p>Colaborador in-situ del Ministerio del Interior.</p>
             <p><a class="btn btn-info btn-socket" href="https://www.policiaecuador.gob.ec" role="button">Ir </a></p>
@@ -268,7 +270,7 @@
 
 </div>
       <!-- FOOTER -->
-      <footer class="panel-footer fixed-bottom paleta1">
+      <footer class="panel-footer fixed-bottom paleta1" >
         <p>TAWS 2017 &middot;  Todos los derechos reservados  &middot;</p>
       </footer>
 
@@ -278,7 +280,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../js/tests/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../dist/js/bootstrap.min.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="{% static 'dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
   </body>
 </html>
