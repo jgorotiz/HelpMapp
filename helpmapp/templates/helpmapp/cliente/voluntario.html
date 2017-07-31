@@ -1,52 +1,16 @@
+{% extends "helpmapp/cliente/base.html" %}
 
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title> helpMapp - Quiero ser Voluntario</title>
-		<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
-		<link rel="icon" href="https://goo.gl/bJHmja">
-	    <link href="{% static 'dist/css/bootstrap.css' %}" rel="stylesheet">
-		<link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
-	    <link href="{% static 'styles/index.css' %}" rel="stylesheet">
-	    <link href="{% static 'styles/voluntario.css' %}" rel="stylesheet">
-	    <link href="{% static 'styles/hdft.css' %}" rel="stylesheet">
-	</head>
-	<body>
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid paleta1">
-				<div class="navbar-header paleta1">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar">  </span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					</button>
-					
-				</div>
-				
-				<div id="navbar" class="navbar-collapse collapse" >
-					<img src="{% static 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
-					<ul class="nav navbar-nav navbar-right ">
-						<li<li><a href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
-		                <li ><a href="{% url 'helpmapp.views.donar' %}" > Donar</a></li>
-		                <li><a href="{% url 'helpmapp.views.estadisticas' %}"> Estadísticas</a></li>
-		                <li><a href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>
-		                <li><a href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li>
-		                <li ><a href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
-						<li>
-							<form class="navbar-form navbar-right">
-								<input type="text" class="form-control" placeholder="Buscar">
-							</form>
-						</li>
-					</ul>
-					
-				</div>
-			</div>
-		</nav>
 
-		<div class="carrusel_vol col-md-5">
+{% block title %}helpMapp - Voluntario{% endblock %}
+
+
+{% block css %}
+	<link href="{% static 'styles/voluntario.css' %}" rel="stylesheet">    
+{% endblock %}
+
+{% block body %}
+<div class="carrusel_vol col-md-5">
 		<div id="page-wrapper">
 		<div class="row">
 		
@@ -195,17 +159,8 @@
 		    </div><!-- /.col-lg-4 -->
 		  </div><!-- /.row -->
 		</div><!-- /.container -->
-			
-      <!-- FOOTER -->
-      <footer class="panel-footer fixed-bottom paleta1">
-        <p>TAWS 2017 &middot;  Todos los derechos reservados  &middot;</p>
-      </footer>
-		<!-- Bootstrap core JavaScript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../js/tests/vendor/jquery.min.js"><\/script>')</script>
-		<script src="{% static 'dist/js/bootstrap.min.js' %}"></script>
+{% endblock %}
+{% block scripts %}
 	  	<script src="{% static 'js/owl.carousel.js' %}"></script>
-	</body>
-</html>
+{% endblock %}
+
