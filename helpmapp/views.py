@@ -57,5 +57,38 @@ def mostrar_administradorZonal(request):
 def mostrar_loginAdmin(request):
     return render(request,'helpmapp/Administrador/index.html')
 
+def mostrar_configuracionCapacidades(request):
+    return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
+
+def mostrar_configuracionCuenta(request):
+    return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
+
+def mostrar_crearProducto(request):
+    return render(request,'helpmapp/Administrador/adminCentro/crearProducto.html')
+
+def mostrar_inventarioAgua(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
+
+def mostrar_inventarioComida(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html')
+
+def mostrar_inventarioRopa(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
+
+def mostrar_inventarioAgua(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
+
+def mostrar_buscarCentroAcopio(request):
+    return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
+
+def mostrar_configCuenta(request):
+    return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
+
+def mostrar_crearAdministrador(request):
+    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
+
+def mostrar_verCentro(request):
+    return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
+
 def saveData():
     return
