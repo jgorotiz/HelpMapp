@@ -48,6 +48,14 @@ def show_name(request):
 	
 	return render(request,'helpmapp/prueba.html')
 
+def mostrar_administradorGeneral(request):
+    return render(request,'helpmapp/Administrador/superAdmin/index.html')
+
+def mostrar_administradorZonal(request):
+    return render(request,'helpmapp/Administrador/adminCentro/index.html')
+
+def mostrar_loginAdmin(request):
+    return render(request,'helpmapp/Administrador/index.html')
 
 def saveData():
     return
