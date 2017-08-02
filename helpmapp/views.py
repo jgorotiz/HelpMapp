@@ -75,8 +75,6 @@ def mostrar_inventarioComida(request):
 def mostrar_inventarioRopa(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
 
-def mostrar_inventarioAgua(request):
-    return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
 
 def mostrar_buscarCentroAcopio(request):
     return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
