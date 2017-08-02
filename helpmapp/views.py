@@ -9,10 +9,16 @@ def donar(request):
     return render(request,'helpmapp/cliente/donar.html')
 
 def estadisticas(request):
-    return render(request,'helpmapp/cliente/index.html')
+    return render(request,'helpmapp/cliente/statistics.html')
 
 def mostrar_tutoriales(request):
-    return render(request,'helpmapp/cliente/index.html')
+    return render(request,'helpmapp/cliente/tutoriales.html')
+
+def mostrar_voluntario(request):
+    return render(request,'helpmapp/cliente/voluntario.html')
+
+def mostrar_sobreNosotros(request):
+    return render(request,'helpmapp/cliente/aboutus.html')
 
 def get_name(request):
     # if this is a POST request we need to process the form data
@@ -42,6 +48,47 @@ def show_name(request):
 	
 	return render(request,'helpmapp/prueba.html')
 
+def mostrar_administradorGeneral(request):
+    return render(request,'helpmapp/Administrador/superAdmin/index.html')
+
+def mostrar_administradorZonal(request):
+    return render(request,'helpmapp/Administrador/adminCentro/index.html')
+
+def mostrar_loginAdmin(request):
+    return render(request,'helpmapp/Administrador/index.html')
+
+def mostrar_configuracionCapacidades(request):
+    return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
+
+def mostrar_configuracionCuenta(request):
+    return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
+
+def mostrar_crearProducto(request):
+    return render(request,'helpmapp/Administrador/adminCentro/crearProducto.html')
+
+def mostrar_inventarioAgua(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
+
+def mostrar_inventarioComida(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html')
+
+def mostrar_inventarioRopa(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
+
+def mostrar_inventarioAgua(request):
+    return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
+
+def mostrar_buscarCentroAcopio(request):
+    return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
+
+def mostrar_configCuenta(request):
+    return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
+
+def mostrar_crearAdministrador(request):
+    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
+
+def mostrar_verCentro(request):
+    return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
 def saveData():
     return

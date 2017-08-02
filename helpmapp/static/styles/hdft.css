@@ -16,12 +16,6 @@ body {
 	position: fixed;
 	bottom: 0;
 }
-.fixed-top{
-
-	width: 100%;
-	position: fixed;
-	top: 0;
-}
 
 .fixed-bottom > p{
 	margin:0;
@@ -33,7 +27,6 @@ body {
 
 .paleta1{
 	background-color: #212a85;
-
 }
 
 

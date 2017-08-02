@@ -1,3 +1,94 @@
+{% extends "helpmapp/cliente/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}helpMapp - Sobre Nosotros{% endblock %}
+
+
+{% block css %}
+		<link href="{% static 'styles/carousel.css' %}" rel="stylesheet">
+        <link href="{% static 'styles/aboutus.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="reserver"></div>
+	<div class="container-fluid">
+	<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading">helpMapp <span class="text-muted">Gestor de donaciones y protocolo ante desastres naturales</span></h2>
+					<p class="lead">Aplicación Web para la optimización de donaciones en desastres naturales. Muestra los UPCs más cercanos a tu ubicación o la ubicación que especifiques, para que sepas donde hacer tu donación indicándote que aceptan en dichos lugares. En <a href="tutoriales.html" class="text-info"> Tutoriales </a> podrás conocer técnicas de supervivencia así como tips para una donación efectiva. Y si deseas ayudar con tus energías y potencial, no dudes en enrolarte como <a href="voluntario.html" class="text-info"> Voluntario</a>.</p>
+				</div>
+				<div class="col-md-5">
+
+					<img class="featurette-image img-responsive center-block top" src="{% static 'img/hM_au.jpg' %}" alt="Generic placeholder image" >
+				</div>
+			</div>
+			<h2 class="featurette-heading text-center titulo">helpMapp <span class="text-muted"> LA HISTORIA</span></h2>
+			<div class="row featurette">
+				<div class="col-md-7 col-md-push-5">
+					<h2 class="featurette-heading">LA IDEA   <span class="text-muted">Inicios</span></h2>
+					<p class="lead">  La idea original consistía en una aplicación post-desastre que buscara mejorar la logística de los centros de acopio presentando los centros de distribución más cercanos para el afectado. Actualmente, se presenta como un sitio en el que convergen tanto la información como la gestión de ayuda.
+					</p>
+				</div>
+				<div class="col-md-5 col-md-pull-7">
+					<img class="featurette-image img-responsive center-block" src="{% static 'img/location.jpg' %}" alt="">
+				</div>
+			</div>
+			<hr class="featurette-divider">
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading">Acreditaciones</h2>
+					<ul>
+						<li class="lead"> Hackaton Ciudades Resilientes 2016 organizado por el Laboratorio de Innovación Quito y patrocinado por el Banco Interamericano de Desarrollo. </li>
+						<li class="lead">  Ganador categoría Comunicación. Concurso UNIR 2016 organizado por la Escuela Politécnica Nacional.</li>
+					</ul>
+				</div>
+				<div class="col-md-5">
+					<img class="featurette-image img-responsive center-block" src="{% static 'img/presentacionHM.jpg' %}" alt="presentation">
+				</div>
+			</div>
+			
+			<div class="row featurette ">
+				<div class="col-md-12 ">
+					<h2 class="featurette-heading text-center titulo"> Equipo de desarrollo</h2>
+				</div>
+			</div>
+			<div class="container marketing helpMappers">
+				<!-- Three columns of text below the carousel -->
+				<div class="row">
+					<div class="col-lg-6">
+						<img class="img-circle" src="{% static 'img/jonathan.jpg' %}" alt="jgorotiz" width="140" height="140">
+						<h2 class="text-primary">Jonathan Gorotiza</h2>
+						<p class="lead">Front-end and Back-end developer</p>
+						<p>Estudiante de Ingeniería en Computación. <br>
+							Escuela Superior Politécnica del Litoral.<br>
+							<a  href="https://mail.espol.edu.ec/" >jgorotiz@espol.edu.ec</a>
+							</div><!-- /.col-lg-6 -->
+							<div class="col-lg-6">
+								<img class="img-circle" src="{% static 'img/fabricio.jpg' %}" alt="flayedra" width="140" height="140">
+								<h2 class="text-primary">Fabricio Layedra</h2>
+								<p class="lead">Information Architect &middot; UI designer</p>
+								<p>Estudiante de Ingeniería en Computación. <br>
+									Escuela Superior Politécnica del Litoral.<br>
+									<a  href="https://mail.espol.edu.ec/" >flayedra@espol.edu.ec</a>
+									</div><!-- /.col-lg-6 -->
+									</div><!-- /.row -->
+									<hr class="featurette-divider">
+								</div>
+								<!-- /END THE FEATURETTES -->
+							</div></div>
+{% endblock %}
+{% block scripts %}
+							<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
+{% endblock %}
+
+
+
+
+
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -5,11 +96,10 @@
 		<title>helpMapp - Sobre Nosotros</title>
 		<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
 		<link rel="icon" href="https://goo.gl/bJHmja">
-		<link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="../styles/carousel.css" rel="stylesheet">
-		<link href="../styles/hdft.css" rel="stylesheet">
-		<link href="../styles/aboutus.css" rel="stylesheet">
-	</head>
+		<link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
+	    <link href="{% static 'styles/index.css' %}" rel="stylesheet">
+	    <link href="{% static 'styles/carousel.css' %}" rel="stylesheet">
+	    <link href="{% static 'styles/hdft.css' %}" rel="stylesheet">
 	<body>
 		<div class="reserver"></div>
 		<div class="intern">
@@ -26,14 +116,14 @@
 					</div>
 					
 					<div id="navbar" class="navbar-collapse collapse" >
-						<img src="../img/helpMapp.jpg" class="header-icon" alt="helpMapp-logo">
+						<img src="{% static 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
 						<ul class="nav navbar-nav navbar-right ">
-							<li><a href="index.html"> Inicio </a></li>
-							<li ><a href="donar.html" > Donar</a></li>
-							<li><a href="statistics.html"> Estadísticas</a></li>
-							<li><a href="voluntario.html" > Voluntario</a></li>
-							<li><a href="tutoriales.html"> Tutoriales </a></li>
-							<li ><a href="aboutus.html"> Sobre Nosotros</a> </li>
+							<li><a href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
+			                <li ><a href="{% url 'helpmapp.views.donar' %}" > Donar</a></li>
+			                <li><a href="{% url 'helpmapp.views.estadisticas' %}"> Estadísticas</a></li>
+			                <li><a href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>
+			                <li><a href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li>
+			                <li ><a href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
 							<li ><a href="#">  Ingresar</a> </li>
                 			<li ><a href="a#"> Registrarse</a> </li>
 							<li>
@@ -52,7 +142,8 @@
 					<p class="lead">Aplicación Web para la optimización de donaciones en desastres naturales. Muestra los UPCs más cercanos a tu ubicación o la ubicación que especifiques, para que sepas donde hacer tu donación indicándote que aceptan en dichos lugares. En <a href="tutoriales.html" class="text-info"> Tutoriales </a> podrás conocer técnicas de supervivencia así como tips para una donación efectiva. Y si deseas ayudar con tus energías y potencial, no dudes en enrolarte como <a href="voluntario.html" class="text-info"> Voluntario</a>.</p>
 				</div>
 				<div class="col-md-5">
-					<img class="featurette-image img-responsive center-block top" src="../img/hM_au.jpg" alt="Generic placeholder image" >
+
+					<img class="featurette-image img-responsive center-block top" src="{% static 'img/hM_au.jpg' %}" alt="Generic placeholder image" >
 				</div>
 			</div>
 			<h2 class="featurette-heading text-center titulo">helpMapp <span class="text-muted"> LA HISTORIA</span></h2>
@@ -63,7 +154,7 @@
 					</p>
 				</div>
 				<div class="col-md-5 col-md-pull-7">
-					<img class="featurette-image img-responsive center-block" src="../img/location.jpg" alt="">
+					<img class="featurette-image img-responsive center-block" src="{% static 'img/location.jpg' %}" alt="">
 				</div>
 			</div>
 			<hr class="featurette-divider">
@@ -76,7 +167,7 @@
 					</ul>
 				</div>
 				<div class="col-md-5">
-					<img class="featurette-image img-responsive center-block" src="../img/presentacionHM.jpg" alt="presentation">
+					<img class="featurette-image img-responsive center-block" src="{% static 'img/presentacionHM.jpg' %}" alt="presentation">
 				</div>
 			</div>
 			
@@ -89,7 +180,7 @@
 				<!-- Three columns of text below the carousel -->
 				<div class="row">
 					<div class="col-lg-6">
-						<img class="img-circle" src="../img/jonathan.jpg" alt="jgorotiz" width="140" height="140">
+						<img class="img-circle" src="{% static 'img/jonathan.jpg' %}" alt="jgorotiz" width="140" height="140">
 						<h2 class="text-primary">Jonathan Gorotiza</h2>
 						<p class="lead">Front-end and Back-end developer</p>
 						<p>Estudiante de Ingeniería en Computación. <br>
@@ -97,7 +188,7 @@
 							<a  href="https://mail.espol.edu.ec/" >jgorotiz@espol.edu.ec</a>
 							</div><!-- /.col-lg-6 -->
 							<div class="col-lg-6">
-								<img class="img-circle" src="../img/fabricio.jpg" alt="flayedra" width="140" height="140">
+								<img class="img-circle" src="{% static 'img/fabricio.jpg' %}" alt="flayedra" width="140" height="140">
 								<h2 class="text-primary">Fabricio Layedra</h2>
 								<p class="lead">Information Architect &middot; UI designer</p>
 								<p>Estudiante de Ingeniería en Computación. <br>
@@ -113,9 +204,7 @@
 							<footer class="panel-footer fixed-bottom paleta1">
 								<p>TAWS 2017 &middot;  Todos los derechos reservados  &middot;</p>
 							</footer>
-							<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-							<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
+
 							<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-							<script src="../js/aboutus.js"></script>
 						</body>
 					</html>
