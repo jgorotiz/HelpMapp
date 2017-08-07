@@ -6,11 +6,11 @@ class CentroDeAcopio(models.Model):
 	id_Centro = models.CharField(default="-", primary_key=True,max_length=16)	
 	nombreUPC = models.CharField(max_length=30)
 	direccion = models.CharField(max_length=100)
-	latitud = models.DecimalField(default=0,max_digits=15,decimal_places=10)
-	longitud = models.DecimalField(default=0,max_digits=15,decimal_places=10)
+	latitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
+	longitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
 	provincia = models.CharField(max_length=30)
 	canton = models.CharField(max_length=30)
-	estado = models.IntegerField()
+	estado = models.IntegerField(default=1)
 
 	def save(self,*args, **kwargs):
 		super(CentroDeAcopio,self).save(*args, **kwargs)
@@ -23,7 +23,7 @@ class HelpMapper(models.Model):
 	nombreUsuario = models.CharField(max_length=12)
 	contrasena = models.CharField(max_length=15)
 	correo = models.EmailField(max_length=100)
-	estado = models.IntegerField()
+	estado = models.IntegerField(default=1)
 	nombre = models.CharField(max_length=100)
 	apellido = models.CharField(max_length=100)
 	tipoSangre = models.CharField(max_length=5)
@@ -72,7 +72,7 @@ class Categoria(models.Model):
 class Producto(models.Model):
 	id_Producto = models.CharField(default="-", primary_key=True,max_length=16)	
 	nombreProducto = models.CharField(max_length=30)
-	cantidad = models.DecimalField(default=0,max_digits=8,decimal_places=2)
+	cantidad = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
 	id_Categoria = models.ForeignKey(Categoria, to_field='id_Categoria', default="-")
 	id_Centro = models.ForeignKey(CentroDeAcopio, to_field='id_Centro', default="-")
 
@@ -85,8 +85,8 @@ class Producto(models.Model):
 
 class CambioInventario(models.Model):
 	id_CambioInventario = models.CharField(default="-", primary_key=True,max_length=16)
-	tipo = models.IntegerField() #(-1) correccion  (0) envio  (1) ingreso
-	cantidad = models.DecimalField(default=0,max_digits=6,decimal_places=2)
+	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
+	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
 	id_producto = models.ForeignKey(Producto, to_field='id_Producto', default="-")
 	fecha = models.DateField(default=datetime.date.today)
 
@@ -103,7 +103,7 @@ class Administrador(models.Model):
 	correo = models.EmailField(max_length=254)
 	tipo = models.IntegerField()
 	id_Centro = models.ForeignKey(CentroDeAcopio, to_field='id_Centro', default="-")
-	estado = models.IntegerField()
+	estado = models.IntegerField(default=1)
 
 	def save(self,*args, **kwargs):
 		super(Administrador,self).save(*args, **kwargs)
