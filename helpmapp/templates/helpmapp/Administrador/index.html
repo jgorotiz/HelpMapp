@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <!-- Bootstrap -->
-    <link href="css/estilo.css" rel="stylesheet">
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/estiloLogin.css" rel="stylesheet">
+    <link href="{% static 'styles/estilo.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/estiloLogin.css' %} " rel="stylesheet">
 </head>
 <body>
   <header>

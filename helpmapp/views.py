@@ -48,6 +48,8 @@ def show_name(request):
 	
 	return render(request,'helpmapp/prueba.html')
 
+
+
 def mostrar_administradorGeneral(request):
     return render(request,'helpmapp/Administrador/superAdmin/index.html')
 
@@ -74,6 +76,7 @@ def mostrar_inventarioComida(request):
 
 def mostrar_inventarioRopa(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
+
 
 
 def mostrar_buscarCentroAcopio(request):
