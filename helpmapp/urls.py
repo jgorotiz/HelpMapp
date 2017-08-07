@@ -9,14 +9,14 @@ urlpatterns = [
         url(r'^estadistica/', views.estadisticas,name="estadisticas"),
         url(r'^tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
         url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
-        url(r'^integrantes/', views.mostrar_sobreNosotros,name="mostrar_nsobreNosotros"),
+        url(r'^integrantes/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
 
 
-        url(r'^loginAdmin/', views.mostrar_loginAdmin,name="mostrar_login"),
+        url(r'^loginAdmin/', views.mostrar_loginAdmin,name="mostrar_loginAdmin"),
 
         url(r'^administradorGeneral/', views.mostrar_administradorGeneral,name="mostrar_administrador_general"),
-        url(r'^configucaionCapacidades/', views.mostrar_configuracionCapacidades,name="mostrar_configuracionCapacidades"),
-        url(r'^configucaionCuenta/', views.mostrar_configuracionCuenta,name="mostrar_configuracionCuenta"),
+        url(r'^configuracionCapacidades/', views.mostrar_configuracionCapacidades,name="mostrar_configuracionCapacidades"),
+        url(r'^configuracionCuenta/', views.mostrar_configuracionCuenta,name="mostrar_configuracionCuenta"),
         url(r'^crearProducto/', views.mostrar_crearProducto,name="mostrar_crearProducto"),
         url(r'^inventarioAgua/', views.mostrar_inventarioAgua,name="mostrar_inventarioAgua"),
         url(r'^inventarioComida/', views.mostrar_inventarioComida,name="mostrar_inventarioComida"),
@@ -27,6 +27,8 @@ urlpatterns = [
         url(r'^configCuenta/', views.mostrar_configCuenta,name="mostrar_configCuenta"),
         url(r'^crearAdmin/', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
         url(r'^verCentro/', views.mostrar_verCentro,name="mostrar_verCentro"),
+        url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
+
 
 
     ]

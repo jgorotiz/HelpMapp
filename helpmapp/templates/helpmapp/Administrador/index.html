@@ -1,39 +1,17 @@
+{% extends "helpmapp/Administrador/base.html" %}
+
 {% load staticfiles %}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<title>HelpMapp-Sistema de administración:Login</title>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- Bootstrap -->
-    <link href="{% static 'styles/estilo.css' %}" rel="stylesheet">
-    <link href="{% static 'styles/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'styles/estiloLogin.css' %} " rel="stylesheet">
-</head>
-<body>
-  <header>
-    <div class="container col-md-12 header">
-      <div>
-        <div class="col-sm-4 col-sm-offset-4" id="logoDiv" >
-          <img src="./img/helpmappLogo.png" alt="logo">
-        </div>
-      </div>
-      <div>
-        <div id="titleId"  class="col-sm-4 col-sm-offset-4">
-          <h2 id="cabecera">
-            Sistema de administraci&oacute;n
-          </h2>  
-        </div>
-        
-      </div>
-      <div>
-        <hr>
-      </div>
-    </div>  
-  </header>
+{% block title %} Helpmapp:Administracion {% endblock %}
+
+
+{% block css %}
+  
+    <link href="{% static 'css/estiloLogin.css' %} " rel="stylesheet">
+  {% endblock %}
+
+
+{% block body %}
   <div class="col-sm-4 col-sm-offset-4">
    <section class="formBox col-sm-12">
         <form class="form-horizontal formLogin" action="superAdmin/index.html">
@@ -48,7 +26,7 @@
             <label class="control-label col-sm-5" for="newpass">Contraseña:</label>
             <div class="col-sm-6">          
               <input type="password" class="form-control" id="newpass" placeholder="contraseña" name="nuevaclave">
-              <a href="./recuperarContrasena.html">¿Olvidaste tu contraseña?</a>
+              <a href="{% url 'helpmapp.views.mostrar_recuperarCuenta' %}">¿Olvidaste tu contraseña?</a>
             </div>
           </div>
           <div class="form-group">        
@@ -67,10 +45,6 @@
 
 
   </div>
-  
-       <footer class="col-md-12 footer">
-         <p id="pe-footer">Todos los derechos reservados. TAWS 2017.</p>
-       </footer>
-
-</body>
-</html>
+ {% endblock %}
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,45 @@
+
+.recuadro{
+	border-style: dashed;
+	border-width: 0.2em;
+	border-color: #fef20f;
+	margin: 1em;
+	border-radius: 1em;
+	text-align:center;
+	padding: 0.5em;
+
+	
+}S
+.recuadro > p{
+	margin-bottom: 0;
+}
+.panel-default>.panel-heading {
+	background-color: #6884b7;
+	color: #ffffff;
+}
+#seccion-graficos{
+	margin-top: 3em;
+}
+.panel-title {
+	width: 100%;
+	text-align: left;
+}
+.btn-info{
+	background-color: #212a85;
+	color: #ffffff;
+}
+.btn-info.focus, .btn-info:focus{
+	background-color: #212a85;
+}
+#seccion-graficos{
+	margin-bottom: 4%;
+}
+
+
+@media only screen and (max-width:767px ){
+	.contenedor-recuadros{
+		padding-left: 25%;
+		padding-right: 25%;
+		display: inline-flex;
+	}
+}

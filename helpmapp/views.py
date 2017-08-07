@@ -91,5 +91,9 @@ def mostrar_crearAdministrador(request):
 def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
+def mostrar_recuperarCuenta(request):
+    return render(request,'helpmapp/Administrador/superAdmin/recuperarCuenta.html')
+
 def saveData():
     return
+
