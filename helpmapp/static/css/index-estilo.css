@@ -1,0 +1,71 @@
+.caja-progress-bar .progress-bar{
+    width:40%;
+
+}
+.contenedor-progress-bars{
+    padding-left: 4%;
+    display: flex;
+}
+.contenedor-recuadros{
+    padding: 5%;
+    align-content: center;
+    text-align: center;
+    display: flex;
+}
+.recuadro{
+    border-style: dashed;
+    border-width: 0.2em;
+    border-color: #fef20f;
+    border-radius: 1em;
+    text-align:center;
+    padding: 0.5em;
+    margin:auto;
+    width: 20%;
+
+}
+.recuadro ~ .recuadro{
+    margin-left: 2em;
+}
+.progress{
+    margin-bottom: 2%;
+}
+.caja-progress-bar{
+    
+    width: 21%;
+}
+.caja-progress-bar ~ .caja-progress-bar{
+    margin-left: 1em;
+}
+
+@media only screen and(max-width: 768px){
+
+  .recuadro{
+    border-style: dashed;
+    border-width: 0.2em;
+    border-color: #fef20f;
+    border-radius: 1em;
+    text-align:center;
+    padding: 0.5em;
+    margin:auto;
+    margin-bottom: 5%;
+  }
+  .contenedor-recuadros{
+    display: block;
+  }
+  .contenedor-progress-bars{
+    display: block;
+  }
+  .recuadro~.recuadro{
+    margin-left: 0;
+  }
+  .recuadro p {
+    word-wrap: break-word;
+  }
+  .caja-progress-bar{
+    width: 100%;
+  }
+  .caja-progress-bar~.caja-progress-bar{
+    margin-left: 0;
+  }
+}
+

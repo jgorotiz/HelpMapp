@@ -1,0 +1,48 @@
+{
+	"table": "geo_ciudad",
+	"rows":
+	[
+		{
+			"id_centro": 48312,
+			"nombre": "UPC PASCUALES I",
+			"ciudad": "GUAYAQUIL",
+			"active": 1
+		},
+		{
+			"id_centro": 48316,
+			"nombre": "UPC GUAYACANES",
+			"ciudad": "GUAYAQUIL",
+			"active": 1
+		},
+		{
+			"id_centro": 48317,
+			"nombre": "UPC URDESA 1",
+			"ciudad": "GUAYAQUIL",
+			"active": 1
+		},
+		{
+			"id_centro": 48318,
+			"nombre": "UPC URDESA 2",
+			"ciudad": "GUAYAQUIL",
+			"active": 1
+		},
+		{
+			"id_centro": 48319,
+			"nombre": "UPC PANECILLO",
+			"ciudad": "QUITO",
+			"active": 1
+		},
+		{
+			"id_centro": 48320,
+			"nombre": "UPC CENTRO HISTORICO",
+			"ciudad": "QUITO",
+			"active": 1
+		},
+		{
+			"id_centro": 48367,
+			"nombre": "UPC EL ARENAL",
+			"ciudad": "CUENCA",
+			"active": 1
+		}
+	]
+}
