@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/estilo.css" rel="stylesheet">
+    {% block css %}{% endblock %}
+
+    
+  </head>
+  <body>
+  <header>
+    <div class="container col-md-12 header">
+      <div >
+        <div class="col-sm-4 col-sm-offset-4" id="logoDiv" >
+          <img src="../img/helpmappLogo.png" alt="logo">
+        </div>
+        <a href="../index.html">
+          <div class="col-sm-4 logout">
+            <p id="logout">
+            <span class="pull-left showopacity glyphicon glyphicon-off"></span><a href="{% url 'helpmapp.views.cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
+            </p>
+          </div>
+        </a>
+      </div>
+      <div>
+        <div id="titleId"  class="col-sm-4 col-sm-offset-4">
+          <h2 id="cabecera">
+            Sistema de administraci&oacute;n
+          </h2>  
+        </div>
+        
+      </div>
+
+      <div>
+        <hr>
+      </div>
+    </div>    
+
+  </header>
+  <div>
+      <div class="col-sm-3 col-md-3 navbar-div navSuperAdmin">
+            <ul class="nav nav-sidebar">
+              <li class="active"><a href="./index.html">Inicio <span class="sr-only">(current)</span></a></li>
+              <li><a href="./buscarCentroAcopio.html">Buscar centro de acopio</a></li>
+              <li><a href="./configCuenta.html">Configuración</a></li>
+              <li><a href="./crearAdmin.html">Crear cuenta administrador</a></li>
+              <li id="cerrar-sesion"><a href="../index.html"><i class="glyphicon glyphicon-off"></i> Cerrar sesión</a></li>
+            </ul>
+       </div>
+
+      <div class="col-sm-9 col-md-9">
+        
+      </div>
+    
+    <div class="clearfix visible-sm-block"> </div>
+   <footer class="col-md-12 footer">
+         <p>Todos los derechos reservados. TAWS 2017.</p>
+    </footer>
+  </div>
+  {% block scripts %}
+{% endblock %}
+  </body>
+</html>
