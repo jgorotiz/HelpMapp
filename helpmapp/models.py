@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 import datetime
 # Create your models here.
 
@@ -18,7 +19,32 @@ class CentroDeAcopio(models.Model):
 	def __str__(self):
 		return self.idCentro
 
-class HelpMapper(models.Model):
+
+class Post(models.Model):
+        author = models.ForeignKey('auth.User')
+        title = models.CharField(max_length=200)
+        text = models.TextField()
+        created_date = models.DateTimeField(
+                default=timezone.now)
+        published_date = models.DateTimeField(
+                blank=True, null=True)
+
+        def publish(self):
+            self.published_date = timezone.now()
+            self.save()
+
+        def __str__(self):
+            return self.title
+class Hability(models.Model):
+	id=models.CharField(primary_key=True,default="-",max_length=16)
+	nombre=models.CharField(default="-",max_length=20)
+
+	def save(self,*args, **kwargs):
+		super(Hability,self).save(*args, **kwargs)
+	def __str__(self):
+		return self.nombre
+
+class AyudadorMapa(models.Model):
 	idHelpMapper=models.CharField(default="-", primary_key=True,max_length=16)
 	nombreUsuario = models.CharField(max_length=12)
 	contrasena = models.CharField(max_length=15)
@@ -32,18 +58,8 @@ class HelpMapper(models.Model):
 	sexo = models.CharField(max_length=10)
 
 	def save(self,*args, **kwargs):
-		super(HelpMapper,self).save(*args, **kwargs)
+		super(AyudadorMapa,self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.idHelpMapper
-
-class Habilidad(models.Model):
-	idHabilidad = models.CharField(default="-",  primary_key=True,max_length=16)
-	nombreHabilidad = models.CharField(max_length=100)
-
-	def save(self,*args, **kwargs):
-		super(Habilidad,self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.idHabilidad
 
