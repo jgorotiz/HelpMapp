@@ -17,57 +17,92 @@
 
 </head>
 <body>
-  <header>
+ <header>
     <div class="container col-md-12 header">
       <div class="row">
         <div class="col-md-4 col-md-offset-4" id="logoDiv" >
-          <img src="../img/helpmappLogo.png" alt="logo">
+
+          <img src="{% static 'img/helpmappLogo.png' %}" alt="logo">
         </div>
         <div class="col-md-2 col-md-offset-2 logout">
           <p id="pe-logout">
           <span class="pull-left showopacity glyphicon glyphicon-off"></span>
-           <a href="../index.html"> Cerrar sesi&oacute;n</a>
+           <a href="{% url 'helpmapp.views.cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
           </p>
         </div>
 
 
+
       </div>
-      <div>
-        <div id="titleId"  class="col-sm-4 col-sm-offset-4">
+
+      <div class="row">
+        <div id="titleId"  class="col-md-4 col-md-offset-4">
           <h2 id="cabecera">
             Sistema de administraci&oacute;n
           </h2>  
         </div>
         
       </div>
-      <div>
+
+      <div class="row">
         <hr>
       </div>
-    </div>  
-  </header>
-  
-  <div>
-    <section class="col-sm-12 main row container">
-      <div class="col-sm-3 col-md-3 navSuperAdmin">
-            <ul class="nav nav-sidebar">
-              <li class="active"><a href="./index.html">Inicio <span class="sr-only">(current)</span></a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_buscarCentroAcopio' %}">Buscar centro de acopio</a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_configCuenta' %}">Configuración</a></li>
-              <li><a href="./crearAdmin.html">Crear cuenta administrador</a></li>
-              <li id="cerrar-sesion"><a href="../index.html"><i class="glyphicon glyphicon-off"></i> Cerrar sesión</a></li>
-            </ul>
-       </div>
+    </div>       
 
-      <div class="col-sm-9 col-md-9">
-        {% block body %}{% endblock %}
-       
-      </div>
-    </section>
-    <div class="clearfix visible-sm-block"> </div>
-   <footer class="col-md-12 footer">
+  </header>
+   
+     <div class="col-sm-2 col-md-2 navSuperAdmin sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="{% url 'helpmapp.views.mostrar_administradorZonal' %}">Inicio <span class="sr-only">(current)</span><span class="pull-right showopacity glyphicon glyphicon-home"></span></a></li>
+           <li class="dropdown">
+              <a href="#demo" class="dropdown-toggle" data-toggle="collapse">Inventario <span class="caret"></span><span class="pull-right showopacity glyphicon glyphicon-th-list"></span></a>
+              <ul class="nav nav-sidebar sidebar-secundario panel-collapse collapse" id="demo" role="menu">
+              <li ><a href="{% url 'helpmapp.views.mostrar_inventarioComida' %}">Comida </a></li>
+              <li><a href="{% url 'helpmapp.views.mostrar_inventarioRopa' %}">Ropa</a></li>
+              <li><a href="{% url 'helpmapp.views.mostrar_inventarioAgua' %}">Agua</a></li>
+            </ul>
+
+           </li>
+           
+            
+            <li><a href="{% url 'helpmapp.views.mostrar_crearProducto' %}">Agregar producto<span class="pull-right showopacity glyphicon glyphicon-plus"></span></a></li>
+           
+           
+
+             <li class="dropdown">
+              <a href="#demo2" class="dropdown-toggle" data-toggle="collapse">Configuraci&oacute;n <span class="caret"></span><span class="pull-right showopacity glyphicon glyphicon-cog"></span></a>
+              <ul class="nav nav-sidebar sidebar-secundario panel-collapse collapse" id="demo2" role="menu">
+              <li ><a href="{% url 'helpmapp.views.mostrar_configuracionCuenta' %}">Configuraci&oacute;n de cuenta </a></li>
+              <li><a href="{% url 'helpmapp.views.mostrar_configuracionCapacidades' %}">Configuraci&oacute;n de centro</a></li>
+              
+            </ul>
+
+           </li>
+           
+
+
+
+            <li id="cerrar-sesion"><a href="{% url 'helpmapp.views.cerrarSesion' %}">Cerrar sesi&oacute;n<span class="pull-right showopacity glyphicon glyphicon-off"></span></a></li>
+            
+          </ul>
+     </div>
+
+     <section class="col-sm-9 col-md-9 ">
+       {% block body %}{% endblock %}
+     </section>    
+
+    <footer class="col-md-12 footer">
          <p>Todos los derechos reservados. TAWS 2017.</p>
     </footer>
-  </div>
-{% block scripts %}{% endblock %}
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block scripts %}{% endblock %}
+     
+    
+
+
+
 </body>
 </html>

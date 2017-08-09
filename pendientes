@@ -1,0 +1,3 @@
+crear una vista y url para cerrar sesión en parte administrativa (helpmapp.views.cerrarSesion)
+cambiar todos los logos de cerrar sesión por sus glyphicons
+arreglar estructuras de páginas de super admin
