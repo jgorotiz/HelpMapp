@@ -1,3 +1,66 @@
 crear una vista y url para cerrar sesión en parte administrativa (helpmapp.views.cerrarSesion)
 cambiar todos los logos de cerrar sesión por sus glyphicons
 arreglar estructuras de páginas de super admin
+class HabilidadHelpMapper(models.Model):
+	idHabilidadHelpMapper = models.CharField(default="-",  primary_key=True,max_length=16)
+	idHelpMapper = models.ForeignKey(HelpMapper, to_field='idHelpMapper', default="-")
+	idHabilidad = models.ForeignKey(Habilidad, to_field='idHabilidad', default="-")
+
+	def save(self,*args, **kwargs):
+		super(HabilidadHelpMapper,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.idHabilidadHelpMapper
+
+class Categoria(models.Model):
+	idCategoria = models.CharField(default="-", primary_key=True,max_length=16)	
+	nombreCategoria = models.CharField(max_length=30)
+	unidad = models.CharField(max_length=20)
+
+	def save(self,*args, **kwargs):
+		super(Categoria,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.idCategoria
+
+class Producto(models.Model):
+	idProducto = models.CharField(default="-", primary_key=True,max_length=16)	
+	nombreProducto = models.CharField(max_length=30)
+	cantidad = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
+	idCategoria = models.ForeignKey(Categoria, to_field='idCategoria', default="-")
+	idCentro = models.ForeignKey(CentroDeAcopio, to_field='idCentro', default="-")
+
+	def save(self,*args, **kwargs):
+		super(Producto,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.idProducto
+
+
+class CambioInventario(models.Model):
+	idCambioInventario = models.CharField(default="-", primary_key=True,max_length=16)
+	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
+	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
+	idProducto = models.ForeignKey(Producto, to_field='idProducto', default="-")
+	fecha = models.DateField(default=datetime.date.today)
+
+	def save(self,*args, **kwargs):
+		super(CambioInventario,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.idCambioInventario
+
+class Administrador(models.Model):
+	idAdministrador = models.CharField(default="-", primary_key=True,max_length=16)
+	nombreUsuario = models.CharField(max_length=12)
+	contrasena = models.CharField( max_length=15)
+	correo = models.EmailField(max_length=254)
+	tipo = models.IntegerField()
+	idCentro = models.ForeignKey(CentroDeAcopio, to_field='idCentro', default="-")
+	estado = models.IntegerField(default=1)
+
+	def save(self,*args, **kwargs):
+		super(Administrador,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.idAdministrador
