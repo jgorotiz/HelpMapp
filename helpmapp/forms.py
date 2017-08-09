@@ -1,4 +1,5 @@
 from django import forms
+from .models import *
 
 class VoluntaryForm(forms.Form):
     nombre = forms.CharField(label='Nombres')
@@ -14,3 +15,7 @@ class VoluntaryForm(forms.Form):
     culinarias=forms.BooleanField(required=False)
     trabajo_campo=forms.BooleanField(required=False)
 
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Nombre de usuario', max_length=16)
+    password = forms.CharField(widget=forms.PasswordInput,label='Nombre de usuario', max_length=16)
+   

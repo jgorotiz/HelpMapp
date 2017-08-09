@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required, permission_required
 
-from .form import VoluntaryForm
+from .forms import *
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/index.html')
 
@@ -48,16 +51,44 @@ def show_name(request):
 	
 	return render(request,'helpmapp/prueba.html')
 
+#LOGIN DEL ADMINISTRADOR
+def mostrar_loginAdmin(request):
+    
+    if request.method == 'POST':
+        form= LoginForm(request.POST)
+        if form.is_valid():
+            m = Administrador.objects.get(nombreUsuario=request.POST['username'])
+            if m.contrasena == request.POST['password']:
+                request.session['id'] = m.id_Administrador
+                if (m.tipo==0): #es super admin
+                    return redirect ('helpmapp/Administrador/superAdmin/index.html')
+                else:#es admin de centro de acopio
+                    return redirect ('helpmapp/Administrador/adminCentro/index.html')
+            else:
+                messages.error(request, "Credenciales incorrectas")
+        else:
+            messages.error(request,"Formulario no válido")
+    else:
+        form= LoginForm()
+    return render(request,'helpmapp/Administrador/index.html',{'form': form})
 
+#CERRAR SESIÓN DE ADMIN
+def cerrarSesion(request):
+    try:
+        del request.session['id']
+    except KeyError:
+        pass
+    
+    return redirect('helpmapp/Administrador/index.html')
 
+#MOSTRAR INDEX DEL SUPER ADMIN
+@login_required(login_url='/loginAdmin/')
+#@permission_required('helpmapp.is_superadmin', login_url='/loginAdmin/')
 def mostrar_administradorGeneral(request):
     return render(request,'helpmapp/Administrador/superAdmin/index.html')
 
 def mostrar_administradorZonal(request):
     return render(request,'helpmapp/Administrador/adminCentro/index.html')
-
-def mostrar_loginAdmin(request):
-    return render(request,'helpmapp/Administrador/index.html')
 
 def mostrar_configuracionCapacidades(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
@@ -77,22 +108,33 @@ def mostrar_inventarioComida(request):
 def mostrar_inventarioRopa(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
 
-
-
 def mostrar_buscarCentroAcopio(request):
     return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
 
 def mostrar_configCuenta(request):
     return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
 
+#CREAR UNA CUENTA DE ADMINISTRADOR    
 def mostrar_crearAdministrador(request):
-    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
+    if request.method == 'POST':
+        
+        form = AdministradorForm(request.POST)
+        if form.is_valid():
+
+            user = form.save(commit=False)
+            user.save()
+
+    else:    
+        form = AdministradorForm()
+   
+    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html',{'form': form})
 
 def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
 def mostrar_recuperarCuenta(request):
     return render(request,'helpmapp/Administrador/superAdmin/recuperarCuenta.html')
+
 
 def saveData():
     return

@@ -15,20 +15,25 @@
   <div class="col-sm-4 col-sm-offset-4">
    <section class="formBox col-sm-12">
         <form class="form-horizontal formLogin" action="superAdmin/index.html">
+        {% csrf_token %}
           <h4 >Inicio de sesi&oacute;n</h4>
           <div class="form-group">
             <label class="control-label col-sm-5" for="oldpass">Nombre de usuario: </label>
             <div class="col-sm-6">
-              <input type="password" class="form-control" id="oldpass" placeholder="usuario" name="viejaclave">
+              {{ form.username }}
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-5" for="newpass">Contraseña:</label>
             <div class="col-sm-6">          
-              <input type="password" class="form-control" id="newpass" placeholder="contraseña" name="nuevaclave">
+              {{ form.password }}
+              
+            </div>
+            
+          </div>
+          <div class="col-sm-6">
               <a href="{% url 'helpmapp.views.mostrar_recuperarCuenta' %}">¿Olvidaste tu contraseña?</a>
             </div>
-          </div>
           <div class="form-group">        
             <div class="col-sm-offset-2 col-sm-10" id="div_submit">
               <button type="submit" class="btn btn-primary" id="btn-submit">Conectarse</button>
