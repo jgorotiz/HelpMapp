@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>HelpMapp-CAcopio:Index</title>
+<{% extends "helpmapp/Administrador/adminCentro/base.html" %}
 
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/estilo.css" rel="stylesheet">
-    <link href="css/index-estilo.css" rel="stylesheet">
+{% load staticfiles %}
+
+{% block title %} HelpMapp-CAcopio:Index{% endblock %}
+
+
+{% block css %}
+
+    <link href="{% static 'css/index-estilo.css' %}" rel="stylesheet">
     
-
+{% endblock %}
    
     
   <body>
