@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="reserver"></div>
+	
+	{% if voluntarios %}
+		<table class="egt">
+		  <tr>
+		    <th>id helpmapper</th>
+		    <th>nombre</th>
+		    <th>apellido</th>
+		    <th>usuario</th>
+		    <th>contraseña</th>
+		    <th>correo</th>
+		    <th>estado</th>
+		    <th>sangre</th>
+		    <th>cedula</th>
+		    <th>telefono</th>
+		    <th>sexo</th>
+		  </tr>
+
+	    {% for voluntario in voluntarios %}
+	    	<tr>
+	    		<th>{{ voluntario.idHelpMapper}}</th>
+			    <th>{{ voluntario.nombreUsuario}}</th>
+			    <th>{{ voluntario.contrasena}}</th>
+			    <th>{{ voluntario.correo}}</th>
+			    <th>{{ voluntario.estado}}</th>
+			    <th>{{ voluntario.nombre}}</th>
+			    <th>{{ voluntario.apellido}}</th>
+			    <th>{{ voluntario.tipoSangre}}</th>
+			    <th>{{ voluntario.cedula}}</th>
+			    <th>{{ voluntario.telefono}}</th>
+			    <th>{{ voluntario.sexo}}</th>
+		  	</tr>
+		  	
+	        
+	    {% endfor %}
+	    </table>
+		{% else %}
+		    <p>No hay facturas que listar!</p>
+
+
+		{% endif %}
+</body>
+</html>
