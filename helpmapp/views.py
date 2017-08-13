@@ -3,8 +3,16 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.mail import send_mail
+from daw.settings import EMAIL_HOST_USER
+import random, string
 
 from .forms import *
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/index.html')
 
@@ -27,10 +35,8 @@ def listar_voluntario(request):
 
 def crear_voluntario(request):
     if request.method == 'POST':
-        print ('si es post')
         form = VoluntaryForm(request.POST)
         if form.is_valid():
-            print ('si es valid')
             voluntario = form.save(commit=False)
             voluntario.save()
             return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
@@ -38,7 +44,6 @@ def crear_voluntario(request):
             print ('no es valido')
 
     else:
-        print ('no es post')
         form = VoluntaryForm()
 
     return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
@@ -60,8 +65,7 @@ def get_name(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            # ...
-                   
+
         	 # redirect to a new URL:
             data = form.cleaned_data
             print (data['nombre'])
@@ -168,3 +172,27 @@ def mostrar_recuperarCuenta(request):
 def saveData():
     return
 
+def recoverPass(request):
+    developers = ["Fabricio","Galo", "María Belén", "Jonathan"]
+
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = RecoveryForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required      
+            # redirect to a new URL:
+            data = form.cleaned_data
+            text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
+            text += id_generator(8)
+            text += "\n "
+            text += "Atentamente,\n"
+            text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
+            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']], fail_silently=False)
+            return HttpResponseRedirect('helpmapp/cliente/login.html')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = VoluntaryForm()
+
+    return render(request, 'helpmapp/cliente/login.html', {'form': form})
