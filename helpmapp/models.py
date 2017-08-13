@@ -3,6 +3,18 @@ from django.utils import timezone
 import datetime
 # Create your models here.
 
+TIPOS_SANGRES = (
+	('A+', 'A+'),
+	('A-', 'A-'),
+	('B+', 'B+'),
+	('B-', 'B-'),
+	('AB+', 'AB+'),
+	('AB-', 'AB-'),
+	('O+', 'O+'),
+	('O-', 'O-'),
+	)
+
+
 class CentroDeAcopio(models.Model):
 	idCentro = models.CharField(default="-", primary_key=True,max_length=16)	
 	nombreUPC = models.CharField(max_length=30)
@@ -46,20 +58,21 @@ class Hability(models.Model):
 
 class AyudadorMapa(models.Model):
 	idHelpMapper=models.CharField(default="-", primary_key=True,max_length=16)
-	nombreUsuario = models.CharField(max_length=12)
-	contrasena = models.CharField(max_length=15)
-	correo = models.EmailField(max_length=100)
-	estado = models.IntegerField(default=1)
 	nombre = models.CharField(max_length=100)
 	apellido = models.CharField(max_length=100)
-	tipoSangre = models.CharField(max_length=5)
+	nombreUsuario = models.CharField(max_length=12)
+	contrasena = models.CharField(max_length=15)
+	sexo = models.CharField(max_length=10)	
 	cedula = models.CharField( max_length=10)
-	telefono = models.CharField(max_length=10)
-	sexo = models.CharField(max_length=10)
+	tipoSangre = models.CharField(max_length=5)
+	telefono = models.CharField(max_length=10)		
+	correo = models.EmailField(max_length=100)
+	estado = models.IntegerField(default=1)
+	
+#    estado = models.CharField(default="acumulado",max_length=25,choices=IMP_CHOICES)
 
 	def save(self,*args, **kwargs):
 		super(AyudadorMapa,self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.idHelpMapper
-
