@@ -94,11 +94,13 @@
 					<input class = "entrada" type="password" id="contraseña" autocomplete="off" />
 					{{ form.nombre }}
 				</div>
-				<div>
-					<label  class="labels">Sexo:</label>
-					<label class="radio-inline"><input type="radio" name="optradio">Masculino</label>
-					<label class="radio-inline"><input type="radio" name="optradio">Femenino</label>
-					{{ form.gender }}
+				<div class="form-group">
+					<label for="sel1" class="labels">Sexo:</label>
+					<select name="sexo"  id="sel1">
+						<option>Masculino</option>
+						<option>Femenenino</option>
+						<option>Otro</option>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="cedula" class="labels">Cédula:</label>
@@ -106,7 +108,7 @@
 					{{ form.cedula }}
 				</div>
 				<div class="form-group">
-					<label for="sel1">Tipo de Sangre:</label>
+					<label  class="labels">Tipo de Sangre:</label>
 					<select name="tipo_sangre"  id="sel1">
 						<option>A+</option>
 						<option>A-</option>
@@ -135,12 +137,15 @@
 					<label class="radio-inline"><input type="radio" name="optradio">No</label>
 				</div>-->
 				<div class="form-group">
-					<label for="habilidad">Habilidad:</label>
-					<select name="habilidad"  id="habilidad">
+					<label  class="labels">Habilidad:</label>
+					<select name="habilidad"  id="sel1">
 						<option>Primeros Auxilios</option>
 						<option>Culinarias</option>
 						<option>Trabajo de Campo</option>
 					</select>
+				</div>
+				<div class="form-group">
+					<button   type="submit" class="btn btn-default sender">Registrarse</button>
 				</div>
 			</form>
 
