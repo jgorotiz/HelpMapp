@@ -1,0 +1,20 @@
+.container {
+	background: #212a85;
+    text-align: center;
+    border-radius: 8%;
+    max-width: 25em;
+
+
+}
+
+label {
+	color: #ece242;
+}
+
+.top{
+	height: 10em;
+}
+.container:hover{
+	opacity:0.9;
+}
+

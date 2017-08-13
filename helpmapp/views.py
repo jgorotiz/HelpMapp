@@ -23,6 +23,9 @@ def mostrar_voluntario(request):
 def mostrar_sobreNosotros(request):
     return render(request,'helpmapp/cliente/aboutus.html')
 
+def mostrar_login(request):
+    return render(request,'helpmapp/cliente/login.html')
+
 def get_name(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':

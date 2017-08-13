@@ -13,48 +13,6 @@
 
 {% block body %}
 
-
-
-    <!-- Bootstrap core CSS -->
-
- 
-    <nav class="navbar  navbar-inverse navbar-fixed-top">
-      <div class="container-fluid paleta1">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar">  </span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-             
-            </div>
-            
-            <div id="navbar" class="navbar-collapse collapse" >
-              <img src="{% static 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
-              <ul class="nav navbar-nav navbar-right ">
-
-                <li><a id = "hola" href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
-                <li ><a href="{% url 'helpmapp.views.donar' %}" > Donar</a></li>
-                <li><a href="{% url 'helpmapp.views.estadisticas' %}"> Estadísticas</a></li>
-                <li><a href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>
-                <li><a href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li>
-                <li ><a href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
-                <li ><a href="#">  Ingresar</a> </li>
-                <li ><a href="a#"> Registrarse</a> </li>
-
-                <li> 
-                    <form class="navbar-form navbar-right">
-                      <input type="text" class="form-control" placeholder="Buscar">
-                    </form>
-                </li>
-               
-              </ul>
-              
-            </div>
-          </div>
-        </nav>
-
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">

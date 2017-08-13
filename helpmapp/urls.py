@@ -10,6 +10,7 @@ urlpatterns = [
         url(r'^tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
         url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
         url(r'^integrantes/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
+        url(r'^login/', views.mostrar_login,name="mostrar_login"),
 
 
         url(r'^loginAdmin/', views.mostrar_loginAdmin,name="mostrar_loginAdmin"),
