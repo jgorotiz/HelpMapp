@@ -70,22 +70,39 @@
 				<h2 class="featurette-heading">¡Ayúdanos a ayudar! <span class="text-muted">Inscríbete como voluntario</span></h2>
 
 			<hr class="featurette-divider"> 
-			<form id = "quiero-ser-voluntario" method="post" action="/thanks/">
+			<form id = "quiero-ser-voluntario" method="post" >
 			{% csrf_token %}
+			{{ form.errors }}
+			{{ form.non_field_errors }}
 				<div class="form-group">
 					<label for="nombre" class="labels">Nombres:</label>
+					<input class = "entrada" type="text" id="nombre" autocomplete="off" />
 					{{ form.nombre }}
 				</div>
 				<div class="form-group">
 					<label for="apellido" class="labels">Apellidos:</label>
+					<input class = "entrada" type="text" id="apellido" autocomplete="off" />
 					{{ form.apellido }}
+				</div>
+				<div class="form-group">
+					<label for="usuario" class="labels">Usuario:</label>
+					<input class = "entrada" type="text" id="usuario" autocomplete="off" />
+					{{ form.nombre }}
+				</div>
+				<div class="form-group">
+					<label for="contraseña" class="labels">Contraseña:</label>
+					<input class = "entrada" type="password" id="contraseña" autocomplete="off" />
+					{{ form.nombre }}
 				</div>
 				<div>
 					<label  class="labels">Sexo:</label>
+					<label class="radio-inline"><input type="radio" name="optradio">Masculino</label>
+					<label class="radio-inline"><input type="radio" name="optradio">Femenino</label>
 					{{ form.gender }}
 				</div>
 				<div class="form-group">
 					<label for="cedula" class="labels">Cédula:</label>
+					<input class = "entrada" type="text" id="cedula" autocomplete="off" />
 					{{ form.cedula }}
 				</div>
 				<div class="form-group">
@@ -103,10 +120,12 @@
 				</div>
 				<div class="form-group">
 					<label for="telfono" class="labels">Teléfono:</label>
+					<input class = "entrada" type="text" id="telfono" autocomplete="off" />
 					{{ form.telefono }}
 				</div>
 				<div class="form-group">
 					<label for="correo" class="labels">Correo:</label>
+					<input class = "entrada" type="email" id="correo" autocomplete="off" />
 					{{ form.email }}
 				</div>
 				<!--
@@ -115,21 +134,13 @@
 					<label class="radio-inline"><input type="radio" name="optradio">Si</label>
 					<label class="radio-inline"><input type="radio" name="optradio">No</label>
 				</div>-->
-				<div>
-					<label  class="labels">Habilidades:</label>
-				    
-
-				    <label for="auxilios">Primeros Auxilios</label>
-				    <input type="checkbox" id="trabajo2" name="auxilios" >
-
-				    <label for="food">Culinarias</label>
-				    <input type="checkbox" id="trabajo3" name="culinarias" >
-
-				    <label for="personal">Trabajo de campo</label>
-				    <input type="checkbox" id="trabajo4" name="trabajo_campo" >
-				</div>
 				<div class="form-group">
-					<button   type="submit" class="btn btn-default sender">Enviar</button>
+					<label for="habilidad">Habilidad:</label>
+					<select name="habilidad"  id="habilidad">
+						<option>Primeros Auxilios</option>
+						<option>Culinarias</option>
+						<option>Trabajo de Campo</option>
+					</select>
 				</div>
 			</form>
 
