@@ -20,6 +20,32 @@ def mostrar_tutoriales(request):
 def mostrar_voluntario(request):
     return render(request,'helpmapp/cliente/voluntario.html')
 
+def listar_voluntario(request):
+    voluntarios =  AyudadorMapa.objects.all()
+         
+    return render(request, 'helpmapp/cliente/prueba.html', {'voluntarios': voluntarios})
+
+def crear_voluntario(request):
+    if request.method == 'POST':
+        print ('si es post')
+        form = VoluntaryForm(request.POST)
+        if form.is_valid():
+            print ('si es valid')
+            voluntario = form.save(commit=False)
+            voluntario.save()
+            return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+        else:
+            print ('no es valido')
+
+    else:
+        print ('no es post')
+        form = VoluntaryForm()
+
+    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+
+
+
+
 def mostrar_sobreNosotros(request):
     return render(request,'helpmapp/cliente/aboutus.html')
 

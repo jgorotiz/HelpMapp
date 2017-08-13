@@ -12,6 +12,7 @@ urlpatterns = [
         url(r'^integrantes/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
         url(r'^login/', views.mostrar_login,name="mostrar_login"),
 
+        url(r'^listar/', views.listar_voluntario,name="listar_voluntario"),  
 
         url(r'^loginAdmin/', views.mostrar_loginAdmin,name="mostrar_loginAdmin"),
 
