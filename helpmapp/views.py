@@ -3,8 +3,16 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.mail import send_mail
+from daw.settings import EMAIL_HOST_USER
+import random, string
 
 from .forms import *
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/index.html')
 
@@ -27,10 +35,8 @@ def listar_voluntario(request):
 
 def crear_voluntario(request):
     if request.method == 'POST':
-        print ('si es post')
         form = VoluntaryForm(request.POST)
         if form.is_valid():
-            print ('si es valid')
             voluntario = form.save(commit=False)
             voluntario.save()
             return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
@@ -38,7 +44,6 @@ def crear_voluntario(request):
             print ('no es valido')
 
     else:
-        print ('no es post')
         form = VoluntaryForm()
 
     return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
@@ -60,8 +65,7 @@ def get_name(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            # ...
-                   
+
         	 # redirect to a new URL:
             data = form.cleaned_data
             print (data['nombre'])
@@ -88,7 +92,7 @@ def mostrar_loginAdmin(request):
         if form.is_valid():
             m = Administrador.objects.get(nombreUsuario=request.POST['username'])
             if m.contrasena == request.POST['password']:
-                request.session['id'] = m.id_Administrador
+                request.session['member_id'] = m.id_Administrador
                 if (m.tipo==0): #es super admin
                     return redirect ('helpmapp/Administrador/superAdmin/index.html')
                 else:#es admin de centro de acopio
@@ -96,7 +100,7 @@ def mostrar_loginAdmin(request):
             else:
                 messages.error(request, "Credenciales incorrectas")
         else:
-            messages.error(request,"Formulario no válido")
+            messages.error(request,"Usuario no registrado")
     else:
         form= LoginForm()
     return render(request,'helpmapp/Administrador/index.html',{'form': form})
@@ -104,22 +108,48 @@ def mostrar_loginAdmin(request):
 #CERRAR SESIÓN DE ADMIN
 def cerrarSesion(request):
     try:
-        del request.session['id']
+        del request.session['member_id']
     except KeyError:
         pass
     
     return redirect('helpmapp/Administrador/index.html')
 
 #MOSTRAR INDEX DEL SUPER ADMIN
-@login_required(login_url='/loginAdmin/')
+#@login_required(login_url='/loginAdmin/')
 #@permission_required('helpmapp.is_superadmin', login_url='/loginAdmin/')
-def mostrar_administradorGeneral(request):
-    return render(request,'helpmapp/Administrador/superAdmin/index.html')
+# def mostrar_administradorGeneral(request):
+#     if('member_id' in request.session):
+#         return render(request,'helpmapp/Administrador/superAdmin/index.html')
+#     else:
+#         return redirect('helpmapp/Administrador/index.html')
 
-def mostrar_administradorZonal(request):
-    return render(request,'helpmapp/Administrador/adminCentro/index.html')
+# def mostrar_administradorZonal(request):
+#     if('member_id' in list(request.session.keys())):
+
+#         return render(request,'helpmapp/Administrador/adminCentro/index.html')
 
 def mostrar_configuracionCapacidades(request):
+    if('member_id' in request.session):
+        m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
+        if (m.tipo==0): #si es administrador de centro
+            if(request.method=="POST"):
+                form = CapacidadesForm(request.POST)
+                if form.is_valid():
+                
+                    voluntario = form.save(commit=False)
+            
+                    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+                else:
+                    print ('no es valido')
+
+            else:
+                print ('no es post')
+                form = CapacidadesForm()
+        return render('helpmapp/Administrador/superAdmin/index.html')
+    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+
+
+
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
 
 def mostrar_configuracionCuenta(request):
@@ -168,3 +198,27 @@ def mostrar_recuperarCuenta(request):
 def saveData():
     return
 
+def recoverPass(request):
+    developers = ["Fabricio","Galo", "María Belén", "Jonathan"]
+
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = RecoveryForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required      
+            # redirect to a new URL:
+            data = form.cleaned_data
+            text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
+            text += id_generator(8)
+            text += "\n "
+            text += "Atentamente,\n"
+            text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
+            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']], fail_silently=False)
+            return HttpResponseRedirect('helpmapp/cliente/login.html')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = VoluntaryForm()
+
+    return render(request, 'helpmapp/cliente/login.html', {'form': form})

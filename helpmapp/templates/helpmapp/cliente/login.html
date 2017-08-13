@@ -25,10 +25,26 @@
 				<input type="password" id="password">
 				<div class="reserver"></div>
 				<button type="submit">Entrar!</button>
-
-				<a href="#"><p class="small">Forgot your password?</p></a>
+				<a onclick="overlay()" class="small"><p>Forgot your password?</p></a>
 			</div>
 
 		</div>
 	</div>
+
+	<div id="popup">
+		<div>
+			<form method="post" action="{% url 'helpmapp.views.recoverPass'%}"">
+				<label for="mail">Correo Electrónico</label>
+				<br/>
+				<input type="email" id="mail">
+			</form>
+			
+			<a href="#" onclick="overlay()" ><p class="small">Recuperar</p></a>
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/login.js' %}"></script>
+
 {% endblock %}

@@ -16,7 +16,7 @@ urlpatterns = [
 
         url(r'^loginAdmin/', views.mostrar_loginAdmin,name="mostrar_loginAdmin"),
 
-        url(r'^administradorGeneral/', views.mostrar_administradorGeneral,name="mostrar_administrador_general"),
+        #url(r'^administradorGeneral/', views.mostrar_administradorGeneral,name="mostrar_administrador_general"),
         url(r'^configuracionCapacidades/', views.mostrar_configuracionCapacidades,name="mostrar_configuracionCapacidades"),
         url(r'^configuracionCuenta/', views.mostrar_configuracionCuenta,name="mostrar_configuracionCuenta"),
         url(r'^crearProducto/', views.mostrar_crearProducto,name="mostrar_crearProducto"),
@@ -24,13 +24,13 @@ urlpatterns = [
         url(r'^inventarioComida/', views.mostrar_inventarioComida,name="mostrar_inventarioComida"),
         url(r'^inventarioRopa/', views.mostrar_inventarioRopa,name="mostrar_inventarioRopa"),
 
-        url(r'^administradorZonal/', views.mostrar_administradorZonal,name="mostrar_administrador_zonal"),
+        #url(r'^administradorZonal/', views.mostrar_administradorZonal,name="mostrar_administrador_zonal"),
         url(r'^buscarCentroAcopio/', views.mostrar_buscarCentroAcopio,name="mostrar_buscarCentroAcopio"),
         url(r'^configCuenta/', views.mostrar_configCuenta,name="mostrar_configCuenta"),
         url(r'^crearAdmin/', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
         url(r'^verCentro/', views.mostrar_verCentro,name="mostrar_verCentro"),
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
-
+        url(r'^recoverPass/', views.recoverPass,name="recoverPass"),
 
 
     ]
