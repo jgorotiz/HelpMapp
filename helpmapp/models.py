@@ -64,12 +64,11 @@ class AyudadorMapa(models.Model):
 	contrasena = models.CharField(max_length=15)
 	sexo = models.CharField(max_length=10)	
 	cedula = models.CharField( max_length=10)
-	tipoSangre = models.CharField(max_length=5)
+	tipoSangre = models.CharField(max_length=5, default="O+", choices=TIPOS_SANGRES)
 	telefono = models.CharField(max_length=10)		
 	correo = models.EmailField(max_length=100)
 	estado = models.IntegerField(default=1)
 	
-#    estado = models.CharField(default="acumulado",max_length=25,choices=IMP_CHOICES)
 
 	def save(self,*args, **kwargs):
 		super(AyudadorMapa,self).save(*args, **kwargs)
