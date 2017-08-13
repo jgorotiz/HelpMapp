@@ -88,7 +88,7 @@ def mostrar_loginAdmin(request):
         if form.is_valid():
             m = Administrador.objects.get(nombreUsuario=request.POST['username'])
             if m.contrasena == request.POST['password']:
-                request.session['id'] = m.id_Administrador
+                request.session['member_id'] = m.id_Administrador
                 if (m.tipo==0): #es super admin
                     return redirect ('helpmapp/Administrador/superAdmin/index.html')
                 else:#es admin de centro de acopio
@@ -96,7 +96,7 @@ def mostrar_loginAdmin(request):
             else:
                 messages.error(request, "Credenciales incorrectas")
         else:
-            messages.error(request,"Formulario no válido")
+            messages.error(request,"Usuario no registrado")
     else:
         form= LoginForm()
     return render(request,'helpmapp/Administrador/index.html',{'form': form})
@@ -104,22 +104,48 @@ def mostrar_loginAdmin(request):
 #CERRAR SESIÓN DE ADMIN
 def cerrarSesion(request):
     try:
-        del request.session['id']
+        del request.session['member_id']
     except KeyError:
         pass
     
     return redirect('helpmapp/Administrador/index.html')
 
 #MOSTRAR INDEX DEL SUPER ADMIN
-@login_required(login_url='/loginAdmin/')
+#@login_required(login_url='/loginAdmin/')
 #@permission_required('helpmapp.is_superadmin', login_url='/loginAdmin/')
-def mostrar_administradorGeneral(request):
-    return render(request,'helpmapp/Administrador/superAdmin/index.html')
+# def mostrar_administradorGeneral(request):
+#     if('member_id' in request.session):
+#         return render(request,'helpmapp/Administrador/superAdmin/index.html')
+#     else:
+#         return redirect('helpmapp/Administrador/index.html')
 
-def mostrar_administradorZonal(request):
-    return render(request,'helpmapp/Administrador/adminCentro/index.html')
+# def mostrar_administradorZonal(request):
+#     if('member_id' in list(request.session.keys())):
+
+#         return render(request,'helpmapp/Administrador/adminCentro/index.html')
 
 def mostrar_configuracionCapacidades(request):
+    if('member_id' in request.session):
+        m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
+        if (m.tipo==0): #si es administrador de centro
+            if(request.method=="POST"):
+                form = CapacidadesForm(request.POST)
+                if form.is_valid():
+                
+                    voluntario = form.save(commit=False)
+            
+                    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+                else:
+                    print ('no es valido')
+
+            else:
+                print ('no es post')
+                form = CapacidadesForm()
+        return render('helpmapp/Administrador/superAdmin/index.html')
+    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+
+
+
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
 
 def mostrar_configuracionCuenta(request):
