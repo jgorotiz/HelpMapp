@@ -18,3 +18,23 @@ label {
 	opacity:0.9;
 }
 
+#popup {
+	visibility: hidden;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width:100%;
+	height:100%;
+	text-align:center;
+	z-index: 1000;
+}
+
+#popup div {
+	width:300px;
+	margin: 100px auto;
+	background-color: #ece242;
+	border-radius: 5%;
+	padding:15px;
+	text-align:center;
+}
+
