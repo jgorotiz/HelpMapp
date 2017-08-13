@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'helpmapp_db',
-	'USER': 'root',
+	'USER': 'galo',
 	'PASSWORD': '0000',
 	'HOST': 'localhost',
 	'PORT': '',
