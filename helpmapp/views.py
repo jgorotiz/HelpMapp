@@ -230,3 +230,13 @@ def recoverPass(request):
         form = VoluntaryForm()
 
     return render(request, 'helpmapp/cliente/login.html', {'form': form})
+
+
+
+
+
+
+#devolver todos los centros de acopios
+def listar_centroAcopio(request):
+    centros =  CentroDeAcopio.objects.all()
+    return render(request, 'helpmapp/cliente/donar.html', {'centros': centros})

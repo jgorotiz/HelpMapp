@@ -15,12 +15,12 @@ TIPOS_SANGRES = (
 	)
 
 class CentroDeAcopio(models.Model):
-	nombreUPC = models.CharField(max_length=30)
-	direccion = models.CharField(max_length=100)
+	nombreUPC = models.CharField(default="-",max_length=30)
+	direccion = models.CharField(default="-",max_length=100)
 	latitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
 	longitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
-	provincia = models.CharField(max_length=30)
-	canton = models.CharField(max_length=30)
+	provincia = models.CharField(default="-",max_length=30)
+	canton = models.CharField(default="-",max_length=30)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 	almacenamientoAgua = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
 	almacenamientoRopa = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
@@ -42,16 +42,16 @@ class Habilidad(models.Model):
 		return self.nombre
 
 class HelpMapper(models.Model):
-	nombre = models.CharField(max_length=100)
-	apellido = models.CharField(max_length=100)
-	nombreUsuario = models.CharField(max_length=12, primary_key=True)
-	contrasena = models.CharField(max_length=15)
-	sexo = models.CharField(max_length=10)	
-	cedula = models.CharField( max_length=10)
+	nombre = models.CharField(default="-",max_length=100)
+	apellido = models.CharField(default="-",max_length=100)
+	nombreUsuario = models.CharField(default="-",max_length=12, primary_key=True)
+	contrasena = models.CharField(default="-",max_length=15)
+	sexo = models.CharField(default="-",max_length=10)	
+	cedula = models.CharField(default="-", max_length=10)
 	tipoSangre = models.CharField(max_length=5, default="O+", choices=TIPOS_SANGRES)
-	telefono = models.CharField(max_length=10)		
+	telefono = models.CharField(default="-",max_length=10)		
 	correo = models.EmailField(max_length=100)
-	idHabilidad = models.ForeignKey(Habilidad, to_field='id', default="-")
+	idHabilidad = models.ForeignKey(Habilidad, to_field='id', default=0)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
@@ -61,8 +61,8 @@ class HelpMapper(models.Model):
 		return self.nombreUsuario
 
 class Categoria(models.Model):
-	nombreCategoria = models.CharField(max_length=30)
-	unidad = models.CharField(max_length=20)
+	nombreCategoria = models.CharField(default="-",max_length=30)
+	unidad = models.CharField(default="-",max_length=20)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
@@ -72,9 +72,9 @@ class Categoria(models.Model):
 		return self.nombreCategoria
 
 class Producto(models.Model):
-	nombreProducto = models.CharField(max_length=30)
+	nombreProducto = models.CharField(default="-",max_length=30)
 	cantidad = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	idCategoria = models.ForeignKey(Categoria, to_field='id', default="-")
+	idCategoria = models.ForeignKey(Categoria, to_field='id', default=0)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
@@ -86,7 +86,7 @@ class Producto(models.Model):
 class CambioInventario(models.Model):
 	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
-	idProducto = models.ForeignKey(Producto, to_field='id', default="-")
+	idProducto = models.ForeignKey(Producto, to_field='id', default=0)
 	fecha = models.DateField(default=datetime.date.today)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
@@ -97,11 +97,11 @@ class CambioInventario(models.Model):
 		return self.id
 
 class Administrador(models.Model):
-	nombreUsuario = models.CharField(max_length=12, primary_key=True)
-	contrasena = models.CharField( max_length=15)
-	correo = models.EmailField(max_length=254)
+	nombreUsuario = models.CharField(default="-",max_length=12, primary_key=True)
+	contrasena = models.CharField(default="-", max_length=15)
+	correo = models.EmailField(default="-",max_length=254)
 	tipo = models.IntegerField(default=1) #(1) superAdmin, (0) adminCentro
-	idCentro = models.ForeignKey(CentroDeAcopio, to_field='id', default="-")
+	idCentro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
@@ -110,18 +110,3 @@ class Administrador(models.Model):
 	def __str__(self):
 		return self.nombreUsuario
 
-class Post(models.Model):
-        author = models.ForeignKey('auth.User')
-        title = models.CharField(max_length=200)
-        text = models.TextField()
-        created_date = models.DateTimeField(
-                default=timezone.now)
-        published_date = models.DateTimeField(
-                blank=True, null=True)
-
-        def publish(self):
-            self.published_date = timezone.now()
-            self.save()
-
-        def __str__(self):
-            return self.title
