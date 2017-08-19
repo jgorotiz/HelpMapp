@@ -135,8 +135,15 @@ def mostrar_configuracionCapacidades(request):
             if(request.method=="POST"):
                 form = CapacidadesForm(request.POST)
                 if form.is_valid():
-                
-                    voluntario = form.save(commit=False)
+                    centro=CentroAcopio.objects.get(id=m.idCentro)
+                    data = form.cleaned_data
+                    cagua=data["maxagua"]
+                    cropa=data["maxropa"]
+                    ccomida=data["maxcom"]
+                    centro.capacidad_agua=cagua
+                    centro.capacidad_ropa=cropa
+                    centro.capacidad_comida=ccomida
+                    centro.save()
             
                     return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
                 else:
@@ -146,7 +153,8 @@ def mostrar_configuracionCapacidades(request):
                 print ('no es post')
                 form = CapacidadesForm()
         return render('helpmapp/Administrador/superAdmin/index.html')
-    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+    return HttpResponseRedirect('/loginAdmin/')
+
 
 
 
@@ -222,3 +230,13 @@ def recoverPass(request):
         form = VoluntaryForm()
 
     return render(request, 'helpmapp/cliente/login.html', {'form': form})
+
+
+
+
+
+
+#devolver todos los centros de acopios
+def listar_centroAcopio(request):
+    centros =  CentroDeAcopio.objects.all()
+    return render(request, 'helpmapp/cliente/donar.html', {'centros': centros})

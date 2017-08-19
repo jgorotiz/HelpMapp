@@ -41,10 +41,35 @@
       <script>
         var map;
           function initMap() {
+            var myLatLng = {lat: -2.58596, lng: -79.8239};
               map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: -2.158596, lng: -79.888239},
                 zoom: 16
               });
+              
+              {% if centros %}
+                {% for centro in centros %}
+                  var contentString = {{ centro.nombreUPC}};
+                  console.log("{{ centro.nombreUPC}}");
+
+                  var infowindow1 = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+
+                    var marker = new google.maps.Marker({
+                      position: {lat: {{ centro.latitud}}, lng: {{ centro.longitud}}},
+                      map: map,
+                      title: 'UPC1'
+                    });
+                    marker.addListener('click', function() {
+                      infowindow1.open(map, marker);
+                    });
+                {% endfor %}
+              {% else %}
+                  alert("NO EXISTEN CENTROS DE ACOPIO EN LA BASE!!");
+
+              {% endif %}
+
               var infoWindow = new google.maps.InfoWindow({map: map});
 
               // Try HTML5 geolocation.
@@ -69,6 +94,9 @@
                 // Browser doesn't support Geolocation
                 handleLocationError(false, infoWindow, map.getCenter());
               }
+
+              
+
           }
 
             function handleLocationError(browserHasGeolocation, infoWindow, pos) {
