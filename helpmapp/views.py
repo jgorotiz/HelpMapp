@@ -16,8 +16,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/index.html')
 
-def donar(request):
-    return render(request,'helpmapp/cliente/donar.html')
+
 
 def estadisticas(request):
     return render(request,'helpmapp/cliente/statistics.html')
@@ -239,4 +238,6 @@ def recoverPass(request):
 #devolver todos los centros de acopios
 def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
+    print(centros)
+    print("hola")
     return render(request, 'helpmapp/cliente/donar.html', {'centros': centros})
