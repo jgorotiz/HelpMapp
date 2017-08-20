@@ -76,27 +76,27 @@
 			{{ form.non_field_errors }}
 				<div class="form-group">
 					<label for="nombre" class="labels">Nombres:</label>
-					<input class = "entrada" type="text" id="nombre" autocomplete="off" />
+					<input class = "entrada" type="text" name="nombre" id="nombre" autocomplete="off" />
 					{{ form.nombre }}
 				</div>
 				<div class="form-group">
 					<label for="apellido" class="labels">Apellidos:</label>
-					<input class = "entrada" type="text" id="apellido" autocomplete="off" />
+					<input class = "entrada" type="text" name="apellido" id="apellido" autocomplete="off" />
 					{{ form.apellido }}
 				</div>
 				<div class="form-group">
-					<label for="usuario" class="labels">Usuario:</label>
-					<input class = "entrada" type="text" id="usuario" autocomplete="off" />
-					{{ form.nombre }}
+					<label for="nombreUsuario" class="labels">Usuario:</label>
+					<input class = "entrada" type="text" name="nombreUsuario" id="nombreUsuario" autocomplete="off" />
+					{{ form.nombreUsuario }}
 				</div>
 				<div class="form-group">
-					<label for="contraseña" class="labels">Contraseña:</label>
-					<input class = "entrada" type="password" id="contraseña" autocomplete="off" />
-					{{ form.nombre }}
+					<label for="contrasena" class="labels">Contraseña:</label>
+					<input class = "entrada" type="password" name="contrasena" id="contrasena" autocomplete="off" />
+					{{ form.contrasena }}
 				</div>
 				<div class="form-group">
-					<label for="sel1" class="labels">Sexo:</label>
-					<select name="sexo"  id="sel1">
+					<label for="sexo" class="labels">Sexo:</label>
+					<select name="sexo"  id="sexo">
 						<option>Masculino</option>
 						<option>Femenenino</option>
 						<option>Otro</option>
@@ -104,12 +104,12 @@
 				</div>
 				<div class="form-group">
 					<label for="cedula" class="labels">Cédula:</label>
-					<input class = "entrada" type="text" id="cedula" autocomplete="off" />
+					<input class = "entrada" type="text" name="cedula" id="cedula" autocomplete="off" />
 					{{ form.cedula }}
 				</div>
 				<div class="form-group">
-					<label  class="labels">Tipo de Sangre:</label>
-					<select name="tipo_sangre"  id="sel1">
+					<label  for="tipoSangre" class="labels">Tipo de Sangre:</label>
+					<select name="tipoSangre"  id="tipoSangre">
 						<option>A+</option>
 						<option>A-</option>
 						<option>B+</option>
@@ -121,13 +121,13 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="telfono" class="labels">Teléfono:</label>
-					<input class = "entrada" type="text" id="telfono" autocomplete="off" />
+					<label for="telefono" class="labels">Teléfono:</label>
+					<input class = "entrada" type="text" name="telefono" id="telefono" autocomplete="off" />
 					{{ form.telefono }}
 				</div>
 				<div class="form-group">
 					<label for="correo" class="labels">Correo:</label>
-					<input class = "entrada" type="email" id="correo" autocomplete="off" />
+					<input class = "entrada" type="email" name="correo" id="correo" autocomplete="off" />
 					{{ form.email }}
 				</div>
 				<!--
@@ -137,11 +137,11 @@
 					<label class="radio-inline"><input type="radio" name="optradio">No</label>
 				</div>-->
 				<div class="form-group">
-					<label  class="labels">Habilidad:</label>
-					<select name="habilidad"  id="sel1">
-						<option>Primeros Auxilios</option>
-						<option>Culinarias</option>
-						<option>Trabajo de Campo</option>
+					<label for="habilidad" class="labels">Habilidad:</label>
+					<select name="habilidad"  id="habilidad">
+						<option value="Primeros Auxilios" selected>Primeros Auxilios</option>
+						<option value="Culinarias">Culinarias</option>
+						<option value="Trabajo de Campo">Trabajo de Campo</option>
 					</select>
 				</div>
 				<div class="form-group">

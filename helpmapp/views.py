@@ -16,8 +16,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/index.html')
 
-def donar(request):
-    return render(request,'helpmapp/cliente/donar.html')
+
 
 def estadisticas(request):
     
@@ -209,12 +208,16 @@ def saveData():
 
 def recoverPass(request):
     developers = ["Fabricio","Galo", "María Belén", "Jonathan"]
-
+    print(request.method)
     if request.method == 'POST':
+        #send_mail("Cambio de contraseña", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+
         # create a form instance and populate it with data from the request:
         form = RecoveryForm(request.POST)
+        print(request.POST)
         # check whether it's valid:
         if form.is_valid():
+            print("is valid")
             # process the data in form.cleaned_data as required      
             # redirect to a new URL:
             data = form.cleaned_data
@@ -223,12 +226,15 @@ def recoverPass(request):
             text += "\n "
             text += "Atentamente,\n"
             text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
-            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']], fail_silently=False)
+            #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+
+            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
             return HttpResponseRedirect('helpmapp/cliente/login.html')
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = VoluntaryForm()
+        form = RecoveryForm()
+        #send_mail("Cambio de contraseña", "nOpOST", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
 
     return render(request, 'helpmapp/cliente/login.html', {'form': form})
 
@@ -240,4 +246,44 @@ def recoverPass(request):
 #devolver todos los centros de acopios
 def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
+    print(centros)
+    print("hola")
     return render(request, 'helpmapp/cliente/donar.html', {'centros': centros})
+
+
+
+#Registrar helpmapper
+def registrar_helpmapper(request):
+    if request.method == 'POST':
+        print ('si es post')
+        form = HelpMapper(request.POST)
+        if form.is_valid():
+            print ('si es valid')
+            helpmapper = form.save(commit=False)
+            helpmapper.save()
+            return render(request, 'helpmapp/cliente/index.html', {'form': form})
+        else:
+            print ('no es valido')
+    else:
+        print ('no es post')
+        form = HelpMapperForm()
+    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+
+def actualizar_contrasena(request, nombreUsuario):
+    helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)
+    if request.method == "POST":
+        form = HelpMapperForm(request.POST,instance=helpmapper)
+        if form.is_valid():
+            helpmapper = form.save(commit=False)
+            helpmapper.save()
+            return redirect('helpmapp/cliente/index.html')
+    else:
+            form = HelpMapperForm(instance=helpmapper)
+    return render(request, 'helpmapp/cliente/index.html', {'form': form})
+
+def eliminar_helpmapper(request, nombreUsuario):
+    
+    helpmapper  = get_object_or_404(HelpMapper, pk = nombreUsuario).delete()
+
+    return HttpResponseRedirect('helpmapp/cliente/index.html')
+
