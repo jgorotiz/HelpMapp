@@ -250,8 +250,6 @@ def recoverPass(request):
 #devolver todos los centros de acopios
 def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
-    print(centros)
-    print("hola")
     return render(request, 'helpmapp/cliente/donar.html', {'centros': centros})
 
 
