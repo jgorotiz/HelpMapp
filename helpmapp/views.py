@@ -16,6 +16,37 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/index.html')
 
+def recovery(request):
+    if request.method=='GET':
+        form = RecoveryForm()
+        return render(request, 'helpmapp/cliente/recovery.html', {'form': form})
+
+    elif request.method=='POST':
+        #send_mail("Cambio de contraseña", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+
+        # create a form instance and populate it with data from the request:
+        form = RecoveryForm(request.POST)
+        print(request.POST)
+        developers = ["Fabricio","Galo", "María Belén", "Jonathan"]
+
+        # check whether it's valid:
+        if form.is_valid():
+            print("is valid")
+            # process the data in form.cleaned_data as required      
+            # redirect to a new URL:
+            data = form.cleaned_data
+            text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
+            text += id_generator(8)
+            text += "\n "
+            text += "Atentamente,\n"
+            text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
+            #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+
+            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
+            return render(request, 'helpmapp/cliente/login.html')
+
+    return render(request, 'helpmapp/cliente/recovery.html', {'form': form})
+
 
 
 def estadisticas(request):
@@ -204,42 +235,6 @@ def mostrar_recuperarCuenta(request):
 
 def saveData():
     return
-
-def recoverPass(request):
-    developers = ["Fabricio","Galo", "María Belén", "Jonathan"]
-    print(request.method)
-    if request.method == 'POST':
-        #send_mail("Cambio de contraseña", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
-
-        # create a form instance and populate it with data from the request:
-        form = RecoveryForm(request.POST)
-        print(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            print("is valid")
-            # process the data in form.cleaned_data as required      
-            # redirect to a new URL:
-            data = form.cleaned_data
-            text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
-            text += id_generator(8)
-            text += "\n "
-            text += "Atentamente,\n"
-            text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
-            #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
-
-            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
-            return HttpResponseRedirect('helpmapp/cliente/login.html')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = RecoveryForm()
-        #send_mail("Cambio de contraseña", "nOpOST", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
-
-    return render(request, 'helpmapp/cliente/login.html', {'form': form})
-
-
-
-
 
 
 #devolver todos los centros de acopios

@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}helpMapp - Login {% endblock %}
+{% block title %}helpMapp - Recovering Password {% endblock %}
 
 {% block css %}
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
@@ -12,9 +12,10 @@
 <div class="top"></div>
 	<div class="container">
 		
-		<div class="login-box">
+		<div id="square">
 			<img src="{% static 'img/helpMapp.jpg' %}">
-			<div>
+
+			<div class="login-box">
 				<div class="reserver"></div>
 				<label for="username">Usuario</label>
 				<br/>
@@ -25,28 +26,18 @@
 				<input type="password" id="password">
 				<div class="reserver"></div>
 				<button type="submit">Entrar!</button>
-				<a onclick="overlay()" class="small"><p>Forgot your password?</p></a>
+				<form>
+				<a  href="{% url 'helpmapp.views.recovery'%}" class="small"><p id="link-recover">Forgot your password?</p></a>
+				</form>
 			</div>
-
 		</div>
 	</div>
 
-	<div id="popup">
-		<div>
-			<form method="POST" action="{% url 'helpmapp.views.recoverPass'%}">
-				{% csrf_token %}
-				<label for="mail">Correo Electrónico</label>
-				<br/>
-				<input type="email" id="mail">
-				{{form.correo}}
-				<input type="submit" value="Enviar">
-			</form>
-
-		</div>
-	</div>
+	
 {% endblock %}
 
 {% block scripts %}
     <script src="{% static 'js/login.js' %}"></script>
+    <script src="{% static 'js/client/recover.js' %}"></script>
 
 {% endblock %}
