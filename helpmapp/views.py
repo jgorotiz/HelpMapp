@@ -241,3 +241,41 @@ def listar_centroAcopio(request):
     print(centros)
     print("hola")
     return render(request, 'helpmapp/cliente/donar.html', {'centros': centros})
+
+
+
+#Registrar helpmapper
+def registrar_helpmapper(request):
+    if request.method == 'POST':
+        print ('si es post')
+        form = HelpMapper(request.POST)
+        if form.is_valid():
+            print ('si es valid')
+            helpmapper = form.save(commit=False)
+            helpmapper.save()
+            return render(request, 'helpmapp/cliente/index.html', {'form': form})
+        else:
+            print ('no es valido')
+    else:
+        print ('no es post')
+        form = HelpMapperForm()
+    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+
+def actualizar_contrasena(request, nombreUsuario):
+    helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)
+    if request.method == "POST":
+        form = HelpMapperForm(request.POST,instance=helpmapper)
+        if form.is_valid():
+            helpmapper = form.save(commit=False)
+            helpmapper.save()
+            return redirect('helpmapp/cliente/index.html')
+    else:
+            form = HelpMapperForm(instance=helpmapper)
+    return render(request, 'helpmapp/cliente/index.html', {'form': form})
+
+def eliminar_helpmapper(request, nombreUsuario):
+    
+    helpmapper  = get_object_or_404(HelpMapper, pk = nombreUsuario).delete()
+
+    return HttpResponseRedirect('helpmapp/cliente/index.html')
+
