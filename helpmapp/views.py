@@ -259,7 +259,7 @@ def registrar_helpmapper(request):
     else:
         print ('no es post')
         form = HelpMapperForm()
-    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+    return render(request, 'helpmapp/cliente/voluntariot.html', {'form': form})
 
 def actualizar_contrasena(request, nombreUsuario):
     helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)
