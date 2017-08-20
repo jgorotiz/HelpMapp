@@ -20,6 +20,11 @@ HABILIDADES = (
 	('Trabajo de Campo', 'Trabajo de Campo'),
 	)
 
+SEXOS = (
+	('M', 'M'),
+	('F', 'F'),
+	)
+
 class CentroDeAcopio(models.Model):
 	nombreUPC = models.CharField(default="-",max_length=30)
 	direccion = models.CharField(default="-",max_length=100)
@@ -43,13 +48,13 @@ class HelpMapper(models.Model):
 	apellido = models.CharField(default="-",max_length=100)
 	nombreUsuario = models.CharField(default="-",max_length=12, primary_key=True)
 	contrasena = models.CharField(default="-",max_length=15)
-	sexo = models.CharField(default="-",max_length=10)	
-	cedula = models.CharField(default="-", max_length=10)
+	sexo = models.CharField(default='M',max_length=5, choices=SEXOS)	
+	cedula = models.CharField(default="M", max_length=10)
 	tipoSangre = models.CharField(max_length=5, default="O+", choices=TIPOS_SANGRES)
 	telefono = models.CharField(default="-",max_length=10)		
 	correo = models.EmailField(max_length=100)
 	habilidad = models.CharField(max_length=5, default="Primeros Auxilios", choices=HABILIDADES)
-	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
+
 
 	def save(self,*args, **kwargs):
 		super(HelpMapper,self).save(*args, **kwargs)

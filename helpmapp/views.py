@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from daw.settings import EMAIL_HOST_USER
+from django.contrib import messages
 import random, string
 
 from .forms import *
@@ -50,6 +51,7 @@ def recovery(request):
 
 
 def estadisticas(request):
+    
     return render(request,'helpmapp/cliente/statistics.html')
 
 def mostrar_tutoriales(request):
@@ -120,17 +122,20 @@ def mostrar_loginAdmin(request):
     if request.method == 'POST':
         form= LoginForm(request.POST)
         if form.is_valid():
-            m = Administrador.objects.get(nombreUsuario=request.POST['username'])
-            if m.contrasena == request.POST['password']:
-                request.session['member_id'] = m.id_Administrador
-                if (m.tipo==0): #es super admin
-                    return redirect ('helpmapp/Administrador/superAdmin/index.html')
-                else:#es admin de centro de acopio
-                    return redirect ('helpmapp/Administrador/adminCentro/index.html')
-            else:
-                messages.error(request, "Credenciales incorrectas")
-        else:
-            messages.error(request,"Usuario no registrado")
+            try:
+                m = Administrador.objects.get(nombreUsuario=request.POST['username'])
+                print(m.contrasena== request.POST['password'])
+                if m.contrasena == request.POST['password']:
+                    request.session['member_id'] = m.nombreUsuario
+                    if (m.tipo==0): #es super admin
+                        return render(request,'helpmapp/Administrador/superAdmin/index.html')
+                    else:#es admin de centro de acopio
+                        print("ejvfjg")
+                        return HttpResponseRedirect('/administradorZonal/')
+                else:
+                    messages.error(request, "Credenciales incorrectas")
+            except: 
+                messages.error(request,"Usuario no registrado")
     else:
         form= LoginForm()
     return render(request,'helpmapp/Administrador/index.html',{'form': form})
@@ -142,7 +147,7 @@ def cerrarSesion(request):
     except KeyError:
         pass
     
-    return redirect('helpmapp/Administrador/index.html')
+    return render(request,'helpmapp/Administrador/index.html')
 
 #MOSTRAR INDEX DEL SUPER ADMIN
 #@login_required(login_url='/loginAdmin/')
@@ -153,10 +158,10 @@ def cerrarSesion(request):
 #     else:
 #         return redirect('helpmapp/Administrador/index.html')
 
-# def mostrar_administradorZonal(request):
-#     if('member_id' in list(request.session.keys())):
+def mostrar_administradorZonal(request):
+    if('member_id' in list(request.session.keys())):
 
-#         return render(request,'helpmapp/Administrador/adminCentro/index.html')
+        return render(request,'helpmapp/Administrador/adminCentro/index.html')
 
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):
@@ -261,7 +266,7 @@ def registrar_helpmapper(request):
     else:
         print ('no es post')
         form = HelpMapperForm()
-    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+    return render(request, 'helpmapp/cliente/voluntariot.html', {'form': form})
 
 def actualizar_contrasena(request, nombreUsuario):
     helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)
