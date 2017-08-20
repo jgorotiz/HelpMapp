@@ -20,6 +20,7 @@ def donar(request):
     return render(request,'helpmapp/cliente/donar.html')
 
 def estadisticas(request):
+    
     return render(request,'helpmapp/cliente/statistics.html')
 
 def mostrar_tutoriales(request):
@@ -107,10 +108,10 @@ def mostrar_loginAdmin(request):
 
 #CERRAR SESIÓN DE ADMIN
 def cerrarSesion(request):
-    try:
-        del request.session['member_id']
-    except KeyError:
-        pass
+    # try:
+    #     del request.session['member_id']
+    # except KeyError:
+    #     pass
     
     return redirect('helpmapp/Administrador/index.html')
 
@@ -123,10 +124,10 @@ def cerrarSesion(request):
 #     else:
 #         return redirect('helpmapp/Administrador/index.html')
 
-# def mostrar_administradorZonal(request):
+def mostrar_administradorZonal(request):
 #     if('member_id' in list(request.session.keys())):
 
-#         return render(request,'helpmapp/Administrador/adminCentro/index.html')
+    return render(request,'helpmapp/Administrador/adminCentro/index.html')
 
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):

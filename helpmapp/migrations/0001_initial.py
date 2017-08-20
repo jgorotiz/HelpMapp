@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Administrador',
             fields=[
-                ('nombreUsuario', models.CharField(default='-', primary_key=True, max_length=12, serialize=False)),
+                ('nombreUsuario', models.CharField(primary_key=True, default='-', max_length=12, serialize=False)),
                 ('contrasena', models.CharField(default='-', max_length=15)),
                 ('correo', models.EmailField(default='-', max_length=254)),
                 ('tipo', models.IntegerField(default=1)),
@@ -24,9 +24,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CambioInventario',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('tipo', models.IntegerField(default=1)),
-                ('cantidad', models.DecimalField(default=0.0, max_digits=6, decimal_places=2)),
+                ('cantidad', models.DecimalField(max_digits=6, default=0.0, decimal_places=2)),
                 ('fecha', models.DateField(default=datetime.date.today)),
                 ('estado', models.IntegerField(default=1)),
             ],
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Categoria',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nombreCategoria', models.CharField(default='-', max_length=30)),
                 ('unidad', models.CharField(default='-', max_length=20)),
                 ('estado', models.IntegerField(default=1)),
@@ -43,23 +43,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CentroDeAcopio',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nombreUPC', models.CharField(default='-', max_length=30)),
                 ('direccion', models.CharField(default='-', max_length=100)),
-                ('latitud', models.DecimalField(default=0.0, max_digits=15, decimal_places=10)),
-                ('longitud', models.DecimalField(default=0.0, max_digits=15, decimal_places=10)),
+                ('latitud', models.DecimalField(max_digits=15, default=0.0, decimal_places=10)),
+                ('longitud', models.DecimalField(max_digits=15, default=0.0, decimal_places=10)),
                 ('provincia', models.CharField(default='-', max_length=30)),
                 ('canton', models.CharField(default='-', max_length=30)),
                 ('estado', models.IntegerField(default=1)),
-                ('almacenamientoAgua', models.DecimalField(default=0.0, max_digits=8, decimal_places=2)),
-                ('almacenamientoRopa', models.DecimalField(default=0.0, max_digits=8, decimal_places=2)),
-                ('almacenamientoComida', models.DecimalField(default=0.0, max_digits=8, decimal_places=2)),
+                ('almacenamientoAgua', models.DecimalField(max_digits=8, default=0.0, decimal_places=2)),
+                ('almacenamientoRopa', models.DecimalField(max_digits=8, default=0.0, decimal_places=2)),
+                ('almacenamientoComida', models.DecimalField(max_digits=8, default=0.0, decimal_places=2)),
             ],
         ),
         migrations.CreateModel(
             name='Habilidad',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nombre', models.CharField(default='-', max_length=20)),
                 ('estado', models.IntegerField(default=1)),
             ],
@@ -69,11 +69,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('nombre', models.CharField(default='-', max_length=100)),
                 ('apellido', models.CharField(default='-', max_length=100)),
-                ('nombreUsuario', models.CharField(default='-', primary_key=True, max_length=12, serialize=False)),
+                ('nombreUsuario', models.CharField(primary_key=True, default='-', max_length=12, serialize=False)),
                 ('contrasena', models.CharField(default='-', max_length=15)),
                 ('sexo', models.CharField(default='-', max_length=10)),
                 ('cedula', models.CharField(default='-', max_length=10)),
-                ('tipoSangre', models.CharField(choices=[('A+', 'A+'), ('A-', 'A-'), ('B+', 'B+'), ('B-', 'B-'), ('AB+', 'AB+'), ('AB-', 'AB-'), ('O+', 'O+'), ('O-', 'O-')], default='O+', max_length=5)),
+                ('tipoSangre', models.CharField(default='O+', choices=[('A+', 'A+'), ('A-', 'A-'), ('B+', 'B+'), ('B-', 'B-'), ('AB+', 'AB+'), ('AB-', 'AB-'), ('O+', 'O+'), ('O-', 'O-')], max_length=5)),
                 ('telefono', models.CharField(default='-', max_length=10)),
                 ('correo', models.EmailField(max_length=100)),
                 ('estado', models.IntegerField(default=1)),
@@ -83,9 +83,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Producto',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nombreProducto', models.CharField(default='-', max_length=30)),
-                ('cantidad', models.DecimalField(default=0.0, max_digits=8, decimal_places=2)),
+                ('cantidad', models.DecimalField(max_digits=8, default=0.0, decimal_places=2)),
                 ('estado', models.IntegerField(default=1)),
                 ('idCategoria', models.ForeignKey(default=0, to='helpmapp.Categoria')),
             ],
