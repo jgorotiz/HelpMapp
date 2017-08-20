@@ -31,7 +31,9 @@ urlpatterns = [
         url(r'^verCentro/', views.mostrar_verCentro,name="mostrar_verCentro"),
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
         url(r'^recoverPass/', views.recoverPass,name="recoverPass"),
+        
         url(r'^cerrarSesion/', views.cerrarSesion,name="cerrarSesion"),
+
 
 
         #CRUD HelpMapper
