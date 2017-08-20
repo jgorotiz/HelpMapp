@@ -24,13 +24,15 @@ urlpatterns = [
         url(r'^inventarioComida/', views.mostrar_inventarioComida,name="mostrar_inventarioComida"),
         url(r'^inventarioRopa/', views.mostrar_inventarioRopa,name="mostrar_inventarioRopa"),
 
-        #url(r'^administradorZonal/', views.mostrar_administradorZonal,name="mostrar_administrador_zonal"),
+        url(r'^administradorZonal/', views.mostrar_administradorZonal,name="mostrar_administrador_zonal"),
         url(r'^buscarCentroAcopio/', views.mostrar_buscarCentroAcopio,name="mostrar_buscarCentroAcopio"),
         url(r'^configCuenta/', views.mostrar_configCuenta,name="mostrar_configCuenta"),
         url(r'^crearAdmin/', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
         url(r'^verCentro/', views.mostrar_verCentro,name="mostrar_verCentro"),
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
         url(r'^recoverPass/', views.recoverPass,name="recoverPass"),
+        url(r'^cerrarSesion/', views.cerrarSesion,name="cerrarSesion"),
+
 
         #CRUD HelpMapper
         url(r'^voluntario/create/$', views.registrar_helpmapper,name='registrar_helpmapper'),
