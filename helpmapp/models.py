@@ -14,6 +14,12 @@ TIPOS_SANGRES = (
 	('O-', 'O-'),
 	)
 
+HABILIDADES = (
+	('Primeros Auxilios', 'Primeros Auxilios'),
+	('Culinarias', 'Culinarias'),
+	('Trabajo de Campo', 'Trabajo de Campo'),
+	)
+
 class CentroDeAcopio(models.Model):
 	nombreUPC = models.CharField(default="-",max_length=30)
 	direccion = models.CharField(default="-",max_length=100)
@@ -32,15 +38,6 @@ class CentroDeAcopio(models.Model):
 	def __str__(self):
 		return self.nombreUPC
 
-class Habilidad(models.Model):
-	nombre = models.CharField(default="-",max_length=20)
-	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
-
-	def save(self,*args, **kwargs):
-		super(Habilidad,self).save(*args, **kwargs)
-	def __str__(self):
-		return self.nombre
-
 class HelpMapper(models.Model):
 	nombre = models.CharField(default="-",max_length=100)
 	apellido = models.CharField(default="-",max_length=100)
@@ -51,7 +48,7 @@ class HelpMapper(models.Model):
 	tipoSangre = models.CharField(max_length=5, default="O+", choices=TIPOS_SANGRES)
 	telefono = models.CharField(default="-",max_length=10)		
 	correo = models.EmailField(max_length=100)
-	idHabilidad = models.ForeignKey(Habilidad, to_field='id', default=0)
+	habilidad = models.CharField(max_length=5, default="Primeros Auxilios", choices=HABILIDADES)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):

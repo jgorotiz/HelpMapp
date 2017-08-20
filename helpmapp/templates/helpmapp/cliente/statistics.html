@@ -8,6 +8,10 @@
 {% block css %}
     <link href="{% static 'styles/donar.css' %}" rel="stylesheet">
     <link href="{% static 'styles/carousel.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/inventarioComida-funcionalidades.js' %}"></script>
+
+
 {% endblock %}
 
 {% block body %}
@@ -39,6 +43,7 @@
           </div>
       </form>
       </div>
+      
       <div class="col-md-8"  id ="map">
       <script>
         var map;
@@ -84,7 +89,16 @@
       </div>
 
       <div class="col-md-1"></div>
+      <div class="col-md-12 estadisticas">
+      {% if lista %}
 
+      <script type="text/javascript">
+
+        animateBarsUp({{lista}});
+        
+      </script>
+      {% end if%}
+      </div>
     </div>
     <div class="container marketing text-center crappers">
         <div  class="row row1" >
