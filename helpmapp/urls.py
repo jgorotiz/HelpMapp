@@ -32,5 +32,8 @@ urlpatterns = [
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
         url(r'^recoverPass/', views.recoverPass,name="recoverPass"),
 
-
+        #CRUD HelpMapper
+        url(r'^voluntario/create/$', views.registrar_helpmapper,name='registrar_helpmapper'),
+        url(r'^voluntario/edit/(?P<nombreUsuario>\w+)/$', views.actualizar_contrasena,name='actualizar_contrasena'),
+        url(r'^voluntario/delete/(?P<nombreUsuario>\w+)/$', views.eliminar_helpmapper,name='eliminar_helpmapper'),
     ]
