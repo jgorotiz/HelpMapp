@@ -155,7 +155,8 @@ def cerrarSesion(request):
     except KeyError:
         pass
     
-    return render(request,'helpmapp/Administrador/index.html')
+    return HttpResponseRedirect('/loginAdmin/')
+    
 
 #MOSTRAR INDEX DEL SUPER ADMIN
 #@login_required(login_url='/loginAdmin/')
