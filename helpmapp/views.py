@@ -161,12 +161,10 @@ def cerrarSesion(request):
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         return render(request,'helpmapp/Administrador/adminCentro/index.html')
-<<<<<<< HEAD
+
 #     if('member_id' in list(request.session.keys())):
 
     return render(request,'helpmapp/Administrador/adminCentro/index.html')
-=======
->>>>>>> 0472afe820dc0ecc84f4fc55ebeab9b3fb10dcc0
 
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):
@@ -194,11 +192,7 @@ def mostrar_configuracionCapacidades(request):
                 form = CapacidadesForm()
         return render('helpmapp/Administrador/superAdmin/index.html')
     return HttpResponseRedirect('/loginAdmin/')
-
-
-
-
-    return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
+    #return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
 
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
