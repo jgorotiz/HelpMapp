@@ -171,16 +171,9 @@ def mostrar_administrador_general(request):
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         return render(request,'helpmapp/Administrador/adminCentro/index.html')
-<<<<<<< HEAD
-
 #     if('member_id' in list(request.session.keys())):
 
-    return render(request,'helpmapp/Administrador/adminCentro/index.html')
-=======
-#     if('member_id' in list(request.session.keys())):
-
-     return HttpResponseRedirect('/loginAdmin/')
->>>>>>> f604da19c77597d3ed73a91fc0367e3548caacd7
+    return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):
