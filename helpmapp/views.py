@@ -118,27 +118,33 @@ def show_name(request):
 
 #LOGIN DEL ADMINISTRADOR
 def mostrar_loginAdmin(request):
-    
-    if request.method == 'POST':
-        form= LoginForm(request.POST)
-        if form.is_valid():
-            try:
-                m = Administrador.objects.get(nombreUsuario=request.POST['username'])
-                print(m.contrasena== request.POST['password'])
-                if m.contrasena == request.POST['password']:
-                    request.session['member_id'] = m.nombreUsuario
-                    if (m.tipo==0): #es super admin
-                        return render(request,'helpmapp/Administrador/superAdmin/index.html')
-                    else:#es admin de centro de acopio
-                        print("ejvfjg")
-                        return HttpResponseRedirect('/administradorZonal/')
-                else:
-                    messages.error(request, "Credenciales incorrectas")
-            except: 
-                messages.error(request,"Usuario no registrado")
+    if (not "member_id" in request.session.keys()):
+        if request.method == 'POST':
+            form= LoginForm(request.POST)
+            if form.is_valid():
+                try:
+                    m = Administrador.objects.get(nombreUsuario=request.POST['username'])
+                    print(m.contrasena== request.POST['password'])
+                    if m.contrasena == request.POST['password']:
+                        request.session['member_id'] = m.nombreUsuario
+                        if (m.tipo==0): #es super admin
+                            return render(request,'helpmapp/Administrador/superAdmin/index.html')
+                        else:#es admin de centro de acopio
+                            print("ejvfjg")
+                            return HttpResponseRedirect('/administradorZonal/')
+                    else:
+                        messages.error(request, "Credenciales incorrectas")
+                except: 
+                    messages.error(request,"Usuario no registrado")
+        else:
+            form= LoginForm()
+        return render(request,'helpmapp/Administrador/index.html',{'form': form})
     else:
-        form= LoginForm()
-    return render(request,'helpmapp/Administrador/index.html',{'form': form})
+        if (m.tipo==0): #es super admin
+            return render(request,'helpmapp/Administrador/superAdmin/index.html')
+        else:#es admin de centro de acopio            
+            return HttpResponseRedirect('/administradorZonal/')
+
 
 #CERRAR SESIÓN DE ADMIN
 def cerrarSesion(request):
@@ -157,11 +163,17 @@ def cerrarSesion(request):
 #         return render(request,'helpmapp/Administrador/superAdmin/index.html')
 #     else:
 #         return redirect('helpmapp/Administrador/index.html')
+def mostrar_administradorGeneral(request):
+    if('member_id' in list(request.session.keys())):
+        return render(request,'helpmapp/Administrador/superAdmin/index.html')
+    return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
-
         return render(request,'helpmapp/Administrador/adminCentro/index.html')
+#     if('member_id' in list(request.session.keys())):
+
+    return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):
@@ -189,23 +201,34 @@ def mostrar_configuracionCapacidades(request):
                 form = CapacidadesForm()
         return render('helpmapp/Administrador/superAdmin/index.html')
     return HttpResponseRedirect('/loginAdmin/')
-
-
-
-
-    return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
+    #return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
 
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
 
 def mostrar_crearProducto(request):
-    return render(request,'helpmapp/Administrador/adminCentro/crearProducto.html')
+    return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
 
 def mostrar_inventarioAgua(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
 
 def mostrar_inventarioComida(request):
-    return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html')
+    if(request.session["member_id"]):
+        if(request.session["member_id"]==1):
+            comida=Producto.objects.filter(categoria=1) #id de comida
+            kg=0
+            for c in comida:
+                kg+=c.cantidad
+            ropa=Producto.objects.filter(categoria=2).count() # id de ropa
+           
+            agua=Producto.objects.filter(categoria=3) #id de agua
+            l=0
+            for a in agua:
+                l+=a.cantidad
+            lista=[kg,ropa,l]
+            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'lista':lista})
+
+    return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_inventarioRopa(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
@@ -264,7 +287,7 @@ def registrar_helpmapper(request):
     else:
         print ('no es post')
         form = HelpMapperForm()
-    return render(request, 'helpmapp/cliente/voluntariot.html', {'form': form})
+    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
 
 def actualizar_contrasena(request, nombreUsuario):
     helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)

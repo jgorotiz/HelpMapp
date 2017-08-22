@@ -1,16 +1,17 @@
-
-{% extends "helpmapp/Administrador/adminCentro/base.html" %}
+{% extends "helpmapp/Administrador/superAdmin/base.html" %}
 
 {% load staticfiles %}
-    {% block title %}HelpMapp-CAcopio:Crear producto{% endblock %}
 
-    {% block css %}
-    <link href="{% static 'css/crearProducto-estilo.css' %}" rel="stylesheet">
-    {% endblock %}
-  
-  {% block body %}
+{% block title %} HelpMapp-Admin:Crear producto{% endblock %}
 
-       <div class="container ">
+
+{% block css %}
+    
+    <link href="{%static 'css/crearProducto-estilo.css' %}" rel="stylesheet">
+ {% endblock %}   
+
+     {% block body %}
+       <div class="container col-sm-9 col-md-9 ">
         <h3>Crear Producto</h3>
            
   <form>
@@ -25,26 +26,19 @@
               </select>
             </div>
     </div>
-    <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="lista-subategorias">Subcategoria</label>
-            <div class="col-sm-5">
-              <select class="form-control" id="lista-subategorias">
-                
-              </select>
-            </div>
-    </div>
+   
     <div class="form-group row">
       <label for="nombre-producto" class="col-sm-2 col-form-label">Nombre del producto: </label>
       <div class="col-sm-5">
         <input type="text" class="form-control" id="nombre-producto" name="nombre-producto" placeholder="Croquetas de perro">
       </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
       <label for="cantidad" class="col-sm-2 col-form-label">Cantidad:  </label>
       <div class="col-sm-2">
         <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="1">
       </div>
-    </div>
+    </div> -->
     
    
     <div class="form-group row">
@@ -54,13 +48,5 @@
     </div>
   </form>
       </div>
-   {% endblock %}
-          
-  
-     {% block scripts %}
-     <script type="text/javascript" src="{% static 'js/crearProducto-funcionalidades.js' %}"></script> 
-     {% endblock %}
-
-
-  </body>
-</html>
+     
+{% endblock %}

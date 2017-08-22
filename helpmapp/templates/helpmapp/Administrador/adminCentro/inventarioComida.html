@@ -24,7 +24,6 @@
     <thead>
       <tr class="info">
         <th>Producto</th>
-        <th>Subcategor&iacute;a</th>
         <th>Cantidad (kg)</th>
         <th>Acci&oacute;n</th>
       </tr>
@@ -32,7 +31,6 @@
     <tbody>
       <tr>
         <td>Arroz</td>
-        <td>Granos</td>
         <td>100</td>
 
         <td><select class="form-control lista-acciones">
@@ -43,7 +41,6 @@
       </tr>
       <tr>
         <td>Lentejas</td>
-        <td>Granos</td>
         <td>40</td>
 
         <td><select class="form-control lista-acciones">
@@ -55,7 +52,6 @@
       </tr>
       <tr>
         <td>Atún</td>
-        <td>Enlatados</td>
         <td>120</td>
 
         <td><select class="form-control lista-acciones">
@@ -84,14 +80,16 @@
       </div>
       {% endblock %}
 
-    <footer class="col-md-12 footer">
-         <p id="pe-footer">Todos los derechos reservados. TAWS 2017.</p>
-    </footer>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.1/d3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     
     <script type="text/javascript" src="{% static 'js/inventarioComida-funcionalidades.js' %}"></script>
+    <script type="text/javascript">
+    {% if lista %}
+      window.onload=animateBarsUp({% lista %});
+    {% endif%}
+    
+    </script>
     {% endblock %}
  

@@ -1,16 +1,20 @@
-{% extends "helpmapp/Administrador/base.html" %}
+{% extends "helpmapp/Administrador/adminCentro/base.html" %}
 
 {% load staticfiles %}
 
-{% block title %} HelpMapp-CAcopio:Agua Inventario {% endblock %
-   
-{% block css %}
-    <!-- Bootstrap -->
-   
-    <link rel="stylesheet" type="text/css" href="% static 'css/inventarioAgua-estilo.css' %}">
-  {% endblock %}
+{% block title %}HelpMapp-CAcopio:Agua Inventario{% endblock %}
+
   
-  {% block body %}
+  
+
+   {% block css %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/inventarioAgua-estilo.css' %}">
+    {% endblock %}
+   {% block body %}
+
+ 
+   
        <div class="container col-sm-9 col-md-9 ">
           <h3>Agua</h3> 
        </div>
@@ -68,8 +72,8 @@
   </form>
 
 </div>
-      {% endblock %}
       
+    {% endblock %}
  
     
    

@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.contrib import admin
 from . import views
 urlpatterns = [
         url(r'^$', views.mostrar_indice, name='mostrar_indice'),
@@ -16,9 +17,9 @@ urlpatterns = [
 
         url(r'^loginAdmin/', views.mostrar_loginAdmin,name="mostrar_loginAdmin"),
 
-        #url(r'^administradorGeneral/', views.mostrar_administradorGeneral,name="mostrar_administrador_general"),
+        url(r'^administradorGeneral/', views.mostrar_administradorGeneral,name="mostrar_administradorGeneral"),
         url(r'^configuracionCapacidades/', views.mostrar_configuracionCapacidades,name="mostrar_configuracionCapacidades"),
-        url(r'^configuracionCuenta/', views.mostrar_configuracionCuenta,name="mostrar_configuracionCuenta"),
+        url(r'^configuracionCuenta/', views.mostrar_configuracionCuenta,name="mostrar_configuracionCuenta"), # de admin zonal
         url(r'^crearProducto/', views.mostrar_crearProducto,name="mostrar_crearProducto"),
         url(r'^inventarioAgua/', views.mostrar_inventarioAgua,name="mostrar_inventarioAgua"),
         url(r'^inventarioComida/', views.mostrar_inventarioComida,name="mostrar_inventarioComida"),
