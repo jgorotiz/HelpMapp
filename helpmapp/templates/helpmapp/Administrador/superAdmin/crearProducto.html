@@ -1,4 +1,4 @@
-{% extends "helpmapp/Administrador/adminCentro/base.html" %}
+{% extends "helpmapp/Administrador/superAdmin/base.html" %}
 
 {% load staticfiles %}
 
@@ -7,7 +7,7 @@
 
 {% block css %}
     
-    <link href="css/crearProducto-estilo.css" rel="stylesheet">
+    <link href="{%static 'css/crearProducto-estilo.css' %}" rel="stylesheet">
  {% endblock %}   
 
      {% block body %}
@@ -49,8 +49,4 @@
   </form>
       </div>
      
-{% endblock %}
-{% block scripts %}
-     <script type="text/javascript" src="js/crearProducto-funcionalidades.js"></script> 
-
 {% endblock %}

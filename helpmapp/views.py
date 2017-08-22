@@ -207,7 +207,7 @@ def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
 
 def mostrar_crearProducto(request):
-    return render(request,'helpmapp/Administrador/adminCentro/crearProducto.html')
+    return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
 
 def mostrar_inventarioAgua(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
