@@ -163,17 +163,17 @@ def cerrarSesion(request):
 #         return render(request,'helpmapp/Administrador/superAdmin/index.html')
 #     else:
 #         return redirect('helpmapp/Administrador/index.html')
-def mostrar_administrador_general(request):
+def mostrar_administradorGeneral(request):
     if('member_id' in list(request.session.keys())):
         return render(request,'helpmapp/Administrador/superAdmin/index.html')
     return HttpResponseRedirect('/loginAdmin/')
-    
+
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         return render(request,'helpmapp/Administrador/adminCentro/index.html')
 #     if('member_id' in list(request.session.keys())):
 
-     return HttpResponseRedirect('/loginAdmin/')
+    return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):
