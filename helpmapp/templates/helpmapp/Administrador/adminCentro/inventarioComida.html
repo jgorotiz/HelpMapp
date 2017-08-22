@@ -87,7 +87,7 @@
     <script type="text/javascript" src="{% static 'js/inventarioComida-funcionalidades.js' %}"></script>
     <script type="text/javascript">
     {% if lista %}
-      window.onload=animateBarsUp({% lista %});
+      window.onload=animateBarsUp({{% lista %}});
     {% endif%}
     
     </script>
