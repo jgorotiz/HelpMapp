@@ -1,72 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>HelpMapp-Sistema de Administración:Index</title>
+{% extends "helpmapp/Administrador/superAdmin/base.html" %}
+{% load staticfiles %}
 
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/estilo.css" rel="stylesheet">
+    {% block title %}HelpMapp-Sistema de Administración:Index{% endblock %}
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-      <style>
+{% block css %}      <style>
        #map {
         height: 400px;
         width: 100%;
        }
-    </style>
-  </head>
-  <body>
-  <header>
-    <div class="container col-md-12 header">
-      <div >
-        <div class="col-sm-4 col-sm-offset-4" id="logoDiv" >
-          <img src="../img/helpmappLogo.png" alt="logo">
-        </div>
-        <a href="../index.html">
-          <div class="col-sm-4 logout">
-            <p id="logout">
-            <img src="../img/cerrar-sesion.png">
-              Cerrar sesi&oacute;n
-            </p>
-          </div>
-        </a>
-      </div>
-      <div>
-        <div id="titleId"  class="col-sm-4 col-sm-offset-4">
-          <h2 id="cabecera">
-            Sistema de administraci&oacute;n
-          </h2>  
-        </div>
-        
-      </div>
-
-      <div>
-        <hr>
-      </div>
-    </div>    
-
-  </header>
-  <div>
-    <section class="col-sm-12 main row container">
-      <div class="col-sm-3 col-md-3 navSuperAdmin">
-            <ul class="nav nav-sidebar">
-              <li class="active"><a href="./index.html">Inicio <span class="sr-only">(current)</span></a></li>
-              <li><a href="./buscarCentroAcopio.html">Buscar centro de acopio</a></li>
-              <li><a href="./configCuenta.html">Configuración</a></li>
-              <li><a href="./crearAdmin.html">Crear cuenta administrador</a></li>
-              <li id="cerrar-sesion"><a href="../index.html"><i class="glyphicon glyphicon-off"></i> Cerrar sesión</a></li>
-            </ul>
-       </div>
-
+    </style>{% endblock %}
+{% block body %}
       <div class="col-sm-9 col-md-9">
         <h3 id="pageTitle" >Vista nacional</h3>
         <div id="map"></div>
@@ -88,10 +31,6 @@
         </script>
       </div>
     </section>
-    <div class="clearfix visible-sm-block"> </div>
-   <footer class="col-md-12 footer">
-         <p>Todos los derechos reservados. TAWS 2017.</p>
-    </footer>
+
+{% endblock %}
   </div>
-  </body>
-</html>

@@ -201,11 +201,7 @@ def mostrar_configuracionCapacidades(request):
                 form = CapacidadesForm()
         return render('helpmapp/Administrador/superAdmin/index.html')
     return HttpResponseRedirect('/loginAdmin/')
-
-
-
-
-    return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
+    #return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
 
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
