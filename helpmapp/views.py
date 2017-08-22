@@ -128,15 +128,11 @@ def cerrarSesion(request):
 #         return redirect('helpmapp/Administrador/index.html')
 
 def mostrar_administradorZonal(request):
-<<<<<<< HEAD
     if('member_id' in list(request.session.keys())):
-
         return render(request,'helpmapp/Administrador/adminCentro/index.html')
-=======
 #     if('member_id' in list(request.session.keys())):
 
     return render(request,'helpmapp/Administrador/adminCentro/index.html')
->>>>>>> ad25ef0912d4771b0690192d5fb27032d66c7476
 
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):
