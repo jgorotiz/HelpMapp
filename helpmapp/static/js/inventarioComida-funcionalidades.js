@@ -113,10 +113,10 @@ var padding = {
   return chart;
 }
 
-$(window).load(function(lista) {
+// $(window).load(function(lista) {
 
 
 
-  animateBarsUp(lista);
+//   animateBarsUp(lista);
 
-});
+// });
