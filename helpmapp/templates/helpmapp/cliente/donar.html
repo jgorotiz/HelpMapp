@@ -52,12 +52,12 @@
                   var contentString = "{{centro.nombreUPC}} \n Cantidad Maxima de Agua: {{centro.almacenamientoAgua}} \n Cantidad Maxima de Ropa: {{centro.almacenamientoRopa}} \n Cantidad Maxima de Comida: {{centro.almacenamientoComida}}";
 
                   var infowindow1 = new google.maps.InfoWindow({
-                    content: contentString
+                    content: "{{centro.nombreUPC}} \n Cantidad Maxima de Agua: {{centro.almacenamientoAgua}} \n Cantidad Maxima de Ropa: {{centro.almacenamientoRopa}} \n Cantidad Maxima de Comida: {{centro.almacenamientoComida}}"
                   });
                   var marker = new google.maps.Marker({
                     position: {lat: {{centro.latitud}}, lng: {{centro.longitud}}},
                     map: map,
-                    title: contentString
+                    title: "{{centro.nombreUPC}} \n Cantidad Maxima de Agua: {{centro.almacenamientoAgua}} \n Cantidad Maxima de Ropa: {{centro.almacenamientoRopa}} \n Cantidad Maxima de Comida: {{centro.almacenamientoComida}}"
                   });
                   marker.addListener('click', function () {
                     infowindow1.open(map, marker);
