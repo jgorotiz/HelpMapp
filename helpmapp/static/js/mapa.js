@@ -1,4 +1,5 @@
 function initMap() {
+  token = "AIzaSyDKUreK6wFQ5A4NFLa15dZSEH85f5XytWo"
 	var map;
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -2.158596, lng: -79.888239},
@@ -32,13 +33,13 @@ function initMap() {
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 	infoWindow.setPosition(pos);
-	InfoWindowWindow.setContent(browserHasGeolocation ?
+	infoWindow.setContent(browserHasGeolocation ?
 	                  'Error: The Geolocation service failed.' :
 	                  'Error: Your browser doesn\'t support geolocation.');
 }
 
 $(window).load(function(
 {
-	initMap();
+  initMap();
 	handleLocationError();
 }));

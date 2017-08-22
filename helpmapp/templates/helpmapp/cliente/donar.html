@@ -49,19 +49,19 @@
               
               {% if centros %}
                 {% for centro in centros %}
-                  var contentString = "{{centro.nombreUPC}}\nCantidad Maxima de Agua: {{centro.almacenamientoAgua}}\nCantidad Maxima de Ropa: {{centro.almacenamientoRopa}}\nCantidad Maxima de Comida: {{centro.almacenamientoComida}}";
+                  var contentString = "{{centro.nombreUPC}} \n Cantidad Maxima de Agua: {{centro.almacenamientoAgua}} \n Cantidad Maxima de Ropa: {{centro.almacenamientoRopa}} \n Cantidad Maxima de Comida: {{centro.almacenamientoComida}}";
 
                   var infowindow1 = new google.maps.InfoWindow({
                     content: contentString
                   });
-                    var marker = new google.maps.Marker({
-                      position: {lat: {{centro.latitud}}, lng: {{centro.longitud}}},
-                      map: map,
-                      title: 'UPC1'
-                    });
-                    marker.addListener('click', function() {
-                      infowindow1.open(map, marker);
-                    });
+                  var marker = new google.maps.Marker({
+                    position: {lat: {{centro.latitud}}, lng: {{centro.longitud}}},
+                    map: map,
+                    title: contentString
+                  });
+                  marker.addListener('click', function () {
+                    infowindow1.open(map, marker);
+                  });
      
                 {% endfor %}
                 {% else %}
@@ -76,7 +76,7 @@
                     lng: position.coords.longitude
                   };
                   infoWindow.setPosition(pos);
-                  infoWindow.setContent('UPC');
+                  infoWindow.setContent('Tu Ubicacion');
                   map.setCenter(pos);
                   map.setZoom(16)
                 }, function() {
@@ -94,6 +94,7 @@
                                   'Error: The Geolocation service failed.' :
                                   'Error: Your browser doesn\'t support geolocation.');
             }
+            
       </script>
       </div>
       </div>
@@ -102,8 +103,10 @@
     </div>
 {% endblock %}
 {% block scripts %}
+    <script src="{% static 'js/mapa.js' %}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKUreK6wFQ5A4NFLa15dZSEH85f5XytWo&callback=initMap"
     async defer></script>
+    
     <!--<script src="{% static 'js/filtrar.js' %}"></script>
     <script src="{% static 'js/donar.js' %}"></script>!-->
 {% endblock %}

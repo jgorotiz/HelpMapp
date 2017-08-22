@@ -38,3 +38,7 @@ label {
 	text-align:center;
 }
 
+
+.loginbox *{
+	margin: 7pt;
+}
