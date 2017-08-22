@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
@@ -23,7 +25,7 @@ def recovery(request):
         return render(request, 'helpmapp/cliente/recovery.html', {'form': form})
 
     elif request.method=='POST':
-        #send_mail("Cambio de contraseña", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+        #send_mail("Cambio de contrasena", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
 
         # create a form instance and populate it with data from the request:
         form = RecoveryForm(request.POST)
