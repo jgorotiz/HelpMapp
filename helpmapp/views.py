@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
@@ -23,7 +25,7 @@ def recovery(request):
         return render(request, 'helpmapp/cliente/recovery.html', {'form': form})
 
     elif request.method=='POST':
-        #send_mail("Cambio de contraseña", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+        #send_mail("Cambio de contrasena", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
 
         # create a form instance and populate it with data from the request:
         form = RecoveryForm(request.POST)
@@ -140,7 +142,7 @@ def mostrar_loginAdmin(request):
             form= LoginForm()
         return render(request,'helpmapp/Administrador/index.html',{'form': form})
     else:
-        if (request.session["member_id"]==0): #es super admin
+        if (request.session['tipo']==0): #es super admin
             return render(request,'helpmapp/Administrador/superAdmin/index.html')
         else:#es admin de centro de acopio            
             return HttpResponseRedirect('/administradorZonal/')
@@ -153,7 +155,8 @@ def cerrarSesion(request):
     except KeyError:
         pass
     
-    return render(request,'helpmapp/Administrador/index.html')
+    return HttpResponseRedirect('/loginAdmin/')
+    
 
 #MOSTRAR INDEX DEL SUPER ADMIN
 #@login_required(login_url='/loginAdmin/')
@@ -214,8 +217,20 @@ def mostrar_inventarioAgua(request):
 
 def mostrar_inventarioComida(request):
     if(request.session["member_id"]):
-        if(request.session["member_id"]=="usuario1"):#Esto hay que cambiar
-            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html')
+        if(request.session["tipo"]==1):
+            comida=Producto.objects.filter(idCategoria=1) #id de comida
+            kg=0
+            for c in comida:
+                kg+=c.cantidad
+            ropa=Producto.objects.filter(idCategoria=2).count() # id de ropa
+           
+            agua=Producto.objects.filter(idCategoria=3) #id de agua
+            l=0
+            for a in agua:
+                l+=a.cantidad
+            lista=[kg,ropa,l]
+            print(lista)
+            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'lista':lista})
 
     return HttpResponseRedirect('/loginAdmin/')
 

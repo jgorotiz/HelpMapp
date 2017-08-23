@@ -24,12 +24,11 @@
 
           <img src="{% static 'img/helpmappLogo.png' %}" alt="logo">
         </div>
-        <div class="col-md-2 col-md-offset-2 logout">
-          <p id="pe-logout">
-          <span class="pull-left showopacity glyphicon glyphicon-off"></span>
-           <a href=""> Cerrar sesi&oacute;n</a>
-          </p>
-        </div>
+        <div class="col-sm-4 logout">
+            <p id="logout">
+            <span class="pull-left showopacity glyphicon glyphicon-off"></span><a href="{% url 'helpmapp.views.cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
+            </p>
+          </div>
 
 
 
@@ -98,6 +97,7 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/tests/vendor/jquery.min.js' %}"></script>
     {% block scripts %}{% endblock %}
      
     
