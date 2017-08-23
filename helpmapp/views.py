@@ -127,10 +127,10 @@ def mostrar_loginAdmin(request):
                     print(m.contrasena== request.POST['password'])
                     if m.contrasena == request.POST['password']:
                         request.session['member_id'] = m.nombreUsuario
+                        request.session['tipo'] = m.tipo
                         if (m.tipo==0): #es super admin
                             return render(request,'helpmapp/Administrador/superAdmin/index.html')
                         else:#es admin de centro de acopio
-                            print("ejvfjg")
                             return HttpResponseRedirect('/administradorZonal/')
                     else:
                         messages.error(request, "Credenciales incorrectas")
@@ -140,7 +140,7 @@ def mostrar_loginAdmin(request):
             form= LoginForm()
         return render(request,'helpmapp/Administrador/index.html',{'form': form})
     else:
-        if (m.tipo==0): #es super admin
+        if (request.session["member_id"]==0): #es super admin
             return render(request,'helpmapp/Administrador/superAdmin/index.html')
         else:#es admin de centro de acopio            
             return HttpResponseRedirect('/administradorZonal/')
@@ -214,19 +214,8 @@ def mostrar_inventarioAgua(request):
 
 def mostrar_inventarioComida(request):
     if(request.session["member_id"]):
-        if(request.session["member_id"]==1):
-            comida=Producto.objects.filter(categoria=1) #id de comida
-            kg=0
-            for c in comida:
-                kg+=c.cantidad
-            ropa=Producto.objects.filter(categoria=2).count() # id de ropa
-           
-            agua=Producto.objects.filter(categoria=3) #id de agua
-            l=0
-            for a in agua:
-                l+=a.cantidad
-            lista=[kg,ropa,l]
-            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'lista':lista})
+        if(request.session["member_id"]=="usuario1"):#Esto hay que cambiar
+            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html')
 
     return HttpResponseRedirect('/loginAdmin/')
 
@@ -306,4 +295,21 @@ def eliminar_helpmapper(request, nombreUsuario):
     helpmapper  = get_object_or_404(HelpMapper, pk = nombreUsuario).delete()
 
     return HttpResponseRedirect('helpmapp/cliente/index.html')
+
+def obtener_datos(request):
+    print("Es administrador zonal")
+    comida=Producto.objects.filter(idCategoria=1) #id de comida
+    kg=0
+    for c in comida:
+        kg+=c.cantidad
+    ropa=Producto.objects.filter(idCategoria=2).count() # id de ropa
+   
+    agua=Producto.objects.filter(idCategoria=3) #id de agua
+    l=0
+    for a in agua:
+        l+=a.cantidad
+    lista=[kg,ropa,l]
+    return lista
+
+
 
