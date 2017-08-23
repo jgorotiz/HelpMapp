@@ -2,14 +2,18 @@
 
 
 
-  function animateBarsUp(lista) {
-
+  function animateBarsUp() {
+    entrada = $(".datosOcultos");
+    datos = entrada.attr("value");
+    lista = datos.split("-");
+    
     var employees = [
-  {dept: 'comida', age : lista[0]},
-  {dept: 'ropa', age : lista[1]},
-  {dept: 'agua', age : lista[2]},
+  {dept: 'comida', age : parseInt(lista[0])},
+  {dept: 'ropa', age : parseInt(lista[1])},
+  {dept: 'agua', age : parseInt(lista[2])},
  
 ];
+console.log(parseInt(lista[0]));
 
 var svgHeight = 400;
 var svgWidth = 400;
@@ -113,10 +117,7 @@ var padding = {
   return chart;
 }
 
-// $(window).load(function(lista) {
+$(window).load(function() {
+animateBarsUp();
 
-
-
-//   animateBarsUp(lista);
-
-// });
+});
