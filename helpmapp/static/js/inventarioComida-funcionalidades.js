@@ -7,13 +7,19 @@
     datos = entrada.attr("value");
     lista = datos.split("-");
     
-    var employees = [
+    /*var employees = [
   {dept: 'comida', age : parseInt(lista[0])},
   {dept: 'ropa', age : parseInt(lista[1])},
   {dept: 'agua', age : parseInt(lista[2])},
  
+];*/
+var employees = [
+  {dept: 'comida', age : 23},
+  {dept: 'ropa', age : 45},
+  {dept: 'agua', age : 16},
+ 
 ];
-console.log(parseInt(lista[0]));
+console.log(employees);
 
 var svgHeight = 400;
 var svgWidth = 400;
@@ -110,7 +116,9 @@ var padding = {
         return convert.y(d.age);
       },
       height: function (d, i) {
+        console.log(d.age);
         return maxHeight - convert.y(d.age);
+
       }
     });
 
