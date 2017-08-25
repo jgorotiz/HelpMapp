@@ -78,16 +78,18 @@
               
         {% if lista %}
           let tag = $("#contenedor-grafico")
-          let oculto =  $("<imput></input>")
-          string = {{lista}}.join("-")
+          let oculto =  $("<input></input>")
+          var l={{lista|safe}}
+          console.log(l)
+          string = l.join("-")
           oculto.attr("type","hidden")
           oculto.attr("class","datosOcultos")
           oculto.attr("value",string)
           tag.append(oculto)
-         
-          {% else %}
+          
+        {% else %}
               alert("NO llego la lista");
-          {% endif %}  
+        {% endif %}  
         
       </script>
       
@@ -103,9 +105,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     
     <script type="text/javascript" src="{% static 'js/inventarioComida-funcionalidades.js' %}"></script>
-    <script type="text/javascript">
-    
-    
-    </script>
+  
     {% endblock %}
  

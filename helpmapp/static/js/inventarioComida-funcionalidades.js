@@ -1,29 +1,35 @@
 
 
-
-
-  function animateBarsUp() {
-    entrada = $(".datosOcultos");
+entrada = $(".datosOcultos");
     datos = entrada.attr("value");
     lista = datos.split("-");
     
+    comida=parseInt(lista[0]);
+    ropa=parseInt(lista[1]);
+    agua=parseInt(lista[2]);
+    lista2=[comida,ropa,agua];
     var employees = [
-  {dept: 'comida', age : parseInt(lista[0])},
-  {dept: 'ropa', age : parseInt(lista[1])},
-  {dept: 'agua', age : parseInt(lista[2])},
+  {dept: 'comida', age : comida},
+  {dept: 'ropa', age : ropa},
+  {dept: 'agua', age : agua},
  
 ];
 console.log(parseInt(lista[0]));
 
 var svgHeight = 400;
 var svgWidth = 400;
-var maxAge = Math.max.apply(Math,employees);
+var maxAge = Math.max.apply(Math,lista2);
+//var maxAge=500;
 maxAge+=10; // You can also compute this from the data
 var barSpacing = 1; // The amount of space you want to keep between the bars
 var padding = {
     left: 20, right: 0,
     top: 20, bottom: 20
 };
+
+function animateBarsUp() {
+    
+
   var maxWidth = svgWidth - padding.left - padding.right;
   var maxHeight = svgHeight - padding.top - padding.bottom;
 
@@ -118,6 +124,6 @@ var padding = {
 }
 
 $(window).load(function() {
-animateBarsUp();
+  animateBarsUp();
 
 });

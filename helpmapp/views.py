@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 from daw.settings import EMAIL_HOST_USER
 from django.contrib import messages
 import random, string
-
+import json
 from .forms import *
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
@@ -222,14 +222,21 @@ def mostrar_inventarioComida(request):
             kg=0
             for c in comida:
                 kg+=c.cantidad
-            ropa=Producto.objects.filter(idCategoria=2).count() # id de ropa
-           
+            ropas=Producto.objects.filter(idCategoria=2) # id de ropa
+            ropa=0
+            for r in ropas:
+                ropa+=r.cantidad
             agua=Producto.objects.filter(idCategoria=3) #id de agua
             l=0
             for a in agua:
                 l+=a.cantidad
-            lista=[kg,ropa,l]
-            print(lista)
+            lista2=[]
+            lista2.append(float(kg))
+            lista2.append(float(ropa))
+            lista2.append(float(l))
+            print (lista2)
+            #lista=json.dumps(lista2)
+            lista=lista2
             return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'lista':lista})
 
     return HttpResponseRedirect('/loginAdmin/')
