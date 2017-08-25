@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 from daw.settings import EMAIL_HOST_USER
 from django.contrib import messages
 import random, string
-
+import json
 from .forms import *
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
@@ -133,7 +133,6 @@ def mostrar_loginAdmin(request):
                         if (m.tipo==0): #es super admin
                             return render(request,'helpmapp/Administrador/superAdmin/index.html')
                         else:#es admin de centro de acopio
-                            print("ejvfjg")
                             return HttpResponseRedirect('/administradorZonal/')
                     else:
                         messages.error(request, "Credenciales incorrectas")
@@ -223,14 +222,21 @@ def mostrar_inventarioComida(request):
             kg=0
             for c in comida:
                 kg+=c.cantidad
-            ropa=Producto.objects.filter(idCategoria=2).count() # id de ropa
-           
+            ropas=Producto.objects.filter(idCategoria=2) # id de ropa
+            ropa=0
+            for r in ropas:
+                ropa+=r.cantidad
             agua=Producto.objects.filter(idCategoria=3) #id de agua
             l=0
             for a in agua:
                 l+=a.cantidad
-            lista=[kg,ropa,l]
-            print(lista)
+            lista2=[]
+            lista2.append(float(kg))
+            lista2.append(float(ropa))
+            lista2.append(float(l))
+            print (lista2)
+            #lista=json.dumps(lista2)
+            lista=lista2
             return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'lista':lista})
 
     return HttpResponseRedirect('/loginAdmin/')
@@ -311,4 +317,21 @@ def eliminar_helpmapper(request, nombreUsuario):
     helpmapper  = get_object_or_404(HelpMapper, pk = nombreUsuario).delete()
 
     return HttpResponseRedirect('helpmapp/cliente/index.html')
+
+def obtener_datos(request):
+    print("Es administrador zonal")
+    comida=Producto.objects.filter(idCategoria=1) #id de comida
+    kg=0
+    for c in comida:
+        kg+=c.cantidad
+    ropa=Producto.objects.filter(idCategoria=2).count() # id de ropa
+   
+    agua=Producto.objects.filter(idCategoria=3) #id de agua
+    l=0
+    for a in agua:
+        l+=a.cantidad
+    lista=[kg,ropa,l]
+    return lista
+
+
 
