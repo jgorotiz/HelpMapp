@@ -52,9 +52,6 @@ def recovery(request):
 
 
 
-def estadisticas(request):
-    
-    return render(request,'helpmapp/cliente/statistics.html')
 
 def mostrar_tutoriales(request):
     return render(request,'helpmapp/cliente/tutoriales.html')
