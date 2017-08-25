@@ -52,9 +52,6 @@ def recovery(request):
 
 
 
-def estadisticas(request):
-    
-    return render(request,'helpmapp/cliente/statistics.html')
 
 def mostrar_tutoriales(request):
     return render(request,'helpmapp/cliente/tutoriales.html')
@@ -179,32 +176,33 @@ def mostrar_administradorZonal(request):
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
-    if('member_id' in request.session):
-        m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
-        if (m.tipo==0): #si es administrador de centro
-            if(request.method=="POST"):
-                form = CapacidadesForm(request.POST)
-                if form.is_valid():
-                    centro=CentroAcopio.objects.get(id=m.idCentro)
-                    data = form.cleaned_data
-                    cagua=data["maxagua"]
-                    cropa=data["maxropa"]
-                    ccomida=data["maxcom"]
-                    centro.capacidad_agua=cagua
-                    centro.capacidad_ropa=cropa
-                    centro.capacidad_comida=ccomida
-                    centro.save()
+    # if('member_id' in request.session):
+    #     m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
+    #     if (m.tipo==1): #si es administrador de centro
+    #         if(request.method=="POST"):
+    #             form = CapacidadesForm(request.POST)
+    #             if form.is_valid():
+    #                 centro=CentroAcopio.objects.get(id=m.idCentro)
+    #                 data = form.cleaned_data
+    #                 cagua=data["maxagua"]
+    #                 cropa=data["maxropa"]
+    #                 ccomida=data["maxcom"]
+    #                 centro.capacidad_agua=cagua
+    #                 centro.capacidad_ropa=cropa
+    #                 centro.capacidad_comida=ccomida
+    #                 centro.save()
             
-                    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
-                else:
-                    print ('no es valido')
+    #                 return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+    #             else:
+    #                 print ('no es valido')
 
-            else:
-                print ('no es post')
-                form = CapacidadesForm()
-        return render('helpmapp/Administrador/superAdmin/index.html')
-    return HttpResponseRedirect('/loginAdmin/')
-    #return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
+    #         else:
+    #             print ('no es post')
+    #             form = CapacidadesForm()
+    #             return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+    #     return HttpResponseRedirect('/administradorGeneral/')
+    # return HttpResponseRedirect('/loginAdmin/')
+    return render(request,"helpmapp/Administrador/adminCentro/configuracionCapacidades.html")
 
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
@@ -316,7 +314,7 @@ def eliminar_helpmapper(request, nombreUsuario):
     
     helpmapper  = get_object_or_404(HelpMapper, pk = nombreUsuario).delete()
 
-    return HttpResponseRedirect('helpmapp/cliente/index.html')
+    return HttpResponseRedirect('/')
 
 def obtener_datos(request):
     print("Es administrador zonal")
@@ -334,4 +332,30 @@ def obtener_datos(request):
     return lista
 
 
+
+
+
+#estadistica Grafico pra cliente
+
+def mostrar_GraficoEstaditico(request):
+    comida=Producto.objects.filter(idCategoria=1) #id de comida
+    kg=0
+    for c in comida:
+        kg+=c.cantidad
+    ropas=Producto.objects.filter(idCategoria=2) # id de ropa
+    ropa=0
+    for r in ropas:
+        ropa+=r.cantidad
+    agua=Producto.objects.filter(idCategoria=3) #id de agua
+    l=0
+    for a in agua:
+        l+=a.cantidad
+    lista2=[]
+    lista2.append(float(kg))
+    lista2.append(float(ropa))
+    lista2.append(float(l))
+    print (lista2)
+    #lista=json.dumps(lista2)
+    lista=lista2
+    return render(request,'helpmapp/cliente/statistics.html',{'lista':lista})
 

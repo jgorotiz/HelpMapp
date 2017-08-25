@@ -24,8 +24,8 @@
 
           <img src="{% static 'img/helpmappLogo.png' %}" alt="logo">
         </div>
-        <div class="col-sm-4 logout">
-            <p id="logout">
+        <div class="col-md-2 col-md-offset-2 logout">
+            <p id="pe-logout">
             <span class="pull-left showopacity glyphicon glyphicon-off"></span><a href="{% url 'helpmapp.views.cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
             </p>
           </div>
@@ -64,7 +64,7 @@
            </li>
            
             
-            <li><a href="{% url 'helpmapp.views.mostrar_crearProducto' %}">Agregar producto<span class="pull-right showopacity glyphicon glyphicon-plus"></span></a></li>
+            
            
            
 
@@ -91,7 +91,7 @@
      </section>    
 
     <footer class="col-md-12 footer">
-         <p>Todos los derechos reservados. TAWS 2017.</p>
+         <p id="pe-footer">Todos los derechos reservados. TAWS 2017.</p>
     </footer>
 
     
