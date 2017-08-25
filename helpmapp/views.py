@@ -176,33 +176,33 @@ def mostrar_administradorZonal(request):
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
-    if('member_id' in request.session):
-        m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
-        if (m.tipo==1): #si es administrador de centro
-            if(request.method=="POST"):
-                form = CapacidadesForm(request.POST)
-                if form.is_valid():
-                    centro=CentroAcopio.objects.get(id=m.idCentro)
-                    data = form.cleaned_data
-                    cagua=data["maxagua"]
-                    cropa=data["maxropa"]
-                    ccomida=data["maxcom"]
-                    centro.capacidad_agua=cagua
-                    centro.capacidad_ropa=cropa
-                    centro.capacidad_comida=ccomida
-                    centro.save()
+    # if('member_id' in request.session):
+    #     m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
+    #     if (m.tipo==1): #si es administrador de centro
+    #         if(request.method=="POST"):
+    #             form = CapacidadesForm(request.POST)
+    #             if form.is_valid():
+    #                 centro=CentroAcopio.objects.get(id=m.idCentro)
+    #                 data = form.cleaned_data
+    #                 cagua=data["maxagua"]
+    #                 cropa=data["maxropa"]
+    #                 ccomida=data["maxcom"]
+    #                 centro.capacidad_agua=cagua
+    #                 centro.capacidad_ropa=cropa
+    #                 centro.capacidad_comida=ccomida
+    #                 centro.save()
             
-                    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
-                else:
-                    print ('no es valido')
+    #                 return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+    #             else:
+    #                 print ('no es valido')
 
-            else:
-                print ('no es post')
-                form = CapacidadesForm()
-                return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
-        return HttpResponseRedirect('/administradorGeneral/')
-    return HttpResponseRedirect('/loginAdmin/')
-    #return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
+    #         else:
+    #             print ('no es post')
+    #             form = CapacidadesForm()
+    #             return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+    #     return HttpResponseRedirect('/administradorGeneral/')
+    # return HttpResponseRedirect('/loginAdmin/')
+    return render(request,"helpmapp/Administrador/adminCentro/configuracionCapacidades.html")
 
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
