@@ -181,7 +181,7 @@ def mostrar_administradorZonal(request):
 def mostrar_configuracionCapacidades(request):
     if('member_id' in request.session):
         m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
-        if (m.tipo==0): #si es administrador de centro
+        if (m.tipo==1): #si es administrador de centro
             if(request.method=="POST"):
                 form = CapacidadesForm(request.POST)
                 if form.is_valid():
@@ -195,14 +195,15 @@ def mostrar_configuracionCapacidades(request):
                     centro.capacidad_comida=ccomida
                     centro.save()
             
-                    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+                    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
                 else:
                     print ('no es valido')
 
             else:
                 print ('no es post')
                 form = CapacidadesForm()
-        return render('helpmapp/Administrador/superAdmin/index.html')
+                return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+        return HttpResponseRedirect('/administradorGeneral/')
     return HttpResponseRedirect('/loginAdmin/')
     #return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html')
 
@@ -316,7 +317,7 @@ def eliminar_helpmapper(request, nombreUsuario):
     
     helpmapper  = get_object_or_404(HelpMapper, pk = nombreUsuario).delete()
 
-    return HttpResponseRedirect('helpmapp/cliente/index.html')
+    return HttpResponseRedirect('/')
 
 def obtener_datos(request):
     print("Es administrador zonal")
