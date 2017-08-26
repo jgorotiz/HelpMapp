@@ -6,6 +6,8 @@
 
 {% block css %}
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/message.css' %}" rel="stylesheet">
+
 {% endblock %}
 
 {% block body %}
@@ -16,14 +18,17 @@
 		<img src="{% static 'img/helpMapp.jpg' %}">
 
 		<div class="recover-box">
-			<div class="reserver"></div>
+
 			<form class= "loginbox" method="POST">
 				{% csrf_token %}
-				<label for="mail">Correo Electrónico</label>
-				<br/>
-				{{form.correo}}
-				<br/>
-				<button type="submit" value="Enviar" href="{% url 'helpmapp.views.mostrar_login' %}">Enviar</button>
+				<hr class="featurette-divider">
+				<label class = 'h4 center pt-20 title_message' for="mail">Correo Electrónico</label></h3>
+				<!--hr class="featurette-divider"-->
+				<h4 class = 'message mt-30'>Ingresa el correo con el que registraste para recuperar tu contraseña:</h4>
+				<div id = "campo" class = 'mt-30'>{{form.correo}}</div>
+				<!--hr class="featurette-divider"-->
+				<hr class="featurette-divider">
+				<button disabled = "disabled" type="submit" id="enviar" value="Enviar" href="{% url 'helpmapp.views.mostrar_login' %}">Enviar</button>				
 			</form>
 		</div>
 	</div>

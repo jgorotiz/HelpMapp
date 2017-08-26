@@ -6,6 +6,8 @@
 
 {% block css %}
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/message.css' %}" rel="stylesheet">
+
 {% endblock %}
 
 {% block body %}
@@ -16,19 +18,38 @@
 			<img src="{% static 'img/helpMapp.jpg' %}">
 
 			<div class="login-box">
-				<div class="reserver"></div>
-				<label for="username">Usuario</label>
-				<br/>
-				<input type="text" id="username">
-				<br/>
-				<label for="password">Contraseña</label>
-				<br/>
-				<input type="password" id="password">
-				<div class="reserver"></div>
-				<button type="submit">Entrar!</button>
-				<form>
-				<a  href="{% url 'helpmapp.views.recovery'%}" class="small"><p id="link-recover">Forgot your password?</p></a>
-				</form>
+				<hr class="featurette-divider">
+				<div class="row">
+					<div class="col-md-5">
+						<!--hr class="featurette-divider"-->
+						<label class = 'h4 pt-20 title_message' for="username">Usuario</label>
+					</div>	
+
+					<!--hr class="featurette-divider"-->
+					<div class="col-md-7">
+						<input class = 'h4 mt-20' type="text" id="username">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<!--hr class="featurette-divider"-->
+						<label class = 'h4 pt-20 title_message' for="password">Contraseña</label>
+					</div>	
+
+					<!--hr class="featurette-divider"-->
+					<div class="col-md-7">
+						<input class = 'h4 mt-20' type="password" id="password">
+					</div>
+				</div>
+
+
+				<hr class="featurette-divider">
+				<div class="box-footer">
+					<button type="submit" class="pt-20">Entrar!</button>
+					<form class= "pt-20">
+						<a  href="{% url 'helpmapp.views.recovery'%}" class="small link"><p  id="link-recover">¿Olvidaste tu contraseña?</p></a>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

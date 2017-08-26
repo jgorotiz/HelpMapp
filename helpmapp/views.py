@@ -39,24 +39,26 @@ def recovery(request):
             # process the data in form.cleaned_data as required      
             # redirect to a new URL:
             data = form.cleaned_data
-            print (data['correo'])
+
             try:
-                if data['correo'] == HelpMapper.objects.get(correo=data['correo']).correo:
+                hm = HelpMapper.objects.get(correo=data['correo'])
+                if data['correo'] == hm.correo:
                     print("ENVIANDO...")
+                    remiter= developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
                     text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
-                    text += id_generator(8)
-                    text += "\n "
+                    new_contrasena = id_generator(8)
+                    text += new_contrasena+ "\n "
                     text += "Atentamente,\n"
-                    text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
-                    #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
-
+                    text += remiter
+                    hm.contrasena = new_contrasena
+                    hm.save()
+                    #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['galo.daniel96@gmail.com]'],fail_silently=False)
                     send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
-                    return render(request, 'helpmapp/cliente/message.html', {'type': 'OK'} )
+                    return render(request, 'helpmapp/cliente/message.html', {'title': 'Correo Enviado', 'message':'Su nueva contraseña ha sido enviada al correo registrado.'} )
             except Exception as e:
-                return render(request, 'helpmapp/cliente/message.html', {'type': 'ERROR'} )
+                return render(request, 'helpmapp/cliente/message.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
                 pass
-
-
+    return render(request, 'helpmapp/cliente/message.html', {'form':form})
 
 
 

@@ -2,15 +2,31 @@
 
 {% load staticfiles %}
 
-{% block title %}helpMapp - Recovering Password {% endblock %}
+{% block title %}helpMapp - Message {% endblock %}
 
 {% block css %}
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/message.css' %}" rel="stylesheet">
+
 {% endblock %}
 
 {% block body %}
+<div class="top"></div>
+	<div class="container">
+		<div id="square">
+			<img src="{% static 'img/helpMapp.jpg' %}">
 
-<h1> CORREO INCORRECTO </h1>
+			<div class="login-box">
+				{% csrf_token %}
+				<h4 class = 'center pt-20 title_message'>{{title}}</h4>
+				<hr class="featurette-divider">
+				<h5 class = 'message mt-30'>{{message}}</h5>
+				<hr class="featurette-divider">
+				<a  href="{% url 'helpmapp.views.mostrar_login'%}" class="small link"><h5 id="link-recover">Ingresar</h5></a>
+
+			</div>
+		</div>
+	</div>
 
 	
 {% endblock %}

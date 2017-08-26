@@ -1,0 +1,16 @@
+.title_message{
+	color: #ece242;
+}
+.message{
+	color: #EBF2FF;
+}
+
+.link{
+	color: #EBF2FF;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.link:hover{
+	color: #ece242;
+}
