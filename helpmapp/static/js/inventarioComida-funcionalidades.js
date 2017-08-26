@@ -4,12 +4,11 @@ entrada = $(".datosOcultos");
     datos = entrada.attr("value");
     lista = datos.split("-");
     
-<<<<<<< HEAD
     /*var employees = [
   {dept: 'comida', age : parseInt(lista[0])},
   {dept: 'ropa', age : parseInt(lista[1])},
   {dept: 'agua', age : parseInt(lista[2])},
-=======
+
     comida=parseInt(lista[0]);
     ropa=parseInt(lista[1]);
     agua=parseInt(lista[2]);
@@ -18,7 +17,6 @@ entrada = $(".datosOcultos");
   {dept: 'comida', age : comida},
   {dept: 'ropa', age : ropa},
   {dept: 'agua', age : agua},
->>>>>>> f1bfcc8932541b232eebc687af2194abb0b06339
  
 ];*/
 var employees = [
