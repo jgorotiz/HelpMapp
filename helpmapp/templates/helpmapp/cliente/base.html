@@ -10,7 +10,7 @@
     <meta name="author" content="Fabricio Layedra">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo">
     <link rel="icon" href="https://goo.gl/bJHmja">
-
+    
 
     
     <title>{% block title %}{% endblock %}</title>
@@ -55,16 +55,12 @@
 
                 <li><a id = "hola" href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
                 <li ><a href="{% url 'helpmapp.views.listar_centroAcopio' %}" > Donar</a></li>
-                <li><a href="{% url 'helpmapp.views.estadisticas' %}"> Estadísticas</a></li>
+                <li><a href="{% url 'helpmapp.views.mostrar_GraficoEstaditico' %}"> Estadísticas</a></li>
                 <li><a href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>
                 <li><a href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li>
                 <li ><a href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
                 <li ><a href="{% url 'helpmapp.views.mostrar_login' %}">Ingresar</a> </li>
-                <li> 
-                    <form class="navbar-form navbar-right">
-                      <input type="text" class="form-control" placeholder="Buscar">
-                    </form>
-                </li>
+                
                
               </ul>
               

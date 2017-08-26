@@ -8,6 +8,8 @@
 {% block css %}
     <link href="{% static 'styles/donar.css' %}" rel="stylesheet">
     <link href="{% static 'styles/carousel.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
+    <script src="{% static 'js/tests/vendor/jquery.min.js' %}"></script>
     
 
 
@@ -49,15 +51,32 @@
       </div>
 
       <div class="col-md-1"></div>
-      <div class="col-md-12 estadisticas">
-      
+      <div class="col-md-6 chart-container">
+        <svg class="chart"> </svg>
       </div> 
     </div>
-    <div class="container marketing text-center crappers">
-        <div  class="row row1" >
+   
+    <div class="col-md-6 chart-container" id="contenedor-grafico">
+      <script>
+        {% if lista %}
+          let tag = $("#contenedor-grafico")
+          let oculto =  $("<input></input>")
+          var l={{lista|safe}}
+          console.log(l)
+          string = l.join("-")
+          oculto.attr("type","hidden")
+          oculto.attr("class","datosOcultos")
+          oculto.attr("value",string)
+          tag.append(oculto)
+          
+        {% else %}
+            alert("NO llego la lista");
+        {% endif %}  
         
-        </div>
-      </div>
+      </script>
+  
+    <svg class="chart"> </svg>
+  </div>
 
       <div class="table-striped" id="tabla">
       <h2>Informes oficiales:</h2>
@@ -69,8 +88,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKUreK6wFQ5A4NFLa15dZSEH85f5XytWo&callback=initMap"
     async defer></script>
     <script src="{% static 'js/mapa.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.1/d3.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/inventarioComida-funcionalidades.js' %}"></script>
     <!--<script src="{% static 'js/filtrar.js' %}"></script>
     <script src="{% static 'js/estadisticas.js' %}"></script>!-->
+    
 {% endblock %}
 
 

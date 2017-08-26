@@ -52,8 +52,9 @@
             <ul class="nav nav-sidebar">
               <li class="active"><a href="{% url 'helpmapp.views.mostrar_administradorGeneral' %}">Inicio <span class="sr-only">(current)</span></a></li>
               <li><a href="{% url 'helpmapp.views.mostrar_buscarCentroAcopio' %}">Buscar centro de acopio</a></li>
-              <li><a href=".{% url 'helpmapp.views.mostrar_buscarCentroAcopio' %}">Configuración</a></li>
-              <li><a href="./crearAdmin.html">Crear cuenta administrador</a></li>
+              <li><a href="{% url 'helpmapp.views.mostrar_crearProducto' %}">Agregar producto<span class="pull-right showopacity glyphicon glyphicon-plus"></span></a></li>
+              <li><a href="{% url 'helpmapp.views.mostrar_configCuenta' %}">Configuración</a></li>
+              <li><a href="{% url 'helpmapp.views.mostrar_crearAdministrador' %}">Crear cuenta administrador</a></li>
               <li id="cerrar-sesion"><a href="../index.html"><i class="glyphicon glyphicon-off"></i> Cerrar sesión</a></li>
             </ul>
        </div>
