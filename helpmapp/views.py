@@ -183,7 +183,7 @@ def mostrar_administradorZonal(request):
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
-    # if('member_id' in request.session):
+    # if('member_id' in request.session.keys()):
     #     m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
     #     if (m.tipo==1): #si es administrador de centro
     #         if(request.method=="POST"):
