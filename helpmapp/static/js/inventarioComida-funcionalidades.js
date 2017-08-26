@@ -19,6 +19,7 @@ entrada = $(".datosOcultos");
   {dept: 'agua', age : agua},
  
 ];*/
+
 var employees = [
   {dept: 'comida', age : 23},
   {dept: 'ropa', age : 45},

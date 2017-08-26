@@ -15,29 +15,34 @@
       {% block body %}
         <h3>Estadísticas generales</h3> 
       </div>
+     {% if upc %}
+        <div class="container col-sm-12 col-md-12" id="info-centro">
+       <h4>{{upc.nombreUPC}} </h4>
+       <p><b>Dirección:</b> {{upc.direccion}}</p>
+       <p><b>Ciudad:</b>{{upc.canton}}</p>
+       <p><b>Provincia:</b>{{upc.provincia}}</p>
+
+       </div>
+       <div class="container col-sm-12 col-md-12 contenedor-recuadros">
+         <div class="recuadro col-md-3 col-sm-3">
+           <span id="cantidad-comida">{{upc.almacenamientoComida}}</span>
+           <p>de alimentos</p>
+         </div>
+
+         <div class="recuadro col-md-3 col-sm-3">
+           <span id="cantidad-agua">{{upc.almacenamientoAgua}}</span>
+           <p>de agua</p>
+         </div>
+         <div class="recuadro col-md-3 col-sm-3">
+           <span id="cantidad-ropa">{{upc.almacenamientoRopa}}</span>
+           <p>de ropa</p>
+         </div>
+       </div>
+        
+      {% else %}
+            
+      {% endif %}  
      
-     <div class="container col-sm-12 col-md-12" id="info-centro">
-       <h4>UPC SALINAS #4</h4>
-       <p><b>Dirección:</b>Maria Luis Gonzalez Rubio Serrano 0 Y Calle Los Almendros</p>
-       <p><b>Ciudad:</b>Salinas</p>
-       <p><b>Provincia:</b>Santa Elena</p>
-
-     </div>
-     <div class="container col-sm-12 col-md-12 contenedor-recuadros">
-       <div class="recuadro col-md-3 col-sm-3">
-         <span id="cantidad-comida">1234 kits</span>
-         <p>de alimentos</p>
-       </div>
-
-       <div class="recuadro col-md-3 col-sm-3">
-         <span id="cantidad-agua">1234 kits</span>
-         <p>de alimentos</p>
-       </div>
-       <div class="recuadro col-md-3 col-sm-3">
-         <span id="cantidad-ropa">1234 kits</span>
-         <p>de alimentos</p>
-       </div>
-     </div>
      
      <div class="container col-sm-12 col-md-12 contenedor-progress-bars">
         <div class="container caja-progress-bar col-md-3 col-sm-3">

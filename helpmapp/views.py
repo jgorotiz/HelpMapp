@@ -148,8 +148,9 @@ def mostrar_loginAdmin(request):
     else:
         if (request.session['tipo']==0): #es super admin
             return render(request,'helpmapp/Administrador/superAdmin/index.html')
-        else:#es admin de centro de acopio            
-            return HttpResponseRedirect('/administradorZonal/')
+        else:#es admin de centro de acopio
+            upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+            return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 
 
 #CERRAR SESIÓN DE ADMIN
@@ -177,7 +178,8 @@ def mostrar_administradorGeneral(request):
 
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
-        return render(request,'helpmapp/Administrador/adminCentro/index.html')
+        upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+        return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
 
     return HttpResponseRedirect('/loginAdmin/')
