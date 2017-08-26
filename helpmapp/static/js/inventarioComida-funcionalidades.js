@@ -14,6 +14,7 @@ entrada = $(".datosOcultos");
   {dept: 'ropa', age : ropa},
   {dept: 'agua', age : agua},
  
+
 ];
 
 console.log(employees);
