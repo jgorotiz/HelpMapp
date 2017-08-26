@@ -33,9 +33,11 @@ def recovery(request):
         # check whether it's valid:
         if form.is_valid():
             print("is valid")
+
             # process the data in form.cleaned_data as required      
             # redirect to a new URL:
             data = form.cleaned_data
+            if data['correo'] in HelpMapper.objects.raw('SELECT correo FROM helpmapper'):
             text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
             text += id_generator(8)
             text += "\n "
