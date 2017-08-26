@@ -46,11 +46,11 @@ class CentroDeAcopio(models.Model):
 class HelpMapper(models.Model):
 	nombre = models.CharField(default="-",max_length=100)
 	apellido = models.CharField(default="-",max_length=100)
-	nombreUsuario = models.CharField(default="-",max_length=18, primary_key=True)
+	nombre_usuario = models.CharField(default="-",max_length=18, primary_key=True)
 	contrasena = models.CharField(default="-",max_length=15)
 	sexo = models.CharField(default='M',max_length=5, choices=SEXOS)	
 	cedula = models.CharField(default="-", max_length=10)
-	tipoSangre = models.CharField(max_length=5, default="O+", choices=TIPOS_SANGRES)
+	tipo_sangre = models.CharField(max_length=5, default="O+", choices=TIPOS_SANGRES)
 	telefono = models.CharField(default="-",max_length=10)		
 	correo = models.EmailField(max_length=100)
 	habilidad = models.CharField(max_length=30, default="Primeros Auxilios", choices=HABILIDADES)
@@ -60,7 +60,7 @@ class HelpMapper(models.Model):
 		super(HelpMapper,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.nombreUsuario
+		return self.nombre_usuario
 
 class Categoria(models.Model):
 	nombreCategoria = models.CharField(default="-",max_length=30)

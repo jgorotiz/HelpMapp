@@ -39,18 +39,23 @@ def recovery(request):
             # process the data in form.cleaned_data as required      
             # redirect to a new URL:
             data = form.cleaned_data
-            if data['correo'] in HelpMapper.objects.raw('SELECT correo FROM helpmapper'):
-            text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
-            text += id_generator(8)
-            text += "\n "
-            text += "Atentamente,\n"
-            text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
-            #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+            print (data['correo'])
+            try:
+                if data['correo'] == HelpMapper.objects.get(correo=data['correo']).correo:
+                    print("ENVIANDO...")
+                    text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
+                    text += id_generator(8)
+                    text += "\n "
+                    text += "Atentamente,\n"
+                    text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
+                    #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
 
-            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
-            return render(request, 'helpmapp/cliente/login.html')
+                    send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
+                    return render(request, 'helpmapp/cliente/message.html', {'type': 'OK'} )
+            except Exception as e:
+                return render(request, 'helpmapp/cliente/message.html', {'type': 'ERROR'} )
+                pass
 
-    return render(request, 'helpmapp/cliente/recovery.html', {'form': form})
 
 
 
