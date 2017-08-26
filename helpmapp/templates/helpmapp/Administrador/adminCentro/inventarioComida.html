@@ -14,10 +14,10 @@
           <h3>Comida</h3> 
           <br>
           
-       </div>
-       <div class="col-md-6 col-md-offset-6">
-         <h4>Kg vs subcategor&iacute;as</h4>
-       </div>
+     </div>
+    <div class="col-md-6 col-md-offset-6">
+     <h4>Kg vs subcategor&iacute;as</h4>
+    </div>
      <div class="col-md-5">
        <div  id="contenedor-tabla">
        
@@ -73,28 +73,28 @@
     </form>
      </div>
      </div>
-      <div class="col-md-6 chart-container" id="contenedor-grafico">
-      <script>
-              
-        {% if lista %}
-          let tag = $("#contenedor-grafico")
-          let oculto =  $("<input></input>")
-          var l={{lista|safe}}
-          console.log(l)
-          string = l.join("-")
-          oculto.attr("type","hidden")
-          oculto.attr("class","datosOcultos")
-          oculto.attr("value",string)
-          tag.append(oculto)
-          
-        {% else %}
-              alert("NO llego la lista");
-        {% endif %}  
-        
-      </script>
-      
-        <svg class="chart"> </svg>
-      </div>
+	  <div class="col-md-6 chart-container" id="contenedor-grafico">
+	  <script>
+	          
+	    {% if lista %}
+	      let tag = $("#contenedor-grafico")
+	      let oculto =  $("<input></input>")
+	      var l={{lista|safe}}
+	      console.log(l)
+	      string = l.join("-")
+	      oculto.attr("type","hidden")
+	      oculto.attr("class","datosOcultos")
+	      oculto.attr("value",string)
+	      tag.append(oculto)
+	      
+	    {% else %}
+	          alert("NO llego la lista");
+	    {% endif %}  
+	    
+	  </script>
+	  
+	    <svg class="chart"> </svg>
+	  </div>
       <div class="container col-sm-12 col-md-12">
         <p></p>
       </div>
