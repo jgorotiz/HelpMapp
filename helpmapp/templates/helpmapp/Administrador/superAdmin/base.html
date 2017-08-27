@@ -54,29 +54,28 @@
 
   </header>
   <div>
-      <div class="col-sm-3 col-md-3 navbar-div navSuperAdmin">
+   <div class="col-sm-3 col-md-3 navbar-div navSuperAdmin">
             <ul class="nav nav-sidebar">
-              <li class="active"><a href="{% url 'helpmapp.views.mostrar_administradorGeneral' %}">Inicio <span class="sr-only">(current)</span></a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_buscarCentroAcopio' %}">Buscar centro de acopio</a></li>
+              <li class="active"><a href="">Inicio <span class="sr-only">(current)</span></a></li>
+              <li><a href="{% url 'helpmapp.views.buscarCentroAcopio' %}">Buscar centro de acopio</a></li>
               <li><a href="{% url 'helpmapp.views.mostrar_crearProducto' %}">Agregar producto<span class="pull-right showopacity glyphicon glyphicon-plus"></span></a></li>
               <li><a href="{% url 'helpmapp.views.mostrar_configCuenta' %}">Configuración</a></li>
               <li><a href="{% url 'helpmapp.views.mostrar_crearAdministrador' %}">Crear cuenta administrador</a></li>
-              <li id="cerrar-sesion"><a href="../index.html"><i class="glyphicon glyphicon-off"></i> Cerrar sesión</a></li>
+              
             </ul>
        </div>
+     
          {% block body %}
 
-<!--       <div class="col-sm-9 col-md-9">
-        
-      </div> -->
       {% endblock %}
-    <!-- <div class="clearfix visible-sm-block"> </div> -->
+
    <footer class="col-md-12 footer">
          <p>Todos los derechos reservados. TAWS 2017.</p>
     </footer>
   </div>
+   <script src="{% static 'js/tests/vendor/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
 
-    <script src="js/bootstrap.min.js"></script>
   {% block scripts %}
 {% endblock %}
   </body>

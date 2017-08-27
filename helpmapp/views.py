@@ -144,7 +144,7 @@ def mostrar_loginAdmin(request):
                         request.session['member_id'] = m.nombreUsuario
                         request.session['tipo'] = m.tipo
                         if (m.tipo==0): #es super admin
-                            return render(request,'helpmapp/Administrador/superAdmin/index.html')
+                            return HttpResponseRedirect('/administradorGeneral/')
                         else:#es admin de centro de acopio
                             return HttpResponseRedirect('/administradorZonal/')
                     else:
@@ -170,17 +170,17 @@ def cerrarSesion(request):
         pass
     
     return HttpResponseRedirect('/loginAdmin/')
-    
-
 
 
 #PÁGINAS DEL ADMINISTRADOR GENERAL
 def mostrar_administradorGeneral(request):
     if('member_id' in list(request.session.keys())):
+        print("hola")
         return render(request,'helpmapp/Administrador/superAdmin/index.html')
-    return HttpResponseRedirect('/loginAdmin/')
+    else:
+        return HttpResponseRedirect('/loginAdmin/')
 
-def mostrar_buscarCentroAcopio(request):
+def buscarCentroAcopio(request):
     return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
 
 def mostrar_configCuenta(request):
@@ -202,12 +202,18 @@ def mostrar_crearAdministrador(request):
 def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
-
+def mostrar_crearProducto(request):
+    print("hola2")
+    if(request.session.get('member_id',None) != None):
+        return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
+    else:
+        return HttpResponseRedirect('/loginAdmin/')
 
 
 #PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
+        print(request.session["member_id"])
         upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
         return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
@@ -246,8 +252,6 @@ def mostrar_configuracionCapacidades(request):
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
 
-def mostrar_crearProducto(request):
-    return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
 
 def mostrar_inventarioAgua(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
