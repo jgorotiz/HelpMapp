@@ -70,7 +70,7 @@
 				<h2 class="featurette-heading">¡Ayúdanos a ayudar! <span class="text-muted">Inscríbete como voluntario</span></h2>
 
 			<hr class="featurette-divider"> 
-			<form id = "quiero-ser-voluntario" method="post" action="{% url 'helpmapp.views.registrar_helpmapper' %}">
+			<form id = "quiero-ser-voluntario" method="Post" action="{% url 'helpmapp.views.registrar_helpmapper' %}">
 			{% csrf_token %}
 			{{ form.errors }}
 			{{ form.non_field_errors }}
@@ -144,6 +144,7 @@
 						<option value="Trabajo de Campo">Trabajo de Campo</option>
 					</select>
 				</div>
+				<input type="hidden" id="estado" name="estado" value=1>
 				<input type="submit" name="submit" value="Registrarse" class="btn btn-default sender">
 			</form>
 

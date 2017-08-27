@@ -294,18 +294,18 @@ def listar_centroAcopio(request):
 def registrar_helpmapper(request):
     if request.method == 'POST':
         print ('si es post')
-        form = HelpMapper(request.POST)
+        form = HelpMapperForm(request.POST)
         if form.is_valid():
             print ('si es valid')
             helpmapper = form.save(commit=False)
             helpmapper.save()
-            return render(request, 'helpmapp/cliente/index.html', {'form': form})
+            return render(request, 'helpmapp/cliente/donar.html', {'form': form})
         else:
             print ('no es valido')
     else:
         print ('no es post')
         form = HelpMapperForm()
-    return render(request, 'helpmapp/cliente/voluntario.html', {'form': form})
+    return render(request, 'helpmapp/cliente/donar.html', {'form': form})
 
 def actualizar_contrasena(request, nombreUsuario):
     helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)
