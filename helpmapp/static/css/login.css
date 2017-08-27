@@ -14,9 +14,7 @@ label {
 .top{
 	height: 10em;
 }
-.container:hover{
-	opacity:0.9;
-}
+
 
 #popup {
 	visibility: hidden;
@@ -42,3 +40,10 @@ label {
 .loginbox *{
 	margin: 7pt;
 }
+input{
+	width: 9em;
+}
+
+.box-footer form{
+	padding-top: 1em; 
+}	

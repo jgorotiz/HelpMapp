@@ -52,14 +52,7 @@
             <div id="navbar" class="navbar-collapse collapse" >
               <img src="{% static 'img/helpMapp.jpg' %}" class="header-icon" alt="helpMapp-logo">
               <ul class="nav navbar-nav navbar-right ">
-
-                <li><a id = "hola" href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
-                <li ><a href="{% url 'helpmapp.views.listar_centroAcopio' %}" > Donar</a></li>
-                <li><a href="{% url 'helpmapp.views.mostrar_GraficoEstaditico' %}"> Estadísticas</a></li>
-                <li><a href="{% url 'helpmapp.views.registrar_helpmapper' %}" > Voluntario</a></li>
-                <li><a href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li>
-                <li ><a href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
-                <li ><a href="{% url 'helpmapp.views.mostrar_login' %}">Ingresar</a> </li>
+                {% block menu %}{% endblock %}
                 
                
               </ul>
@@ -71,7 +64,7 @@
     {% block body %}{% endblock %}
       <!-- FOOTER -->
       <footer class="panel-footer fixed-bottom paleta1" >
-        <p>TAWS 2017 &middot;  Todos los derechos reservados  &middot;</p>
+        <p class="h4 labels">TAWS 2017 &middot;  Todos los derechos reservados  &middot;</p>
       </footer>
 
 

@@ -67,7 +67,38 @@ class Producto(models.Model):
 
 	def __str__(self):
 		return self.nombreProducto
+		
+class Administrador(models.Model):
+	nombreUsuario = models.CharField(default="-",max_length=12, primary_key=True)
+	contrasena = models.CharField(default="-", max_length=15)
+	correo = models.EmailField(default="-",max_length=254)
+	tipo = models.IntegerField(default=1) #(1) superAdmin, (0) adminCentro
+	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
+	def save(self,*args, **kwargs):
+		super(Administrador,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.nombreUsuario
+
+class CentroDeAcopio(models.Model):
+	nombreUPC = models.CharField(default="-",max_length=30)
+	direccion = models.CharField(default="-",max_length=100)
+	latitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
+	longitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
+	provincia = models.CharField(default="-",max_length=30)
+	canton = models.CharField(default="-",max_length=30)
+	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
+	almacenamientoAgua = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
+	almacenamientoRopa = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
+	almacenamientoComida = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
+	idAdmin = models.ForeignKey(Administrador, to_field='nombreUsuario', default=1)
+
+	def save(self,*args, **kwargs):
+		super(CentroDeAcopio,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.nombreUPC
 
 class ExistenciaInventario(models.Model):
 	idProducto = models.ForeignKey(Producto, to_field='id', default=0)
@@ -93,36 +124,6 @@ class CambioInventario(models.Model):
 	def __str__(self):
 		return self.id
 
-class Administrador(models.Model):
-	nombreUsuario = models.CharField(default="-",max_length=12, primary_key=True)
-	contrasena = models.CharField(default="-", max_length=15)
-	correo = models.EmailField(default="-",max_length=254)
-	tipo = models.IntegerField(default=1) #(1) superAdmin, (0) adminCentro
-	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
-
-	def save(self,*args, **kwargs):
-		super(Administrador,self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.nombreUsuario
 
 
-class CentroDeAcopio(models.Model):
-	nombreUPC = models.CharField(default="-",max_length=30)
-	direccion = models.CharField(default="-",max_length=100)
-	latitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
-	longitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
-	provincia = models.CharField(default="-",max_length=30)
-	canton = models.CharField(default="-",max_length=30)
-	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
-	almacenamientoAgua = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	almacenamientoRopa = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	almacenamientoComida = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	idAdmin = models.ForeignKey(Administrador, to_field='nombreUsuario', default=1)
-
-	def save(self,*args, **kwargs):
-		super(CentroDeAcopio,self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.nombreUPC
 

@@ -14,5 +14,5 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput,label='Nombre de usuario', max_length=16)
    
 class RecoveryForm(forms.Form):
-    correo = forms.CharField(label='Correo Electrónico', max_length=100)
+    correo = forms.CharField(label='Correo Electrónico', max_length=100,required=True)
     

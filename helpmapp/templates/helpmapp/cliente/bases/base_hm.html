@@ -1,0 +1,19 @@
+{% extends "helpmapp/cliente/bases/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}helpMapp{% endblock %}
+{% block menu%}
+  <!--AQUI VA UN CSRF PARA RECOGER EL NOMBRE DEL USUARIO Y LA SESION-->
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
+  <li ><a class="labels h4 " href="{% url 'helpmapp.views.listar_centroAcopio' %}" > Donar</a></li><!--
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_GraficoEstaditico' %}"> Estadísticas</a></li>
+  -->
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>-->
+  <!--
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li
+  -->
+  >
+  <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
+  <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_login' %}"> Ingresar</a> </li>
+{% endblock %}

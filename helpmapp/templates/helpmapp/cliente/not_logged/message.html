@@ -1,0 +1,51 @@
+{% extends "helpmapp/cliente/bases/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}helpMapp - Message {% endblock %}
+
+{% block css %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/message.css' %}" rel="stylesheet">
+
+{% endblock %}
+{% block menu%}
+  <!--AQUI VA UN CSRF PARA RECOGER EL NOMBRE DEL USUARIO Y LA SESION-->
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
+  <li ><a class="labels h4 " href="{% url 'helpmapp.views.listar_centroAcopio' %}" > Donar</a></li><!--
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_GraficoEstaditico' %}"> Estadísticas</a></li>
+  -->
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>-->
+  <!--
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li
+  -->
+  >
+  <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
+  <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_login' %}"> Ingresar</a> </li>
+{% endblock %}
+{% block body %}
+<div class="top"></div>
+	<div class="container">
+		<div id="square">
+			<img src="{% static 'img/helpMapp.jpg' %}">
+
+			<div class="login-box">
+				{% csrf_token %}
+				<h4 class = 'center pt-20 title_message'>{{title}}</h4>
+				<hr class="featurette-divider">
+				<h5 class = 'message mt-30'>{{message}}</h5>
+				<hr class="featurette-divider">
+				<a  href="{% url 'helpmapp.views.mostrar_login'%}" class="small link"><h5 id="link-recover">Ingresar</h5></a>
+
+			</div>
+		</div>
+	</div>
+
+	
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/login.js' %}"></script>
+    <script src="{% static 'js/client/recover.js' %}"></script>
+
+{% endblock %}

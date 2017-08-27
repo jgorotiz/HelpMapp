@@ -2,16 +2,21 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from . import views
 urlpatterns = [
+        #For Everyone
         url(r'^$', views.mostrar_indice, name='mostrar_indice'),
-         url(r'^lol$', views.get_name),
-
-#        url(r'^thanks/', views.show_name),
+        #url(r'^lol$', views.get_name),
+        #url(r'^thanks/', views.show_name),
         url(r'^donar/', views.listar_centroAcopio,name="donar"),
+        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
+        url(r'^equipo/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
+        url(r'^login/', views.mostrar_login,name="mostrar_login"),
+
+        #For HelpMapper
         url(r'^estadistica/', views.mostrar_GraficoEstadistico,name="mostrar_GraficoEstadistico"),
         url(r'^tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
-        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
-        url(r'^integrantes/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
-        url(r'^login/', views.mostrar_login,name="mostrar_login"),
+        
+        
+        
 
         url(r'^listar/', views.listar_voluntario,name="listar_voluntario"),  
 
@@ -35,6 +40,8 @@ urlpatterns = [
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
 
         url(r'^recovery/', views.recovery,name="recovery"),
+        url(r'^profile/', views.profile,name="profile"),
+        url(r'^account/', views.edit_account,name="edit_account"),
         
         url(r'^cerrarSesion/', views.cerrarSesion,name="cerrarSesion"),
 
