@@ -10,8 +10,33 @@
        }
     </style>{% endblock %}
 {% block body %}
-      <div class="col-sm-9 col-md-9">
+      <div class="col-sm-9 col-md-9" style="
+    margin-bottom: 8%;">
         <h3 id="pageTitle" >Vista nacional</h3>
+
+        <div class="container col-sm-12 col-md-12 contenedor-recuadros row">
+          <div class="col-md-4 col-sm-4">
+          <img src="{% static 'img/basket.svg' %}">
+          <br>
+            <span id="cantidad">1234 kits</span>
+            <p>de alimentos</p>
+          </div>
+          <div class="col-md-4 col-sm-4">
+          <img src="{% static 'img/water.svg' %}">
+          <br>
+            <span id="cantidad2">235 galones</span>
+            <p>de agua</p>
+          </div>
+          <div class="col-md-4 col-sm-4">
+          <img src="{% static 'img/shirt.png' %}">
+            <br>
+            <span id="cantidad3">94 kits</span>
+            <p>de ropa</p>
+          </div>
+        </div>
+
+
+
         <div id="map"></div>
         <script>
             function initMap() {

@@ -274,18 +274,18 @@ def edit_account(request):
 
 #CREAR UNA CUENTA DE ADMINISTRADOR    
 def mostrar_crearAdministrador(request):
-    if request.method == 'POST':
+    # if request.method == 'POST':
         
-        form = AdministradorForm(request.POST)
-        if form.is_valid():
+    #     form = AdministradorForm(request.POST)
+    #     if form.is_valid():
 
-            user = form.save(commit=False)
-            user.save()
+    #         user = form.save(commit=False)
+    #         user.save()
 
-    else:    
-        form = AdministradorForm()
+    # else:    
+    #     form = AdministradorForm()
    
-    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html',{'form': form})
+    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
 
 def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
