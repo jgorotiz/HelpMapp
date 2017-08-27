@@ -12,12 +12,27 @@ import random, string
 import json
 from .forms import *
 
+def mostrar_indice(request):
+    return render(request,'helpmapp/cliente/not_logged/index.html')
+
+#devolver todos los centros de acopios
+def listar_centroAcopio(request):
+    centros =  CentroDeAcopio.objects.all()
+    return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros})
+
+def mostrar_voluntario(request):
+    return render(request,'helpmapp/cliente/not_logged/voluntario.html')
+
+def mostrar_sobreNosotros(request):
+    return render(request,'helpmapp/cliente/not_logged/aboutus.html')
+
+def mostrar_login(request):
+    return render(request,'helpmapp/cliente/not_logged/login.html')
+
+
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
-def mostrar_indice(request):
-    return render(request,'helpmapp/cliente/index.html')
 
 def recovery(request):
     if request.method=='GET':
@@ -44,16 +59,15 @@ def recovery(request):
                 hm = HelpMapper.objects.get(correo=data['correo'])
                 if data['correo'] == hm.correo:
                     print("ENVIANDO...")
-                    remiter= developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
-                    text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
+                    remiter= developers[random.randint(0,len(developers)-1)] + " del Equipo de helpMapp, te saluda e informa que: \n"
+                    text = remiter + "Tu cambio de contraseña ha sido exitoso. Por favor, ingresa con tu nueva contraseña: "
                     new_contrasena = id_generator(8)
-                    text += new_contrasena+ "\n "
-                    text += "Atentamente,\n"
-                    text += remiter
+                    text += new_contrasena+ "\n" + "Gracias por ser un helpMapper!"
+         
                     hm.contrasena = new_contrasena
                     hm.save()
-                    #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['galo.daniel96@gmail.com]'],fail_silently=False)
-                    send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
+                    #send_mail("Vales trozo", text, EMAIL_HOST_USER, ['rodfcast@gmail.com]'],fail_silently=False)
+                    send_mail("helpMapp: Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
                     return render(request, 'helpmapp/cliente/message.html', {'title': 'Correo Enviado', 'message':'Su nueva contraseña ha sido enviada al correo registrado.'} )
             except Exception as e:
                 return render(request, 'helpmapp/cliente/message.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
@@ -61,12 +75,10 @@ def recovery(request):
     return render(request, 'helpmapp/cliente/message.html', {'form':form})
 
 
-
 def mostrar_tutoriales(request):
     return render(request,'helpmapp/cliente/tutoriales.html')
 
-def mostrar_voluntario(request):
-    return render(request,'helpmapp/cliente/voluntario.html')
+
 
 def listar_voluntario(request):
     voluntarios =  AyudadorMapa.objects.all()
@@ -91,11 +103,6 @@ def crear_voluntario(request):
 
 
 
-def mostrar_sobreNosotros(request):
-    return render(request,'helpmapp/cliente/aboutus.html')
-
-def mostrar_login(request):
-    return render(request,'helpmapp/cliente/login.html')
 
 def get_name(request):
     # if this is a POST request we need to process the form data
@@ -259,6 +266,12 @@ def mostrar_buscarCentroAcopio(request):
 def mostrar_configCuenta(request):
     return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
 
+def profile(request):
+    return render(request,'helpmapp/cliente/login.html')
+
+def edit_account(request):
+    return render(request,'helpmapp/cliente/login.html')
+
 #CREAR UNA CUENTA DE ADMINISTRADOR    
 def mostrar_crearAdministrador(request):
     if request.method == 'POST':
@@ -285,10 +298,7 @@ def saveData():
     return
 
 
-#devolver todos los centros de acopios
-def listar_centroAcopio(request):
-    centros =  CentroDeAcopio.objects.all()
-    return render(request, 'helpmapp/cliente/donar.html', {'centros': centros})
+
 
 
 

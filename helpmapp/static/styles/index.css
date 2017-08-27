@@ -7,6 +7,8 @@ h2.featurette-heading{
 	text-align: center;
 }
 
+
+
 hr.featurette-divider{
 	margin-top: 1%;
 	margin-bottom: 1%;
@@ -164,3 +166,8 @@ hr.featurette-divider{
   color: #ece242;
   font-size: 1.3em;
 }
+
+.labels{
+  margin: 0;
+}
+

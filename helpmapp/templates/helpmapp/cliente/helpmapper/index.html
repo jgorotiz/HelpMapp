@@ -1,0 +1,19 @@
+{% extends "helpmapp/cliente/bases/index.html" %}
+
+{% block menu%}
+    <!--AQUI VA UN CSRF PARA RECOGER EL NOMBRE DEL USUARIO Y LA SESION-->
+    <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
+    <li ><a class="labels h4 " href="{% url 'helpmapp.views.listar_centroAcopio' %}" > Donar</a></li>
+    <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_GraficoEstaditico' %}"> Estadísticas</a></li>
+    <!--
+    <li><a href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>-->
+    <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_tutoriales' %}"> Tutoriales </a></li>
+    <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
+    <li class=" dropdown">
+      <a  class="h4 labels dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hola, usuario<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+          <li><a href="{% url 'helpmapp.views.profile' %}">Ver Perfil</a></li>
+          <li><a href="{% url 'helpmapp.views.edit_account' %}">Editar Cuenta</a></li>
+      </ul>
+    </li>
+{% endblock %}
