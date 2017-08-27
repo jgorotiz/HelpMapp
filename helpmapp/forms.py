@@ -7,7 +7,7 @@ class HelpMapperForm(forms.Form):
     class Meta:
         model = HelpMapper
         fields = ('nombre', 'apellido', 'nombreUsuario', 'contrasena', 'sexo', 'cedula',
-                    'tipoSangre', 'telefono', 'correo', 'habilidad')
+                    'tipoSangre', 'telefono', 'correo', 'habilidad', 'estado')
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Nombre de usuario', max_length=16)
