@@ -35,20 +35,27 @@ def recovery(request):
         # check whether it's valid:
         if form.is_valid():
             print("is valid")
+
             # process the data in form.cleaned_data as required      
             # redirect to a new URL:
             data = form.cleaned_data
-            text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
-            text += id_generator(8)
-            text += "\n "
-            text += "Atentamente,\n"
-            text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
-            #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
+            print (data['correo'])
+            try:
+                if data['correo'] == HelpMapper.objects.get(correo=data['correo']).correo:
+                    print("ENVIANDO...")
+                    text = "Su cambio de contraseña ha sido exitoso. Por favor, ingrese con su nueva contraseña: "
+                    text += id_generator(8)
+                    text += "\n "
+                    text += "Atentamente,\n"
+                    text += developers[random.randint(0,len(developers)-1)] + ", del Equipo de helpMapp."
+                    #send_mail("Vales trozo", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
 
-            send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
-            return render(request, 'helpmapp/cliente/login.html')
+                    send_mail("Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
+                    return render(request, 'helpmapp/cliente/message.html', {'type': 'OK'} )
+            except Exception as e:
+                return render(request, 'helpmapp/cliente/message.html', {'type': 'ERROR'} )
+                pass
 
-    return render(request, 'helpmapp/cliente/recovery.html', {'form': form})
 
 
 
@@ -141,8 +148,9 @@ def mostrar_loginAdmin(request):
     else:
         if (request.session['tipo']==0): #es super admin
             return render(request,'helpmapp/Administrador/superAdmin/index.html')
-        else:#es admin de centro de acopio            
-            return HttpResponseRedirect('/administradorZonal/')
+        else:#es admin de centro de acopio
+            upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+            return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 
 
 #CERRAR SESIÓN DE ADMIN
@@ -170,13 +178,14 @@ def mostrar_administradorGeneral(request):
 
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
-        return render(request,'helpmapp/Administrador/adminCentro/index.html')
+        upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+        return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
 
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
-    # if('member_id' in request.session):
+    # if('member_id' in request.session.keys()):
     #     m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
     #     if (m.tipo==1): #si es administrador de centro
     #         if(request.method=="POST"):

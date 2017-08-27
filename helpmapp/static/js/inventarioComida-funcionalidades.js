@@ -3,28 +3,20 @@
 entrada = $(".datosOcultos");
     datos = entrada.attr("value");
     lista = datos.split("-");
-    
-    /*var employees = [
-  {dept: 'comida', age : parseInt(lista[0])},
-  {dept: 'ropa', age : parseInt(lista[1])},
-  {dept: 'agua', age : parseInt(lista[2])},
+    console.log(lista);
 
     comida=parseInt(lista[0]);
     ropa=parseInt(lista[1]);
     agua=parseInt(lista[2]);
     lista2=[comida,ropa,agua];
     var employees = [
-  {dept: 'comida', age : comida},
+  {dept: 'comida', age :comida},
   {dept: 'ropa', age : ropa},
   {dept: 'agua', age : agua},
  
-];*/
-var employees = [
-  {dept: 'comida', age : 23},
-  {dept: 'ropa', age : 45},
-  {dept: 'agua', age : 16},
- 
+
 ];
+
 console.log(employees);
 
 var svgHeight = 400;
