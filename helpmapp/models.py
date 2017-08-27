@@ -59,7 +59,6 @@ class Categoria(models.Model):
 
 class Producto(models.Model):
 	nombreProducto = models.CharField(default="-",max_length=30)
-	cantidad = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
 	idCategoria = models.ForeignKey(Categoria, to_field='id', default=0)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
@@ -69,10 +68,22 @@ class Producto(models.Model):
 	def __str__(self):
 		return self.nombreProducto
 
+
+class ExistenciaInventario(models.Model):
+	idProducto = models.ForeignKey(Producto, to_field='id', default=0)
+	idCentro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
+	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
+	def save(self,*args, **kwargs):
+		super(ExistenciaInventario,self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.id
+
 class CambioInventario(models.Model):
 	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
 	idProducto = models.ForeignKey(Producto, to_field='id', default=0)
+	idCentro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
 	fecha = models.DateField(default=datetime.date.today)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
