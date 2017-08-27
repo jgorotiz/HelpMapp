@@ -163,19 +163,40 @@ def cerrarSesion(request):
     return HttpResponseRedirect('/loginAdmin/')
     
 
-#MOSTRAR INDEX DEL SUPER ADMIN
-#@login_required(login_url='/loginAdmin/')
-#@permission_required('helpmapp.is_superadmin', login_url='/loginAdmin/')
-# def mostrar_administradorGeneral(request):
-#     if('member_id' in request.session):
-#         return render(request,'helpmapp/Administrador/superAdmin/index.html')
-#     else:
-#         return redirect('helpmapp/Administrador/index.html')
+
+
+#PÁGINAS DEL ADMINISTRADOR GENERAL
 def mostrar_administradorGeneral(request):
     if('member_id' in list(request.session.keys())):
         return render(request,'helpmapp/Administrador/superAdmin/index.html')
     return HttpResponseRedirect('/loginAdmin/')
 
+def mostrar_buscarCentroAcopio(request):
+    return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
+
+def mostrar_configCuenta(request):
+    return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
+#CREAR UNA CUENTA DE ADMINISTRADOR    
+def mostrar_crearAdministrador(request):
+    # if request.method == 'POST':
+        
+    #     form = AdministradorForm(request.POST)
+    #     if form.is_valid():
+
+    #         user = form.save(commit=False)
+    #         user.save()
+
+    # else:    
+    #     form = AdministradorForm()
+   
+    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
+def mostrar_verCentro(request):
+    return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
+
+
+
+
+#PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
@@ -251,29 +272,11 @@ def mostrar_inventarioComida(request):
 def mostrar_inventarioRopa(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
 
-def mostrar_buscarCentroAcopio(request):
-    return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
 
-def mostrar_configCuenta(request):
-    return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
 
-#CREAR UNA CUENTA DE ADMINISTRADOR    
-def mostrar_crearAdministrador(request):
-    # if request.method == 'POST':
-        
-    #     form = AdministradorForm(request.POST)
-    #     if form.is_valid():
 
-    #         user = form.save(commit=False)
-    #         user.save()
 
-    # else:    
-    #     form = AdministradorForm()
-   
-    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
 
-def mostrar_verCentro(request):
-    return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
 def mostrar_recuperarCuenta(request):
     return render(request,'helpmapp/Administrador/superAdmin/recuperarCuenta.html')
@@ -346,7 +349,7 @@ def obtener_datos(request):
 
 #estadistica Grafico pra cliente
 
-def mostrar_GraficoEstaditico(request):
+def mostrar_GraficoEstadistico(request):
     comida=Producto.objects.filter(idCategoria=1) #id de comida
     kg=0
     for c in comida:

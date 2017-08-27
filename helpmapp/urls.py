@@ -7,7 +7,7 @@ urlpatterns = [
 
 #        url(r'^thanks/', views.show_name),
         url(r'^donar/', views.listar_centroAcopio,name="donar"),
-        url(r'^estadistica/', views.mostrar_GraficoEstaditico,name="estadisticas"),
+        url(r'^estadistica/', views.mostrar_GraficoEstadistico,name="mostrar_GraficoEstadistico"),
         url(r'^tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
         url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
         url(r'^integrantes/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
@@ -18,6 +18,11 @@ urlpatterns = [
         url(r'^loginAdmin/', views.mostrar_loginAdmin,name="mostrar_loginAdmin"),
 
         url(r'^administradorGeneral/', views.mostrar_administradorGeneral,name="mostrar_administradorGeneral"),
+         url(r'^administradorGeneral/buscarCentroAcopio/', views.mostrar_buscarCentroAcopio,name="mostrar_buscarCentroAcopio"),
+        url(r'^administradorGeneral/configuracionCuenta/', views.mostrar_configCuenta,name="mostrar_configCuenta"),
+        url(r'^administradorGeneral/crearAdmin/', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
+        url(r'^administradorGeneral/verCentro/', views.mostrar_verCentro,name="mostrar_verCentro"),
+
         url(r'^administradorZonal/configuracionCapacidades/', views.mostrar_configuracionCapacidades,name="mostrar_configuracionCapacidades"),
         url(r'^administradorZonal/configuracionCuenta/', views.mostrar_configuracionCuenta,name="mostrar_configuracionCuenta"), # de admin zonal
         url(r'^administradorGeneral/crearProducto/', views.mostrar_crearProducto,name="mostrar_crearProducto"),
@@ -26,10 +31,7 @@ urlpatterns = [
         url(r'^administradorZonal/inventarioRopa/', views.mostrar_inventarioRopa,name="mostrar_inventarioRopa"),
 
         url(r'^administradorZonal/', views.mostrar_administradorZonal,name="mostrar_administrador_zonal"),
-        url(r'^administradorGeneral/buscarCentroAcopio/', views.mostrar_buscarCentroAcopio,name="mostrar_buscarCentroAcopio"),
-        url(r'^administradorGeneral/configuracionCuenta/', views.mostrar_configCuenta,name="mostrar_configCuenta"),
-        url(r'^administradorGeneral/crearAdmin/', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
-        url(r'^administradorGeneral/verCentro/', views.mostrar_verCentro,name="mostrar_verCentro"),
+       
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
 
         url(r'^recovery/', views.recovery,name="recovery"),
