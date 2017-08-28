@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
@@ -345,19 +345,29 @@ def eliminar_helpmapper(request, nombreUsuario):
     return HttpResponseRedirect('/')
 
 def obtener_datos(request):
-    print("Es administrador zonal")
-    comida=Producto.objects.filter(idCategoria=1) #id de comida
-    kg=0
-    for c in comida:
-        kg+=c.cantidad
-    ropa=Producto.objects.filter(idCategoria=2).count() # id de ropa
    
-    agua=Producto.objects.filter(idCategoria=3) #id de agua
-    l=0
-    for a in agua:
-        l+=a.cantidad
-    lista=[kg,ropa,l]
-    return lista
+    response_data={}
+    l=[] #diccionario que contendrá la cantidad de cada prenda de ropa
+    ropa=Producto.objects.filter(idCategoria=2) #filtro todos los productos que sean ropa
+    maxropa=0
+    for r in ropa:
+        prendas=ExistenciaInventario.objects.filter(idProducto=r.id) #filtro todos los inventariados por cada prenda
+        c=prendas.cantidad.sum()
+        if(c>maxropa):
+            maxropa=c
+        d={}
+        d["dept"]=r.nombre
+        d["age"]=c
+        l.append(d)
+    response_data["cantidad_ropa"]=l
+    response_data["max_ropa"]=maxropa
+    d2={}
+    return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+   
+   
 
 
 
@@ -385,5 +395,5 @@ def mostrar_GraficoEstadistico(request):
     print (lista2)
     #lista=json.dumps(lista2)
     lista=lista2
-    return render(request,'helpmapp/cliente/statistics.html',{'lista':lista})
+    return render(request,'helpmapp/cliente/helpmapper/statistics.html',{'lista':lista})
 

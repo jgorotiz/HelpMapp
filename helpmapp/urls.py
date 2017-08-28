@@ -24,10 +24,12 @@ urlpatterns = [
 
         url(r'^administradorGeneral/$', views.mostrar_administradorGeneral,name="mostrar_administradorGeneral"),
         url(r'^administradorGeneral/buscarCentroAcopio/$', views.buscarCentroAcopio),
-        url(r'^administradorGeneral/configuracionCuenta/', views.mostrar_configCuenta,name="mostrar_configCuenta"),
-        url(r'^administradorGeneral/crearAdmin/', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
-        url(r'^administradorGeneral/verCentro/', views.mostrar_verCentro,name="mostrar_verCentro"),
-        url(r'^administradorGeneral/crearProducto/', views.mostrar_crearProducto,name="mostrar_crearProducto"),
+        url(r'^administradorGeneral/configuracionCuenta/$', views.mostrar_configCuenta,name="mostrar_configCuenta"),
+        url(r'^administradorGeneral/crearAdmin/$', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
+        url(r'^administradorGeneral/verCentro/$', views.mostrar_verCentro,name="mostrar_verCentro"),
+        
+
+
 
         url(r'^administradorZonal/configuracionCapacidades/', views.mostrar_configuracionCapacidades,name="mostrar_configuracionCapacidades"),
         url(r'^administradorZonal/configuracionCuenta/', views.mostrar_configuracionCuenta,name="mostrar_configuracionCuenta"), # de admin zonal
@@ -56,5 +58,5 @@ urlpatterns = [
 
 
         #Datos para graficos D3JS
-        url(r'^datos/$', views.obtener_datos,name='obtener_datos')
+        url(r'^datos/$', views.obtener_datos,name='obtener_datos'),
     ]
