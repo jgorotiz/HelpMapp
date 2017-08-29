@@ -115,7 +115,7 @@ class CambioInventario(models.Model):
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
 	idProducto = models.ForeignKey(Producto, to_field='id', default=0)
 	idCentro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
-	fecha = models.DateField(default=datetime.date.today)
+	fecha = models.DateField(auto_now=True)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):

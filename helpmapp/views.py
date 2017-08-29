@@ -11,6 +11,7 @@ from django.contrib import messages
 import random, string
 import json
 from .forms import *
+from django.db import connection
 
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/not_logged/index.html')
@@ -361,12 +362,20 @@ def obtener_datos(request):
         l.append(d)
     response_data["cantidad_ropa"]=l
     response_data["max_ropa"]=maxropa
-    d2={}
+
+    
+    comida=Producto.objects.filter(idCategoria=1)
+    hoy=datetime.date.today()
+    fecha=hoy-datetime.timedelta(days=7)
+    cursor=connection.cursor()
+    resultados=cursor.execute("SELECT fecha, SUM(IF(accion=\'enviar\',cantidad,0)) as \'enviar\' FROM CambioInventario,Producto WHERE CambioInventario.idProducto=Producto.idProducto and idCategoria=1 and fecha>="+fecha)
+    resultados=dictfetchall(cursor) #de la forma [{'fecha': jfahsdf,'enviar':239},{'fecha': jferwsdf,'enviar':230}]
+    response_data["comida_enviada"]=resultados
     return HttpResponse(
             json.dumps(response_data),
             content_type="application/json"
         )
-   
+    
    
 
 
