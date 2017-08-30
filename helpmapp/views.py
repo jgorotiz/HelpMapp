@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
@@ -11,6 +11,7 @@ from django.contrib import messages
 import random, string
 import json
 from .forms import *
+from django.db import connection
 
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/not_logged/index.html')
@@ -144,7 +145,7 @@ def mostrar_loginAdmin(request):
                         request.session['member_id'] = m.nombreUsuario
                         request.session['tipo'] = m.tipo
                         if (m.tipo==0): #es super admin
-                            return render(request,'helpmapp/Administrador/superAdmin/index.html')
+                            return HttpResponseRedirect('/administradorGeneral/')
                         else:#es admin de centro de acopio
                             return HttpResponseRedirect('/administradorZonal/')
                     else:
@@ -170,23 +171,50 @@ def cerrarSesion(request):
         pass
     
     return HttpResponseRedirect('/loginAdmin/')
-    
 
-#MOSTRAR INDEX DEL SUPER ADMIN
-#@login_required(login_url='/loginAdmin/')
-#@permission_required('helpmapp.is_superadmin', login_url='/loginAdmin/')
-# def mostrar_administradorGeneral(request):
-#     if('member_id' in request.session):
-#         return render(request,'helpmapp/Administrador/superAdmin/index.html')
-#     else:
-#         return redirect('helpmapp/Administrador/index.html')
+
+#PÁGINAS DEL ADMINISTRADOR GENERAL
 def mostrar_administradorGeneral(request):
     if('member_id' in list(request.session.keys())):
+        print("hola")
         return render(request,'helpmapp/Administrador/superAdmin/index.html')
-    return HttpResponseRedirect('/loginAdmin/')
+    else:
+        return HttpResponseRedirect('/loginAdmin/')
 
+def buscarCentroAcopio(request):
+    return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
+
+def mostrar_configCuenta(request):
+    return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
+#CREAR UNA CUENTA DE ADMINISTRADOR    
+def mostrar_crearAdministrador(request):
+    # if request.method == 'POST':
+        
+    #     form = AdministradorForm(request.POST)
+    #     if form.is_valid():
+
+    #         user = form.save(commit=False)
+    #         user.save()
+
+    # else:    
+    #     form = AdministradorForm()
+   
+    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
+def mostrar_verCentro(request):
+    return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
+
+def mostrar_crearProducto(request):
+    print("hola2")
+    if(request.session.get('member_id',None) != None):
+        return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
+    else:
+        return HttpResponseRedirect('/loginAdmin/')
+
+
+#PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
+        print(request.session["member_id"])
         upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
         return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
@@ -225,8 +253,6 @@ def mostrar_configuracionCapacidades(request):
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
 
-def mostrar_crearProducto(request):
-    return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
 
 def mostrar_inventarioAgua(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
@@ -260,11 +286,7 @@ def mostrar_inventarioComida(request):
 def mostrar_inventarioRopa(request):
     return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
 
-def mostrar_buscarCentroAcopio(request):
-    return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
 
-def mostrar_configCuenta(request):
-    return render(request,'helpmapp/Administrador/superAdmin/configCuenta.html')
 
 def profile(request):
     return render(request,'helpmapp/cliente/login.html')
@@ -272,23 +294,9 @@ def profile(request):
 def edit_account(request):
     return render(request,'helpmapp/cliente/login.html')
 
-#CREAR UNA CUENTA DE ADMINISTRADOR    
-def mostrar_crearAdministrador(request):
-    # if request.method == 'POST':
-        
-    #     form = AdministradorForm(request.POST)
-    #     if form.is_valid():
 
-    #         user = form.save(commit=False)
-    #         user.save()
 
-    # else:    
-    #     form = AdministradorForm()
-   
-    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
 
-def mostrar_verCentro(request):
-    return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
 def mostrar_recuperarCuenta(request):
     return render(request,'helpmapp/Administrador/superAdmin/recuperarCuenta.html')
@@ -338,19 +346,37 @@ def eliminar_helpmapper(request, nombreUsuario):
     return HttpResponseRedirect('/')
 
 def obtener_datos(request):
-    print("Es administrador zonal")
-    comida=Producto.objects.filter(idCategoria=1) #id de comida
-    kg=0
-    for c in comida:
-        kg+=c.cantidad
-    ropa=Producto.objects.filter(idCategoria=2).count() # id de ropa
    
-    agua=Producto.objects.filter(idCategoria=3) #id de agua
-    l=0
-    for a in agua:
-        l+=a.cantidad
-    lista=[kg,ropa,l]
-    return lista
+    response_data={}
+    l=[] #diccionario que contendrá la cantidad de cada prenda de ropa
+    ropa=Producto.objects.filter(idCategoria=2) #filtro todos los productos que sean ropa
+    maxropa=0
+    for r in ropa:
+        prendas=ExistenciaInventario.objects.filter(idProducto=r.id) #filtro todos los inventariados por cada prenda
+        c=prendas.cantidad.sum()
+        if(c>maxropa):
+            maxropa=c
+        d={}
+        d["dept"]=r.nombre
+        d["age"]=c
+        l.append(d)
+    response_data["cantidad_ropa"]=l
+    response_data["max_ropa"]=maxropa
+
+    
+    comida=Producto.objects.filter(idCategoria=1)
+    hoy=datetime.date.today()
+    fecha=hoy-datetime.timedelta(days=7)
+    cursor=connection.cursor()
+    resultados=cursor.execute("SELECT fecha, SUM(IF(accion=\'enviar\',cantidad,0)) as \'enviar\' FROM CambioInventario,Producto WHERE CambioInventario.idProducto=Producto.idProducto and idCategoria=1 and fecha>="+fecha)
+    resultados=dictfetchall(cursor) #de la forma [{'fecha': jfahsdf,'enviar':239},{'fecha': jferwsdf,'enviar':230}]
+    response_data["comida_enviada"]=resultados
+    return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    
+   
 
 
 
@@ -358,7 +384,7 @@ def obtener_datos(request):
 
 #estadistica Grafico pra cliente
 
-def mostrar_GraficoEstaditico(request):
+def mostrar_GraficoEstadistico(request):
     comida=Producto.objects.filter(idCategoria=1) #id de comida
     kg=0
     for c in comida:
@@ -378,5 +404,5 @@ def mostrar_GraficoEstaditico(request):
     print (lista2)
     #lista=json.dumps(lista2)
     lista=lista2
-    return render(request,'helpmapp/cliente/statistics.html',{'lista':lista})
+    return render(request,'helpmapp/cliente/helpmapper/statistics.html',{'lista':lista})
 
