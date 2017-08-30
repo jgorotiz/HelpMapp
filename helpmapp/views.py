@@ -37,7 +37,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def recovery(request):
     if request.method=='GET':
         form = RecoveryForm()
-        return render(request, 'helpmapp/cliente/recovery.html', {'form': form})
+        return render(request, 'helpmapp/cliente/not_logged/recovery.html', {'form': form})
 
     elif request.method=='POST':
         #send_mail("Cambio de contrasena", "Post", EMAIL_HOST_USER, ['ramsesfabri@gmail.com]'],fail_silently=False)
@@ -68,11 +68,11 @@ def recovery(request):
                     hm.save()
                     #send_mail("Vales trozo", text, EMAIL_HOST_USER, ['rodfcast@gmail.com]'],fail_silently=False)
                     send_mail("helpMapp: Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
-                    return render(request, 'helpmapp/cliente/message.html', {'title': 'Correo Enviado', 'message':'Su nueva contraseña ha sido enviada al correo registrado.'} )
+                    return render(request, 'helpmapp/cliente/not_logged/message.html', {'title': 'Correo Enviado', 'message':'Su nueva contraseña ha sido enviada al correo registrado.'} )
             except Exception as e:
-                return render(request, 'helpmapp/cliente/message.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
+                return render(request, 'helpmapp/cliente/not_logged/message.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
                 pass
-    return render(request, 'helpmapp/cliente/message.html', {'form':form})
+    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
 
 
 def mostrar_tutoriales(request):
