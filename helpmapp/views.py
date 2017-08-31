@@ -13,6 +13,7 @@ import json
 from .forms import *
 from django.db import connection
 
+#Controllers for everyone
 def mostrar_indice(request):
     return render(request,'helpmapp/cliente/not_logged/index.html')
 
@@ -30,10 +31,8 @@ def mostrar_sobreNosotros(request):
 def mostrar_login(request):
     return render(request,'helpmapp/cliente/not_logged/login.html')
 
-
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
-
 
 def recovery(request):
     if request.method=='GET':
@@ -76,8 +75,50 @@ def recovery(request):
     return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
 
 
+#For HelpMappers
+
+def index_hm(request):
+    return render(request,'helpmapp/cliente/helpmapper/index.html')
+
+#devolver todos los centros de acopios
+def listar_centroAcopioHM(request):
+
+    centros =  CentroDeAcopio.objects.all()
+
+    return render(request, 'helpmapp/cliente/helpmapper/donar.html', {'centros': centros})
+
+#estadistica Grafico pra cliente
+def mostrar_GraficoEstadistico(request):
+    comida=Producto.objects.filter(idCategoria=1) #id de comida
+    kg=0
+    for c in comida:
+        kg+=c.cantidad
+    ropas=Producto.objects.filter(idCategoria=2) # id de ropa
+    ropa=0
+    for r in ropas:
+        ropa+=r.cantidad
+    agua=Producto.objects.filter(idCategoria=3) #id de agua
+    l=0
+    for a in agua:
+        l+=a.cantidad
+    lista2=[]
+    lista2.append(float(kg))
+    lista2.append(float(ropa))
+    lista2.append(float(l))
+    print (lista2)
+    #lista=json.dumps(lista2)
+    lista=lista2
+    return render(request,'helpmapp/cliente/helpmapper/statistics.html',{'lista':lista})
+
 def mostrar_tutoriales(request):
-    return render(request,'helpmapp/cliente/tutoriales.html')
+    return render(request,'helpmapp/cliente/helpmapper/tutoriales.html')
+
+def mostrar_sobreNosotrosHM(request):
+
+    return render(request,'helpmapp/cliente/helpmapper/aboutus.html')
+
+
+
 
 
 
@@ -382,27 +423,4 @@ def obtener_datos(request):
 
 
 
-#estadistica Grafico pra cliente
-
-def mostrar_GraficoEstadistico(request):
-    comida=Producto.objects.filter(idCategoria=1) #id de comida
-    kg=0
-    for c in comida:
-        kg+=c.cantidad
-    ropas=Producto.objects.filter(idCategoria=2) # id de ropa
-    ropa=0
-    for r in ropas:
-        ropa+=r.cantidad
-    agua=Producto.objects.filter(idCategoria=3) #id de agua
-    l=0
-    for a in agua:
-        l+=a.cantidad
-    lista2=[]
-    lista2.append(float(kg))
-    lista2.append(float(ropa))
-    lista2.append(float(l))
-    print (lista2)
-    #lista=json.dumps(lista2)
-    lista=lista2
-    return render(request,'helpmapp/cliente/helpmapper/statistics.html',{'lista':lista})
 

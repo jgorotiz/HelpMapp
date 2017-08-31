@@ -10,10 +10,14 @@ urlpatterns = [
         url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
         url(r'^equipo/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
         url(r'^login/', views.mostrar_login,name="mostrar_login"),
+        url(r'^recovery/', views.recovery,name="recovery"),
 
         #For HelpMapper
-        url(r'^estadistica/', views.mostrar_GraficoEstadistico,name="mostrar_GraficoEstadistico"),
-        url(r'^tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
+        url(r'^home/', views.index_hm,name="home"),
+        url(r'^hm/donar/', views.listar_centroAcopioHM,name="donar"),
+        url(r'^hm/estadistica/', views.mostrar_GraficoEstadistico,name="mostrar_GraficoEstadistico"),
+        url(r'^hm/tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
+        url(r'^hm/equipo/', views.mostrar_sobreNosotrosHM,name="mostrar_sobreNosotros"),
         
         
         
@@ -42,7 +46,6 @@ urlpatterns = [
        
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
 
-        url(r'^recovery/', views.recovery,name="recovery"),
         url(r'^profile/', views.profile,name="profile"),
         url(r'^account/', views.edit_account,name="edit_account"),
         
