@@ -3,11 +3,11 @@
 from django import forms
 from .models import *
 
-class HelpMapperForm(forms.Form):
+class HelpMapperForm(forms.ModelForm):
     class Meta:
         model = HelpMapper
-        fields = ('nombre', 'apellido', 'nombreUsuario', 'contrasena', 'sexo', 'cedula',
-                    'tipoSangre', 'telefono', 'correo', 'habilidad', 'estado')
+        fields = ('nombre', 'apellido', 'nombre_usuario', 'contrasena', 'sexo', 'cedula',
+                    'tipo_sangre', 'telefono', 'correo', 'habilidad', 'estado')
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Nombre de usuario', max_length=16)

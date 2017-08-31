@@ -360,13 +360,13 @@ def registrar_helpmapper(request):
             print ('si es valid')
             helpmapper = form.save(commit=False)
             helpmapper.save()
-            return render(request, 'helpmapp/cliente/donar.html', {'form': form})
+            return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
         else:
             print ('no es valido')
     else:
         print ('no es post')
         form = HelpMapperForm()
-    return render(request, 'helpmapp/cliente/donar.html', {'form': form})
+    return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
 
 def actualizar_contrasena(request, nombreUsuario):
     helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)
