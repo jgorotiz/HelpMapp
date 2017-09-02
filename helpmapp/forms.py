@@ -7,7 +7,6 @@ class HelpMapperForm(forms.ModelForm):
     class Meta:
         model = HelpMapper
         fields = ('nombre', 'apellido', 'nombre_usuario', 'contrasena', 'sexo', 'cedula',
-
                     'tipo_sangre', 'telefono', 'correo', 'habilidad', 'estado')
 
 class LoginForm(forms.Form):
@@ -20,3 +19,8 @@ class RecoveryForm(forms.Form):
 class ChangePassForm(forms.Form):
 	password = forms.CharField(widget=forms.PasswordInput,label='Contrasena', max_length=16)
 	confirm_password = forms.CharField(widget=forms.PasswordInput,label='Confirmar contrasena', max_length=16)
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ('nombre_producto', 'id_categoria', 'estado')

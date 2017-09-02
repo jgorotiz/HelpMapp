@@ -33,7 +33,6 @@ def mostrar_login(request):
         if request.method == 'POST':
             form= LoginForm(request.POST)
             if form.is_valid():
-                print("dsfsd")
                 try:
                     m = HelpMapper.objects.get(nombre_usuario=request.POST['username'])
                     print(m.contrasena== request.POST['password'])
@@ -267,12 +266,20 @@ def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
 def mostrar_crearProducto(request):
-    print("hola2")
-    if(request.session.get('member_id',None) != None):
-        return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
+    if request.method == 'POST':
+        print ('si es post')
+        form = ProductoForm(request.POST)
+        if form.is_valid():
+            print ('si es valid')
+            producto = form.save(commit=False)
+            producto.save()
+            return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
+        else:
+            print ('no es valido')
     else:
-        return HttpResponseRedirect('/loginAdmin/')
-
+        print ('no es post')
+        form = ProductoForm()
+    return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
 
 #PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
@@ -393,40 +400,29 @@ def registrar_helpmapper(request):
 
 def actualizar_contrasena(request):
     if request.method=='POST':
-        form = RecoveryForm(request.POST)
+        form = ChangePassForm(request.POST)
         print(request.POST)
         if form.is_valid():
             print("is valid")
             data = form.cleaned_data
             try:
-                hm = HelpMapper.objects.get(correo=data['correo'])
-                if data['correo'] == hm.correo:
-                    print("ENVIANDO...")
-                    remiter= developers[random.randint(0,len(developers)-1)] + " del Equipo de helpMapp, te saluda e informa que: \n"
-                    text = remiter + "Tu cambio de contraseña ha sido exitoso. Por favor, ingresa con tu nueva contraseña: "
-                    new_contrasena = id_generator(8)
-                    text += new_contrasena+ "\n" + "Gracias por ser un helpMapper!"
-         
+                hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
+                if data['contrasena'] == data['confirm_password']:
+                    new_contrasena = data['contrasena']
                     hm.contrasena = new_contrasena
                     hm.save()
-                    #send_mail("Vales trozo", text, EMAIL_HOST_USER, ['rodfcast@gmail.com]'],fail_silently=False)
-                    send_mail("helpMapp: Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
-                    return render(request, 'helpmapp/cliente/not_logged/message.html', {'title': 'Correo Enviado', 'message':'Su nueva contraseña ha sido enviada al correo registrado.'} )
+                    return render(request, 'helpmapp/cliente/helpmapper/profile.html', {'title': 'Contrasena modificada', 'message':'Contrasena modificada exitosamente.'} )
+                else:
+                    return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Contrasenas distintas', 'message':'Error: Las contrasenas ingresadas no coinciden.'})                    
+
             except Exception as e:
-                return render(request, 'helpmapp/cliente/not_logged/message.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
+                return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
                 pass
-    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
+    return render(request, 'helpmapp/cliente/helpmapper/index.html', {'form':form})
 
-
-
-
-
-
-
-def eliminar_helpmapper(request, nombre_usuario):
-    
-    helpmapper  = get_object_or_404(HelpMapper, pk = nombre_usuario).delete()
-
+def eliminar_helpmapper(request):
+    hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
+    helpmapper  = get_object_or_404(HelpMapper, pk = hm.nombre_usuario).delete()
     return HttpResponseRedirect('/')
 
 def obtener_datos(request):
@@ -467,6 +463,27 @@ def obtener_datos(request):
     
    
 
+
+
+#configurar Capacidades de un centro
+def configurarCentro(request):
+    if request.method=='GET':
+        form = configurarCapacidadesForm()
+        return render(request, 'helpmapp/Administrdor/adminCentro/configuracionCapacidades.html', {'form': form})
+
+    elif request.method=='POST':
+        form = configurarCapacidadesForm(request.POST)
+        if form.is_valid():
+            print("is valid")
+            data = form.cleaned_data
+            ca = CentroDeAcopio.objects.get(idAdmin=request.session['member_id']) #data['correo']
+            ca.almacenamientoAgua = data['almacenamientoAgua']
+            ca.almacenamientoRopa = data['almacenamientoRopa']
+            ca.almacenamientoComida = data['almacenamientoComida']
+            ca.save()
+            return render(request, 'helpmapp/Administrdor/adminCentro/configuracionCapacidades.html')
+            
+    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
 
  
 
