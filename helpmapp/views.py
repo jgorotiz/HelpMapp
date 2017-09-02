@@ -382,25 +382,46 @@ def registrar_helpmapper(request):
             print ('si es valid')
             helpmapper = form.save(commit=False)
             helpmapper.save()
-            return render(request, 'helpmapp/cliente/donar.html', {'form': form})
+            return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
         else:
             print ('no es valido')
     else:
         print ('no es post')
         form = HelpMapperForm()
-    return render(request, 'helpmapp/cliente/donar.html', {'form': form})
+    return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
 
-def actualizar_contrasena(request, nombre_usuario):
-    helpmapper = get_object_or_404(HelpMapper, pk=nombre_usuario)
-    if request.method == "POST":
-        form = HelpMapperForm(request.POST,instance=helpmapper)
+
+def actualizar_contrasena(request):
+    if request.method=='POST':
+        form = RecoveryForm(request.POST)
+        print(request.POST)
         if form.is_valid():
-            helpmapper = form.save(commit=False)
-            helpmapper.save()
-            return redirect('helpmapp/cliente/index.html')
-    else:
-            form = HelpMapperForm(instance=helpmapper)
-    return render(request, 'helpmapp/cliente/index.html', {'form': form})
+            print("is valid")
+            data = form.cleaned_data
+            try:
+                hm = HelpMapper.objects.get(correo=data['correo'])
+                if data['correo'] == hm.correo:
+                    print("ENVIANDO...")
+                    remiter= developers[random.randint(0,len(developers)-1)] + " del Equipo de helpMapp, te saluda e informa que: \n"
+                    text = remiter + "Tu cambio de contraseña ha sido exitoso. Por favor, ingresa con tu nueva contraseña: "
+                    new_contrasena = id_generator(8)
+                    text += new_contrasena+ "\n" + "Gracias por ser un helpMapper!"
+         
+                    hm.contrasena = new_contrasena
+                    hm.save()
+                    #send_mail("Vales trozo", text, EMAIL_HOST_USER, ['rodfcast@gmail.com]'],fail_silently=False)
+                    send_mail("helpMapp: Cambio de contraseña", text, EMAIL_HOST_USER, [data['correo']],fail_silently=False)
+                    return render(request, 'helpmapp/cliente/not_logged/message.html', {'title': 'Correo Enviado', 'message':'Su nueva contraseña ha sido enviada al correo registrado.'} )
+            except Exception as e:
+                return render(request, 'helpmapp/cliente/not_logged/message.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
+                pass
+    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
+
+
+
+
+
+
 
 def eliminar_helpmapper(request, nombre_usuario):
     

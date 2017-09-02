@@ -12,7 +12,7 @@
   <!--AQUI VA UN CSRF PARA RECOGER EL NOMBRE DEL USUARIO Y LA SESION-->
   <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
   <li ><a class="labels h4 " href="{% url 'helpmapp.views.listar_centroAcopio' %}" > Donar</a></li>
-  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_voluntario' %}" > Voluntario</a></li>
+  <li><a class="labels h4 " href="{% url 'helpmapp.views.registrar_helpmapper' %}" > Voluntario</a></li>
   <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
   <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_login' %}"> Ingresar</a> </li>
 {% endblock %}
@@ -77,19 +77,17 @@
 				<h2 class="center featurette-heading">¡Ayúdanos a ayudar! <span class="center text-muted">Inscríbete como voluntario</span></h2>
 
 			<hr class="featurette-divider"> 
-			<form id = "quiero-ser-voluntario" method="Post" action="{% url 'helpmapp.views.registrar_helpmapper' %}">
+			<form id = "quiero-ser-voluntario" method="Post">
 			{% csrf_token %}
 			{{ form.errors }}
 			{{ form.non_field_errors }}
 				<div class="form-group">
 					<label for="nombre" class="h4 labels">Nombres:</label>
 					<input class = "entrada" type="text" name="nombre" id="nombre" autocomplete="off" />
-					{{ form.nombre }}
 				</div>
 				<div class="form-group">
 					<label for="apellido" class="h4 labels">Apellidos:</label>
 					<input class = "entrada" type="text" name="apellido" id="apellido" autocomplete="off" />
-					{{ form.apellido }}
 				</div>
 				<div class="form-group">
 					<label for="nombre_usuario" class="h4 labels">Usuario:</label>
@@ -99,7 +97,6 @@
 				<div class="form-group">
 					<label for="contrasena" class="h4 labels">Contraseña:</label>
 					<input class = "entrada" type="password" name="contrasena" id="contrasena" autocomplete="off" />
-					{{ form.contrasena }}
 				</div>
 				<div class="form-group">
 					<label for="sexo" class="h4 labels">Sexo:</label>
@@ -112,11 +109,10 @@
 				<div class="form-group">
 					<label for="cedula" class="h4 labels">Cédula:</label>
 					<input class = "entrada" type="text" name="cedula" id="cedula" autocomplete="off" />
-					{{ form.cedula }}
 				</div>
 				<div class="form-group">
-					<label  for="tipoSangre" class="h4 labels">Tipo de Sangre:</label>
-					<select name="tipoSangre"  id="tipoSangre">
+					<label  for="tipo_sangre" class="h4 labels">Tipo de Sangre:</label>
+					<select name="tipo_sangre"  id="tipo_sangre">
 						<option value="A+">A+</option>
 						<option value="A-">A-</option>
 						<option value="B+">B+</option>
@@ -130,12 +126,10 @@
 				<div class="form-group">
 					<label for="telefono" class="h4 labels">Teléfono:</label>
 					<input class = "entrada" type="text" name="telefono" id="telefono" autocomplete="off" />
-					{{ form.telefono }}
 				</div>
 				<div class="form-group">
 					<label for="correo" class="h4 labels">Correo:</label>
 					<input class = "entrada" type="email" name="correo" id="correo" autocomplete="off" />
-					{{ form.email }}
 				</div>
 				<!--
 				<div>
