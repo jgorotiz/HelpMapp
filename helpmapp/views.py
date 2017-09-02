@@ -22,14 +22,14 @@ def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
     return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros})
 
-def mostrar_voluntario(request):
-    return render(request,'helpmapp/cliente/not_logged/voluntario.html')
+
 
 def mostrar_sobreNosotros(request):
     return render(request,'helpmapp/cliente/not_logged/aboutus.html')
 
 def mostrar_login(request):
     if (not "member_id" in request.session.keys()):
+        print("request.session['member_id']")
         if request.method == 'POST':
             form= LoginForm(request.POST)
             if form.is_valid():
@@ -44,8 +44,11 @@ def mostrar_login(request):
                         messages.error(request, "Credenciales incorrectas")
                 except: 
                     messages.error(request,"Usuario no registrado")
+            else:
+                form= LoginForm()
         else:
             form= LoginForm()
+            print(form)
         return render(request,'helpmapp/cliente/not_logged/login.html',{'form': form})
     else:
         print(request.session['member_id'])
@@ -362,7 +365,12 @@ def profile(request):
     return render(request,'helpmapp/cliente/helpmapper/profile.html')
 
 def logout(request):
-    return redirect(request,'helpmapp/cliente/not_logged/index.html')
+    try:
+        del request.session['member_id']
+    except KeyError:
+        pass
+    
+    return HttpResponseRedirect('/login/')
 
 
 
