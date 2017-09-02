@@ -16,3 +16,8 @@ class LoginForm(forms.Form):
 class RecoveryForm(forms.Form):
     correo = forms.CharField(label='Correo Electrónico', max_length=100,required=True)
     
+
+class configurarCapacidadesForm(forms.Form):
+	almacenamientoAgua = forms.DecimalField(label='Capacidad máxima de agua:',max_digits=8)
+	almacenamientoRopa = forms.DecimalField(label='Capacidad máxima de ropa:',max_digits=8)
+	almacenamientoComida = forms.DecimalField(label='Capacidad máxima de Comida:',max_digits=8)

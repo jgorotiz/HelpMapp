@@ -33,7 +33,6 @@ def mostrar_login(request):
         if request.method == 'POST':
             form= LoginForm(request.POST)
             if form.is_valid():
-                print("dsfsd")
                 try:
                     m = HelpMapper.objects.get(nombre_usuario=request.POST['username'])
                     print(m.contrasena== request.POST['password'])
@@ -441,6 +440,27 @@ def obtener_datos(request):
     
    
 
+
+
+#configurar Capacidades de un centro
+def configurarCentro(request):
+    if request.method=='GET':
+        form = configurarCapacidadesForm()
+        return render(request, 'helpmapp/Administrdor/adminCentro/configuracionCapacidades.html', {'form': form})
+
+    elif request.method=='POST':
+        form = configurarCapacidadesForm(request.POST)
+        if form.is_valid():
+            print("is valid")
+            data = form.cleaned_data
+            ca = CentroDeAcopio.objects.get(idAdmin=request.session['member_id']) #data['correo']
+            ca.almacenamientoAgua = data['almacenamientoAgua']
+            ca.almacenamientoRopa = data['almacenamientoRopa']
+            ca.almacenamientoComida = data['almacenamientoComida']
+            ca.save()
+            return render(request, 'helpmapp/Administrdor/adminCentro/configuracionCapacidades.html')
+            
+    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
 
  
 
