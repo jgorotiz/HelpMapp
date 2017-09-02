@@ -6,7 +6,7 @@ from .models import *
 class HelpMapperForm(forms.Form):
     class Meta:
         model = HelpMapper
-        fields = ('nombre', 'apellido', 'nombreUsuario', 'contrasena', 'sexo', 'cedula',
+        fields = ('nombre', 'apellido', 'nombre_usuario', 'contrasena', 'sexo', 'cedula',
                     'tipoSangre', 'telefono', 'correo', 'habilidad', 'estado')
 
 class LoginForm(forms.Form):
