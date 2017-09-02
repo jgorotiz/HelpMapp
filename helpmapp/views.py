@@ -111,15 +111,15 @@ def listar_centroAcopioHM(request):
 
 #estadistica Grafico pra cliente
 def mostrar_GraficoEstadistico(request):
-    comida=Producto.objects.filter(idCategoria=1) #id de comida
+    comida=Producto.objects.filter(id_categoria=1) #id de comida
     kg=0
     for c in comida:
         kg+=c.cantidad
-    ropas=Producto.objects.filter(idCategoria=2) # id de ropa
+    ropas=Producto.objects.filter(id_categoria=2) # id de ropa
     ropa=0
     for r in ropas:
         ropa+=r.cantidad
-    agua=Producto.objects.filter(idCategoria=3) #id de agua
+    agua=Producto.objects.filter(id_categoria=3) #id de agua
     l=0
     for a in agua:
         l+=a.cantidad
@@ -202,10 +202,10 @@ def mostrar_loginAdmin(request):
             form= LoginForm(request.POST)
             if form.is_valid():
                 try:
-                    m = Administrador.objects.get(nombreUsuario=request.POST['username'])
+                    m = Administrador.objects.get(nombre_usuario=request.POST['username'])
                     print(m.contrasena== request.POST['password'])
                     if m.contrasena == request.POST['password']:
-                        request.session['member_id'] = m.nombreUsuario
+                        request.session['member_id'] = m.nombre_usuario
                         request.session['tipo'] = m.tipo
                         if (m.tipo==0): #es super admin
                             return HttpResponseRedirect('/administradorGeneral/')
@@ -222,7 +222,7 @@ def mostrar_loginAdmin(request):
         if (request.session['tipo']==0): #es super admin
             return render(request,'helpmapp/Administrador/superAdmin/index.html')
         else:#es admin de centro de acopio
-            upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+            upc = CentroDeAcopio.objects.get(id_admin=request.session['member_id'])
             return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 
 
@@ -278,7 +278,7 @@ def mostrar_crearProducto(request):
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         print(request.session["member_id"])
-        upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+        upc = CentroDeAcopio.objects.get(id_admin=request.session['member_id'])
         return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
 
@@ -286,7 +286,7 @@ def mostrar_administradorZonal(request):
 
 def mostrar_configuracionCapacidades(request):
     # if('member_id' in request.session.keys()):
-    #     m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
+    #     m = Administrador.objects.get(nombre_usuario=request.session["member_id"])
     #     if (m.tipo==1): #si es administrador de centro
     #         if(request.method=="POST"):
     #             form = CapacidadesForm(request.POST)
@@ -323,15 +323,15 @@ def mostrar_inventarioAgua(request):
 def mostrar_inventarioComida(request):
     if(request.session["member_id"]):
         if(request.session["tipo"]==1):
-            comida=Producto.objects.filter(idCategoria=1) #id de comida
+            comida=Producto.objects.filter(id_categoria=1) #id de comida
             kg=0
             for c in comida:
                 kg+=c.cantidad
-            ropas=Producto.objects.filter(idCategoria=2) # id de ropa
+            ropas=Producto.objects.filter(id_categoria=2) # id de ropa
             ropa=0
             for r in ropas:
                 ropa+=r.cantidad
-            agua=Producto.objects.filter(idCategoria=3) #id de agua
+            agua=Producto.objects.filter(id_categoria=3) #id de agua
             l=0
             for a in agua:
                 l+=a.cantidad
@@ -390,6 +390,7 @@ def registrar_helpmapper(request):
         form = HelpMapperForm()
     return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
 
+
 def actualizar_contrasena(request):
     if request.method=='POST':
         form = ChangePassForm(request.POST)
@@ -410,7 +411,21 @@ def actualizar_contrasena(request):
             except Exception as e:
                 return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
                 pass
+<<<<<<< HEAD
     return render(request, 'helpmapp/cliente/helpmapper/index.html', {'form':form})
+=======
+    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
+
+
+
+
+
+
+
+def eliminar_helpmapper(request, nombre_usuario):
+    
+    helpmapper  = get_object_or_404(HelpMapper, pk = nombre_usuario).delete()
+>>>>>>> be68ce13d6be4c4577a1ddba81a0db350704296d
 
 def eliminar_helpmapper(request):
     hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
@@ -422,10 +437,10 @@ def obtener_datos(request):
    
     response_data={}
     l=[] #diccionario que contendrá la cantidad de cada prenda de ropa
-    ropa=Producto.objects.filter(idCategoria=2) #filtro todos los productos que sean ropa
+    ropa=Producto.objects.filter(id_categoria=2) #filtro todos los productos que sean ropa
     maxropa=0
     for r in ropa:
-        prendas=ExistenciaInventario.objects.filter(idProducto=r.id) #filtro todos los inventariados por cada prenda
+        prendas=ExistenciaInventario.objects.filter(id_producto=r.id) #filtro todos los inventariados por cada prenda
         c=prendas.cantidad.sum()
         if(c>maxropa):
             maxropa=c
@@ -437,13 +452,13 @@ def obtener_datos(request):
     response_data["max_ropa"]=maxropa
 
     
-    comida=Producto.objects.filter(idCategoria=1)
-    hoy=datetime.date.today()
-    fecha=hoy-datetime.timedelta(days=7)
-    cursor=connection.cursor()
-    resultados=cursor.execute("SELECT fecha, SUM(IF(accion=\'enviar\',cantidad,0)) as \'enviar\' FROM CambioInventario,Producto WHERE CambioInventario.idProducto=Producto.idProducto and idCategoria=1 and fecha>="+fecha)
-    resultados=dictfetchall(cursor) #de la forma [{'fecha': jfahsdf,'enviar':239},{'fecha': jferwsdf,'enviar':230}]
-    response_data["comida_enviada"]=resultados
+    # comida=Producto.objects.filter(id_categoria=1)
+    # hoy=datetime.date.today()
+    # fecha=hoy-datetime.timedelta(days=7)
+    # cursor=connection.cursor()
+    # resultados=cursor.execute("SELECT fecha, SUM(IF(accion=\'enviar\',cantidad,0)) as \'enviar\' FROM CambioInventario,Producto WHERE CambioInventario.id_producto=Producto.id_producto and id_categoria=1 and fecha>="+fecha)
+    # resultados=dictfetchall(cursor) #de la forma [{'fecha': jfahsdf,'enviar':239},{'fecha': jferwsdf,'enviar':230}]
+    # response_data["comida_enviada"]=resultados
     return HttpResponse(
             json.dumps(response_data),
             content_type="application/json"

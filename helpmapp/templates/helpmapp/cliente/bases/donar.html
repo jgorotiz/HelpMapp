@@ -49,15 +49,15 @@
               
               {% if centros %}
                 {% for centro in centros %}
-                  var contentString = "{{centro.nombreUPC}} \n Cantidad Maxima de Agua: {{centro.almacenamientoAgua}} \n Cantidad Maxima de Ropa: {{centro.almacenamientoRopa}} \n Cantidad Maxima de Comida: {{centro.almacenamientoComida}}";
+                  var contentString = "{{centro.nombre_upc}} \n Cantidad Maxima de Agua: {{centro.almacenamiento_agua}} \n Cantidad Maxima de Ropa: {{centro.almacenamiento_ropa}} \n Cantidad Maxima de Comida: {{centro.almacenamiento_comida}}";
 
                   var infowindow1 = new google.maps.InfoWindow({
-                    content: "{{centro.nombreUPC}} \n Cantidad Maxima de Agua: {{centro.almacenamientoAgua}} \n Cantidad Maxima de Ropa: {{centro.almacenamientoRopa}} \n Cantidad Maxima de Comida: {{centro.almacenamientoComida}}"
+                    content: "{{centro.nombre_upc}} \n Cantidad Maxima de Agua: {{centro.almacenamiento_agua}} \n Cantidad Maxima de Ropa: {{centro.almacenamiento_ropa}} \n Cantidad Maxima de Comida: {{centro.almacenamiento_comida}}"
                   });
                   var marker = new google.maps.Marker({
                     position: {lat: {{centro.latitud}}, lng: {{centro.longitud}}},
                     map: map,
-                    title: "{{centro.nombreUPC}} \n Cantidad Maxima de Agua: {{centro.almacenamientoAgua}} \n Cantidad Maxima de Ropa: {{centro.almacenamientoRopa}} \n Cantidad Maxima de Comida: {{centro.almacenamientoComida}}"
+                    title: "{{centro.nombre_upc}} \n Cantidad Maxima de Agua: {{centro.almacenamiento_agua}} \n Cantidad Maxima de Ropa: {{centro.almacenamiento_ropa}} \n Cantidad Maxima de Comida: {{centro.almacenamiento_comida}}"
                   });
                   marker.addListener('click', function () {
                     infowindow1.open(map, marker);
