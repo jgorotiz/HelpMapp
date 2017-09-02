@@ -410,27 +410,12 @@ def actualizar_contrasena(request):
             except Exception as e:
                 return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
                 pass
-<<<<<<< HEAD
     return render(request, 'helpmapp/cliente/helpmapper/index.html', {'form':form})
-=======
-    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
-
-
-
-
-
-
-
-def eliminar_helpmapper(request, nombre_usuario):
-    
-    helpmapper  = get_object_or_404(HelpMapper, pk = nombre_usuario).delete()
->>>>>>> be68ce13d6be4c4577a1ddba81a0db350704296d
 
 def eliminar_helpmapper(request):
     hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
     helpmapper  = get_object_or_404(HelpMapper, pk = hm.nombre_usuario).delete()
     return HttpResponseRedirect('/')
-
 
 def obtener_datos(request):
    
