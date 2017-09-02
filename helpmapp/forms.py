@@ -16,22 +16,11 @@ class LoginForm(forms.Form):
 class RecoveryForm(forms.Form):
     correo = forms.CharField(label='Correo Electrónico', max_length=100,required=True)
     
-
-
-class configurarCapacidadesForm(forms.Form):
-	almacenamientoAgua = forms.DecimalField(label='Capacidad máxima de agua:',max_digits=8)
-	almacenamientoRopa = forms.DecimalField(label='Capacidad máxima de ropa:',max_digits=8)
-	almacenamientoComida = forms.DecimalField(label='Capacidad máxima de Comida:',max_digits=8)
-
 class ChangePassForm(forms.Form):
 	password = forms.CharField(widget=forms.PasswordInput,label='Contrasena', max_length=16)
 	confirm_password = forms.CharField(widget=forms.PasswordInput,label='Confirmar contrasena', max_length=16)
 
-<<<<<<< HEAD
-class HelpMapperForm(forms.ModelForm):
+class ProductoForm(forms.ModelForm):
     class Meta:
-        model = HelpMapper
-        fields = ('nombre', 'apellido', 'nombre_usuario', 'contrasena', 'sexo', 'cedula',
-                    'tipo_sangre', 'telefono', 'correo', 'habilidad', 'estado')
-=======
->>>>>>> 589717ac605d5726b2aff6deba4a519495ec888d
+        model = Producto
+        fields = ('nombre_producto', 'id_categoria', 'estado')
