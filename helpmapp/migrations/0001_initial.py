@@ -13,7 +13,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Administrador',
             fields=[
+<<<<<<< HEAD
                 ('nombre_usuario', models.CharField(primary_key=True, max_length=12, serialize=False, default='-')),
+=======
+                ('nombre_usuario', models.CharField(primary_key=True, serialize=False, max_length=12, default='-')),
+>>>>>>> 257318312f812d903fc2bead76200858d775501c
                 ('contrasena', models.CharField(max_length=15, default='-')),
                 ('correo', models.EmailField(max_length=254, default='-')),
                 ('tipo', models.IntegerField(default=1)),
@@ -23,9 +27,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CambioInventario',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('tipo', models.IntegerField(default=1)),
                 ('cantidad', models.DecimalField(max_digits=6, decimal_places=2, default=0.0)),
+=======
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('tipo', models.IntegerField(default=1)),
+                ('cantidad', models.DecimalField(decimal_places=2, default=0.0, max_digits=6)),
+>>>>>>> 257318312f812d903fc2bead76200858d775501c
                 ('fecha', models.DateField(auto_now=True)),
                 ('estado', models.IntegerField(default=1)),
             ],
@@ -33,7 +43,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Categoria',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+=======
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+>>>>>>> 257318312f812d903fc2bead76200858d775501c
                 ('nombre_categoria', models.CharField(max_length=30, default='-')),
                 ('unidad', models.CharField(max_length=20, default='-')),
                 ('estado', models.IntegerField(default=1)),
@@ -42,6 +56,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CentroDeAcopio',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('nombre_upc', models.CharField(max_length=30, default='-')),
                 ('direccion', models.CharField(max_length=100, default='-')),
@@ -54,13 +69,32 @@ class Migration(migrations.Migration):
                 ('almacenamiento_ropa', models.DecimalField(max_digits=8, decimal_places=2, default=0.0)),
                 ('almacenamiento_comida', models.DecimalField(max_digits=8, decimal_places=2, default=0.0)),
                 ('usuarioAdmin', models.ForeignKey(to_field='nombreUsuario', to='helpmapp.Administrador', default='-')),
+=======
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('nombre_upc', models.CharField(max_length=30, default='-')),
+                ('direccion', models.CharField(max_length=100, default='-')),
+                ('latitud', models.DecimalField(decimal_places=10, default=0.0, max_digits=15)),
+                ('longitud', models.DecimalField(decimal_places=10, default=0.0, max_digits=15)),
+                ('provincia', models.CharField(max_length=30, default='-')),
+                ('canton', models.CharField(max_length=30, default='-')),
+                ('estado', models.IntegerField(default=1)),
+                ('almacenamiento_agua', models.DecimalField(decimal_places=2, default=0.0, max_digits=8)),
+                ('almacenamiento_ropa', models.DecimalField(decimal_places=2, default=0.0, max_digits=8)),
+                ('almacenamiento_comida', models.DecimalField(decimal_places=2, default=0.0, max_digits=8)),
+                ('usuario_admin', models.ForeignKey(to='helpmapp.Administrador', default='-')),
+>>>>>>> 257318312f812d903fc2bead76200858d775501c
             ],
         ),
         migrations.CreateModel(
             name='ExistenciaInventario',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('cantidad', models.DecimalField(max_digits=6, decimal_places=2, default=0.0)),
+=======
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('cantidad', models.DecimalField(decimal_places=2, default=0.0, max_digits=6)),
+>>>>>>> 257318312f812d903fc2bead76200858d775501c
                 ('id_centro', models.ForeignKey(to='helpmapp.CentroDeAcopio', default=0)),
             ],
         ),
@@ -69,7 +103,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('nombre', models.CharField(max_length=100, default='-')),
                 ('apellido', models.CharField(max_length=100, default='-')),
+<<<<<<< HEAD
                 ('nombre_usuario', models.CharField(primary_key=True, max_length=18, serialize=False, default='-')),
+=======
+                ('nombre_usuario', models.CharField(primary_key=True, serialize=False, max_length=18, default='-')),
+>>>>>>> 257318312f812d903fc2bead76200858d775501c
                 ('contrasena', models.CharField(max_length=15, default='-')),
                 ('sexo', models.CharField(choices=[('M', 'M'), ('F', 'F')], max_length=5, default='M')),
                 ('cedula', models.CharField(max_length=10, default='-')),
@@ -83,7 +121,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Producto',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+=======
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+>>>>>>> 257318312f812d903fc2bead76200858d775501c
                 ('nombre_producto', models.CharField(max_length=30, default='-')),
                 ('estado', models.IntegerField(default=1)),
                 ('id_categoria', models.ForeignKey(to='helpmapp.Categoria', default=0)),
