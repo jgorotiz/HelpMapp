@@ -16,3 +16,6 @@ class LoginForm(forms.Form):
 class RecoveryForm(forms.Form):
     correo = forms.CharField(label='Correo Electrónico', max_length=100,required=True)
     
+class ChangePassForm(forms.Form):
+	password = forms.CharField(widget=forms.PasswordInput,label='Contrasena', max_length=16)
+	confirm_password = forms.CharField(widget=forms.PasswordInput,label='Confirmar contrasena', max_length=16)
