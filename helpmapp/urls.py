@@ -7,7 +7,7 @@ urlpatterns = [
         #url(r'^lol$', views.get_name),
         #url(r'^thanks/', views.show_name),
         url(r'^donar/', views.listar_centroAcopio,name="donar"),
-        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
+#        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
         url(r'^equipo/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
         url(r'^login/', views.mostrar_login,name="mostrar_login"),
         url(r'^recovery/', views.recovery,name="recovery"),
@@ -55,10 +55,13 @@ urlpatterns = [
 
         #CRUD HelpMapper
         url(r'^voluntario/$', views.registrar_helpmapper,name='registrar_helpmapper'),
-        url(r'^voluntario/edit/(?P<nombreUsuario>\w+)/$', views.actualizar_contrasena,name='actualizar_contrasena'),
+<<<<<<< HEAD
+        url(r'^voluntario/change_pass/$', views.actualizar_contrasena,name='actualizar_contrasena'),
         url(r'^voluntario/delete/(?P<nombreUsuario>\w+)/$', views.eliminar_helpmapper,name='eliminar_helpmapper'),
-
-
+=======
+        url(r'^voluntario/edit/(?P<nombre_usuario>\w+)/$', views.actualizar_contrasena,name='actualizar_contrasena'),
+        url(r'^voluntario/delete/(?P<nombre_usuario>\w+)/$', views.eliminar_helpmapper,name='eliminar_helpmapper'),
+>>>>>>> be68ce13d6be4c4577a1ddba81a0db350704296d
 
         #Datos para graficos D3JS
         url(r'^datos/$', views.obtener_datos,name='obtener_datos'),
