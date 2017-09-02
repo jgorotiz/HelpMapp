@@ -267,12 +267,20 @@ def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
 def mostrar_crearProducto(request):
-    print("hola2")
-    if(request.session.get('member_id',None) != None):
-        return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
+    if request.method == 'POST':
+        print ('si es post')
+        form = ProductoForm(request.POST)
+        if form.is_valid():
+            print ('si es valid')
+            producto = form.save(commit=False)
+            producto.save()
+            return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
+        else:
+            print ('no es valido')
     else:
-        return HttpResponseRedirect('/loginAdmin/')
-
+        print ('no es post')
+        form = ProductoForm()
+    return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
 
 #PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
