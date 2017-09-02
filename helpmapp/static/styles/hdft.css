@@ -53,4 +53,24 @@ body {
 	margin-right: 10px;
 }
 
+.dropdown-toogle{
+	background-color: #212a85; 
+}
 
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+	background-color: #212a85;
+	opacity: 0.8;
+}
+
+.dropdown-menu>li>a{
+    color: #ece242;
+}
+
+.dropdown-menu>li>a:hover{
+   background-color: transparent;
+   color: white;
+}
+
+.dropdown-menu{
+	background-color: #212a85;
+}

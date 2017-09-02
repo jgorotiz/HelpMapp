@@ -330,10 +330,10 @@ def mostrar_inventarioRopa(request):
 
 
 def profile(request):
-    return render(request,'helpmapp/cliente/login.html')
+    return render(request,'helpmapp/cliente/helpmapper/profile.html')
 
-def edit_account(request):
-    return render(request,'helpmapp/cliente/login.html')
+def logout(request):
+    return redirect(request,'helpmapp/cliente/not_logged/index.html')
 
 
 

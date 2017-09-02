@@ -47,7 +47,7 @@ urlpatterns = [
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
 
         url(r'^profile/', views.profile,name="profile"),
-        url(r'^account/', views.edit_account,name="edit_account"),
+        url(r'^logout/', views.logout,name="logout"),
         
         url(r'^cerrarSesion/', views.cerrarSesion,name="cerrarSesion"),
 
