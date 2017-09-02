@@ -29,7 +29,29 @@ def mostrar_sobreNosotros(request):
     return render(request,'helpmapp/cliente/not_logged/aboutus.html')
 
 def mostrar_login(request):
-    return render(request,'helpmapp/cliente/not_logged/login.html')
+    if (not "member_id" in request.session.keys()):
+        if request.method == 'POST':
+            form= LoginForm(request.POST)
+            if form.is_valid():
+                print("dsfsd")
+                try:
+                    m = HelpMapper.objects.get(nombre_usuario=request.POST['username'])
+                    print(m.contrasena== request.POST['password'])
+                    if m.contrasena == request.POST['password']:
+                        request.session['member_id'] = m.nombre_usuario
+                        print(request.session['member_id'])
+                        return HttpResponseRedirect('/home/')
+                    else:
+                        messages.error(request, "Credenciales incorrectas")
+                except: 
+                    messages.error(request,"Usuario no registrado")
+        else:
+            form= LoginForm()
+        return render(request,'helpmapp/cliente/not_logged/login.html',{'form': form})
+    else:
+        print(request.session['member_id'])
+        usuario = HelpMapper.objects.get(nombre_usuario=request.session['member_id'])
+        return render(request,'helpmapp/cliente/helpmapper/index.html',{'usuario': usuario})
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -420,7 +442,5 @@ def obtener_datos(request):
    
 
 
-
-
-
+ 
 
