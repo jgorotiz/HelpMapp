@@ -271,12 +271,12 @@ def mostrar_verCentro(request):
 def mostrar_crearProducto(request):
     if request.method == 'POST':
         print ('si es post')
-        form = ProductoForm(request.POST)
+        form = ProductoForm(request.POST)        
         if form.is_valid():
             print ('si es valid')
             producto = form.save(commit=False)
             producto.save()
-            return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
+            return render(request, 'helpmapp/Administrador/superAdmin/index.html', {'form': form})
         else:
             print ('no es valido')
     else:
@@ -417,7 +417,7 @@ def actualizar_contrasena(request):
                     return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Contrasenas distintas', 'message':'Error: Las contrasenas ingresadas no coinciden.'})                    
 
             except Exception as e:
-                return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Correo Inválido', 'message':'El correo ingresado es incorrecto.'})
+                return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Error', 'message':'Error: No se modifico la contrasena correctamente.'})
                 pass
     return render(request, 'helpmapp/cliente/helpmapper/index.html', {'form':form})
 
