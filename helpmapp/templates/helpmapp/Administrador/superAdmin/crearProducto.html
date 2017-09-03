@@ -14,7 +14,7 @@
        <div class="container col-sm-9 col-md-9 ">
         <h3>Crear Producto</h3>
            
-  <form>
+  <form method = 'Post'>
     {% csrf_token %}
     {{ form.errors }}
     {{ form.non_field_errors }}
