@@ -448,7 +448,56 @@ def obtener_datos(request):
     response_data["cantidad_ropa"]=l
     response_data["max_ropa"]=maxropa
 
-    
+    l2=[]
+    comida=Producto.objects.filter(id_categoria=1) #filtro todos los productos que sean comida
+    maxcomida=0
+    for c in comida:
+        productos=ExistenciaInventario.objects.filter(id_producto=c.id) #filtro todos los inventariados por cada producto
+        cantidad=0
+        for p in productos:
+            cantidad+=float(p.cantidad)
+        #c=prendas.cantidad.sum()
+        if(cantidad>maxcomida):
+            maxcomida=cantidad
+        d={}
+        d["dept"]=c.nombre_producto
+        d["age"]=cantidad
+        l2.append(d)
+    response_data["cantidad_comida"]=l2
+    response_data["max_comida"]=maxcomida
+
+    l3=[]
+    agua=Producto.objects.get(nombre_producto="agua")
+    centros=CentroDeAcopio.objects.all()
+    d={}
+    for c in centros:
+        canton=c.canton
+        if(canton in list(d.keys())):
+            try:
+                existencia=ExistenciaInventario.objects.get(id_centro=c.id,id_producto=agua.id)
+                d[canton]+=float(existencia.cantidad)
+            except ExistenciaInventario.DoesNotExist:
+                pass
+        else:
+            try:
+                existencia=ExistenciaInventario.objects.get(id_centro=c.id,id_producto=agua.id)
+                d[canton]=float(existencia.cantidad)
+            except ExistenciaInventario.DoesNotExist:
+                pass
+    max=0
+    for k,v in d.items():
+        temp={}
+        temp["dept"]=k
+        temp["age"]=v
+        if(v>max):
+            max=v
+        l3.append(temp)
+    temp={}
+    temp["dept"]="canton-prueba"
+    temp["age"]=300
+    l3.append(temp)
+    response_data["agua_canton"]=l3
+    response_data["max_agua"]=max
     # comida=Producto.objects.filter(id_categoria=1)
     # hoy=datetime.date.today()
     # fecha=hoy-datetime.timedelta(days=7)

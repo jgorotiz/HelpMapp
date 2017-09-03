@@ -1,7 +1,15 @@
 .chart rect {
     fill: steelblue;
   }
+.chart2 rect {
+    fill: steelblue;
+    
+  }
 
+.chart3 rect {
+    fill: steelblue;
+    
+  }
   .axis path,
   .axis line {
     fill: none;
@@ -17,7 +25,17 @@
     fill: green;
     cursor: pointer;
   }
+
+
+.chart2 .current {
+    fill: red;
+    cursor: pointer;
+  }
 .chart-container{
       margin-bottom: 10%;
-      margin-left: 4em;
+      margin-left: 5em;
 }
+.chart3 .current {
+    fill: green;
+    cursor: pointer;
+  }
