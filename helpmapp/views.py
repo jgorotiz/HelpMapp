@@ -22,14 +22,14 @@ def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
     return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros})
 
-def mostrar_voluntario(request):
-    return render(request,'helpmapp/cliente/not_logged/voluntario.html')
+
 
 def mostrar_sobreNosotros(request):
     return render(request,'helpmapp/cliente/not_logged/aboutus.html')
 
 def mostrar_login(request):
     if (not "member_id" in request.session.keys()):
+        print("request.session['member_id']")
         if request.method == 'POST':
             form= LoginForm(request.POST)
             if form.is_valid():
@@ -44,8 +44,11 @@ def mostrar_login(request):
                         messages.error(request, "Credenciales incorrectas")
                 except: 
                     messages.error(request,"Usuario no registrado")
+            else:
+                form= LoginForm()
         else:
             form= LoginForm()
+            print(form)
         return render(request,'helpmapp/cliente/not_logged/login.html',{'form': form})
     else:
         print(request.session['member_id'])
@@ -110,26 +113,26 @@ def listar_centroAcopioHM(request):
 
 #estadistica Grafico pra cliente
 def mostrar_GraficoEstadistico(request):
-    comida=Producto.objects.filter(id_categoria=1) #id de comida
-    kg=0
-    for c in comida:
-        kg+=c.cantidad
-    ropas=Producto.objects.filter(id_categoria=2) # id de ropa
-    ropa=0
-    for r in ropas:
-        ropa+=r.cantidad
-    agua=Producto.objects.filter(id_categoria=3) #id de agua
-    l=0
-    for a in agua:
-        l+=a.cantidad
-    lista2=[]
-    lista2.append(float(kg))
-    lista2.append(float(ropa))
-    lista2.append(float(l))
-    print (lista2)
-    #lista=json.dumps(lista2)
-    lista=lista2
-    return render(request,'helpmapp/cliente/helpmapper/statistics.html',{'lista':lista})
+    # comida=Producto.objects.filter(id_categoria=1) #id de comida
+    # kg=0
+    # for c in comida:
+    #     kg+=c.cantidad
+    # ropas=Producto.objects.filter(id_categoria=2) # id de ropa
+    # ropa=0
+    # for r in ropas:
+    #     ropa+=r.cantidad
+    # agua=Producto.objects.filter(id_categoria=3) #id de agua
+    # l=0
+    # for a in agua:
+    #     l+=a.cantidad
+    # lista2=[]
+    # lista2.append(float(kg))
+    # lista2.append(float(ropa))
+    # lista2.append(float(l))
+    # print (lista2)
+    # #lista=json.dumps(lista2)
+    # lista=lista2
+    return render(request,'helpmapp/cliente/helpmapper/statistics.html')
 
 def mostrar_tutoriales(request):
     return render(request,'helpmapp/cliente/helpmapper/tutoriales.html')
@@ -362,7 +365,12 @@ def profile(request):
     return render(request,'helpmapp/cliente/helpmapper/profile.html')
 
 def logout(request):
-    return redirect(request,'helpmapp/cliente/not_logged/index.html')
+    try:
+        del request.session['member_id']
+    except KeyError:
+        pass
+    
+    return HttpResponseRedirect('/login/')
 
 
 
@@ -430,14 +438,19 @@ def obtener_datos(request):
     response_data={}
     l=[] #diccionario que contendrá la cantidad de cada prenda de ropa
     ropa=Producto.objects.filter(id_categoria=2) #filtro todos los productos que sean ropa
+    print(ropa)
     maxropa=0
     for r in ropa:
         prendas=ExistenciaInventario.objects.filter(id_producto=r.id) #filtro todos los inventariados por cada prenda
-        c=prendas.cantidad.sum()
+        print(prendas)
+        c=0
+        for p in prendas:
+            c+=int(p.cantidad)
+        #c=prendas.cantidad.sum()
         if(c>maxropa):
             maxropa=c
         d={}
-        d["dept"]=r.nombre
+        d["dept"]=r.nombre_producto
         d["age"]=c
         l.append(d)
     response_data["cantidad_ropa"]=l

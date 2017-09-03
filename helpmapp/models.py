@@ -92,7 +92,7 @@ class CentroDeAcopio(models.Model):
 	almacenamiento_agua = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
 	almacenamiento_ropa = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
 	almacenamiento_comida = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	usuarioAdmin = models.ForeignKey(Administrador, to_field='nombreUsuario', default='-')
+	usuario_admin = models.ForeignKey(Administrador, to_field='nombre_usuario', default='-')
 
 	def save(self,*args, **kwargs):
 		super(CentroDeAcopio,self).save(*args, **kwargs)
@@ -108,7 +108,7 @@ class ExistenciaInventario(models.Model):
 		super(ExistenciaInventario,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)+"centro: "+str(self.id_centro)
 
 class CambioInventario(models.Model):
 	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
