@@ -224,7 +224,7 @@ def mostrar_loginAdmin(request):
         if (request.session['tipo']==0): #es super admin
             return render(request,'helpmapp/Administrador/superAdmin/index.html')
         else:#es admin de centro de acopio
-            upc = CentroDeAcopio.objects.get(id_admin=request.session['member_id'])
+            upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
             return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 
 
@@ -288,40 +288,33 @@ def mostrar_crearProducto(request):
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         print(request.session["member_id"])
-        upc = CentroDeAcopio.objects.get(id_admin=request.session['member_id'])
+        upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
         return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
 
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
-    # if('member_id' in request.session.keys()):
-    #     m = Administrador.objects.get(nombre_usuario=request.session["member_id"])
-    #     if (m.tipo==1): #si es administrador de centro
-    #         if(request.method=="POST"):
-    #             form = CapacidadesForm(request.POST)
-    #             if form.is_valid():
-    #                 centro=CentroAcopio.objects.get(id=m.idCentro)
-    #                 data = form.cleaned_data
-    #                 cagua=data["maxagua"]
-    #                 cropa=data["maxropa"]
-    #                 ccomida=data["maxcom"]
-    #                 centro.capacidad_agua=cagua
-    #                 centro.capacidad_ropa=cropa
-    #                 centro.capacidad_comida=ccomida
-    #                 centro.save()
-            
-    #                 return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
-    #             else:
-    #                 print ('no es valido')
+    if request.method=='GET':
+        form = configurarCapacidadesForm()
+        return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
 
-    #         else:
-    #             print ('no es post')
-    #             form = CapacidadesForm()
-    #             return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
-    #     return HttpResponseRedirect('/administradorGeneral/')
-    # return HttpResponseRedirect('/loginAdmin/')
-    return render(request,"helpmapp/Administrador/adminCentro/configuracionCapacidades.html")
+    elif request.method=='POST':
+        form = configurarCapacidadesForm(request.POST)
+        if form.is_valid():
+            print("is valid")
+            data = form.cleaned_data
+            ca = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) #data['correo']
+            ca.almacenamiento_agua = data['almacenamiento_agua']
+            ca.almacenamiento_ropa = data['almacenamiento_ropa']
+            ca.almacenamiento_comida = data['almacenamiento_comida']
+            ca.save()
+            print(ca)
+            upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
+            return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
+    form = configurarCapacidadesForm()      
+    return render(request, 'helpmapp/Administrador/adminCentro/index.html', {'form':form})
+
 
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
@@ -472,26 +465,4 @@ def obtener_datos(request):
    
 
 
-
-#configurar Capacidades de un centro
-def configurarCentro(request):
-    if request.method=='GET':
-        form = configurarCapacidadesForm()
-        return render(request, 'helpmapp/Administrdor/adminCentro/configuracionCapacidades.html', {'form': form})
-
-    elif request.method=='POST':
-        form = configurarCapacidadesForm(request.POST)
-        if form.is_valid():
-            print("is valid")
-            data = form.cleaned_data
-            ca = CentroDeAcopio.objects.get(idAdmin=request.session['member_id']) #data['correo']
-            ca.almacenamientoAgua = data['almacenamientoAgua']
-            ca.almacenamientoRopa = data['almacenamientoRopa']
-            ca.almacenamientoComida = data['almacenamientoComida']
-            ca.save()
-            return render(request, 'helpmapp/Administrdor/adminCentro/configuracionCapacidades.html')
-            
-    return render(request, 'helpmapp/cliente/not_logged/message.html', {'form':form})
-
- 
 
