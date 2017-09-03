@@ -12,6 +12,7 @@ import random, string
 import json
 from .forms import *
 from django.db import connection
+from .models import *
 
 #Controllers for everyone
 def mostrar_indice(request):
@@ -354,8 +355,9 @@ def mostrar_inventarioRopa(request):
 
 
 
-def profile(request):
-    return render(request,'helpmapp/cliente/helpmapper/profile.html')
+def profile(request,nombre_usuario):
+    helpmapper = HelpMapper.objects.get(nombre_usuario = nombre_usuario)
+    return render(request,'helpmapp/cliente/helpmapper/profile.html', {'hm':helpmapper})
 
 def logout(request):
     try:
@@ -363,10 +365,11 @@ def logout(request):
     except KeyError:
         pass
     
-    return HttpResponseRedirect('/login/')
+    return HttpResponseRedirect('/')
 
-
-
+def change_password(request,nombre_usuario):
+    helpmapper = HelpMapper.objects.get(nombre_usuario = nombre_usuario)
+    return render(request,'helpmapp/cliente/helpmapper/change_password.html', {'hm':helpmapper})
 
 
 def mostrar_recuperarCuenta(request):
