@@ -31,7 +31,7 @@ urlpatterns = [
         url(r'^administradorGeneral/configuracionCuenta/$', views.mostrar_configCuenta,name="mostrar_configCuenta"),
         url(r'^administradorGeneral/crearAdmin/$', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
         url(r'^administradorGeneral/verCentro/$', views.mostrar_verCentro,name="mostrar_verCentro"),
-        
+        url(r'^administradorGeneral/crearProducto/$', views.mostrar_crearProducto,name="mostrar_crearProducto"),        
 
 
 
