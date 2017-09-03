@@ -2,8 +2,10 @@
 {% load staticfiles %}
     {% block title %}HelpMapp-Admin:Buscar centro{% endblock %}
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="css/verCentro-estilo.css">
-    <link rel="stylesheet" type="text/css" href="css/estiloBuscarCentro.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/verCentro-estilo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estiloBuscarCentro.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css"/>
+
 {% endblock %}
   {% block body %}
     <section class="col-sm-9 col-md-9">
@@ -91,7 +93,7 @@
      </section>
      {% endblock %}     
     {% block scripts %}
+    <script src="{% static 'js/listar_cda.js' %}"></script>
     <script src="{% static 'js/filtrar.js' %}"></script>
-    <script src="./js/func-tabla.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'js/func-tabla.js' %}"></script>
 {% endblock %}

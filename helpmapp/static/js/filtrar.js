@@ -1,5 +1,5 @@
 function capturar(){
-    $.getJSON("{% static 'data/provincias.json' %}", function(data) {
+    $.getJSON("{% static '../data/provincias.json' %}", function(data) {
     	let opcion = $('<option></option>');
         opcion.attr("value", "")
         opcion.text("Provincia");
@@ -19,7 +19,7 @@ function cargarCiudades(){
 	$('#province').click(function(){
         var valor = $("#province").val();
         $("#city").empty();
-        $.getJSON("{% static 'data/ciudades.json' %}", function(data) {
+        $.getJSON("{% static '../data/ciudades.json' %}", function(data) {
         	if(valor != ""){
 	        	let opcion = $('<option></option>');
 		        opcion.attr("value", "")
@@ -45,7 +45,7 @@ function cargarCentros(){
     $('#btn-submit').click(function(){
         var valor = $("#city").val();
         $("#tabla-upc").empty();
-        $.getJSON("./data/centros-acopio.json", function(data) {
+        $.getJSON("../data/centros-acopio.json", function(data) {
             if(valor != ""){
                 $.each(data["rows"], function(key,val) {
                     if (valor == val["ciudad"]){
