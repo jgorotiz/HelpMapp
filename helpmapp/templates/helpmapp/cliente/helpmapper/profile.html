@@ -2,8 +2,35 @@
 
 {% load staticfiles %}
 
+{% block css%}
+		<link href="{% static 'styles/profile.css' %}" rel="stylesheet">
+
+{% endblock %}
 {% block title %}helpMapp - Perfil{% endblock %}
 
 {% block body %}
+<div class="reserver"></div>
 
+
+<div class="container marketing helpMappers">
+				<!-- Three columns of text below the carousel -->
+	<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<img class="img-circle" src="{% static 'img/user.jpg' %}" alt="user" width="200" height="200">
+			<h2 class="text-primary">{{hm.nombre}} {{hm.apellido}}</h2>
+			<p class="lead">{{hm.habilidad}}</p>
+			<h4>	Tipo de Sangre &middot; {{hm.tipo_sangre}} </h4>
+			<h4> 	Cédula &middot; {{hm.cedula}} <br></h4>
+			<h4>	Teléfono &middot; {{hm.telefono}}<br></h4>
+				<a  href="https://mail.espol.edu.ec/" >{{hm.correo}}<br></a>
+<br>
+			<button type="submit" id="eliminar" value="Eliminar Cuenta" >Eliminar Cuenta</button>				
+
+
+		</div><!-- /.col-lg-6 -->
+		<div class="col-lg-4"></div>
+</div>
+</div>
 {% endblock %}
+

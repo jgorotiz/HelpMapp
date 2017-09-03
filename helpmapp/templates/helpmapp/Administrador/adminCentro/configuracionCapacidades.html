@@ -11,26 +11,26 @@
      
        <div class="container col-sm-9 col-md-9 ">
         <h3>Configuración de centro</h3>
-        <form class="form-horizontal" action="{% url 'helpmapp.views.mostrar_login' %}">
+        <form method="Post" class="form-horizontal" action="{% url 'helpmapp.views.mostrar_configuracionCapacidades' %}">
         {% csrf_token %}
           <div class="form-group">
             <label class="control-label col-sm-4" for="maxagua">Capacidad máxima de agua:</label>
             <div class="col-sm-6">
-              {{ form.almacenamientoAgua }}
+              {{ form.almacenamiento_agua }}
 
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-4" for="maxcom"> Capacidad máxima de comida:</label>
             <div class="col-sm-6">          
-              {{ form.almacenamientoRopa }}
+              {{ form.almacenamiento_ropa }}
             </div>
           </div>
 
            <div class="form-group">
             <label class="control-label col-sm-4" for="maxropa">Capacidad máxima de ropa:</label>
             <div class="col-sm-6">          
-              {{ form.almacenamientoComida }}
+              {{ form.almacenamiento_comida }}
 
             </div>
           </div>

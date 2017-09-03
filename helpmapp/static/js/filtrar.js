@@ -1,5 +1,5 @@
 function capturar(){
-    $.getJSON("/helpMapp/data/provincias.json", function(data) {
+    $.getJSON("{% static 'data/provincias.json' %}", function(data) {
     	let opcion = $('<option></option>');
         opcion.attr("value", "")
         opcion.text("Provincia");
@@ -19,7 +19,7 @@ function cargarCiudades(){
 	$('#province').click(function(){
         var valor = $("#province").val();
         $("#city").empty();
-        $.getJSON("/helpMapp/data/ciudades.json", function(data) {
+        $.getJSON("{% static 'data/ciudades.json' %}", function(data) {
         	if(valor != ""){
 	        	let opcion = $('<option></option>');
 		        opcion.attr("value", "")
