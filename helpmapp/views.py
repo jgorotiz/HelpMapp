@@ -365,7 +365,7 @@ def logout(request):
     except KeyError:
         pass
     
-    return HttpResponseRedirect('/login/')
+    return HttpResponseRedirect('/')
 
 def change_password(request,nombre_usuario):
     helpmapper = HelpMapper.objects.get(nombre_usuario = nombre_usuario)
