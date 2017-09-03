@@ -288,7 +288,7 @@ def mostrar_crearProducto(request):
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         print(request.session["member_id"])
-        upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
+        upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
         return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
 
