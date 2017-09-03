@@ -7,7 +7,7 @@ urlpatterns = [
         #url(r'^lol$', views.get_name),
         #url(r'^thanks/', views.show_name),
         url(r'^donar/', views.listar_centroAcopio,name="donar"),
-        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
+#        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
         url(r'^equipo/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
         url(r'^login/', views.mostrar_login,name="mostrar_login"),
         url(r'^recovery/', views.recovery,name="recovery"),
@@ -32,7 +32,7 @@ urlpatterns = [
         url(r'^administradorGeneral/configuracionCuenta/$', views.mostrar_configCuenta,name="mostrar_configCuenta"),
         url(r'^administradorGeneral/crearAdmin/$', views.mostrar_crearAdministrador,name="mostrar_crearAdministrador"),
         url(r'^administradorGeneral/verCentro/$', views.mostrar_verCentro,name="mostrar_verCentro"),
-        
+        url(r'^administradorGeneral/crearProducto/$', views.mostrar_crearProducto,name="mostrar_crearProducto"),        
 
 
 
@@ -56,10 +56,8 @@ urlpatterns = [
 
         #CRUD HelpMapper
         url(r'^voluntario/$', views.registrar_helpmapper,name='registrar_helpmapper'),
-        url(r'^voluntario/edit/(?P<nombreUsuario>\w+)/$', views.actualizar_contrasena,name='actualizar_contrasena'),
+        url(r'^voluntario/change_pass/$', views.actualizar_contrasena,name='actualizar_contrasena'),
         url(r'^voluntario/delete/(?P<nombreUsuario>\w+)/$', views.eliminar_helpmapper,name='eliminar_helpmapper'),
-
-
 
         #Datos para graficos D3JS
         url(r'^datos/$', views.obtener_datos,name='obtener_datos'),

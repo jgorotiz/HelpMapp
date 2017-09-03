@@ -1,0 +1,1 @@
+[{"model": "helpmapp.producto", "pk": 1, "fields": {"estado": 1, "id_categoria": 2, "nombre_producto": "Falda"}}, {"model": "helpmapp.producto", "pk": 2, "fields": {"estado": 1, "id_categoria": 2, "nombre_producto": "medias ni\u00f1a"}}, {"model": "helpmapp.producto", "pk": 3, "fields": {"estado": 1, "id_categoria": 2, "nombre_producto": "pantalon jean hombre"}}]

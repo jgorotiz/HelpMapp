@@ -23,18 +23,17 @@ def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
     return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros})
 
-def mostrar_voluntario(request):
-    return render(request,'helpmapp/cliente/not_logged/voluntario.html')
+
 
 def mostrar_sobreNosotros(request):
     return render(request,'helpmapp/cliente/not_logged/aboutus.html')
 
 def mostrar_login(request):
     if (not "member_id" in request.session.keys()):
+        print("request.session['member_id']")
         if request.method == 'POST':
             form= LoginForm(request.POST)
             if form.is_valid():
-                print("dsfsd")
                 try:
                     m = HelpMapper.objects.get(nombre_usuario=request.POST['username'])
                     print(m.contrasena== request.POST['password'])
@@ -46,8 +45,11 @@ def mostrar_login(request):
                         messages.error(request, "Credenciales incorrectas")
                 except: 
                     messages.error(request,"Usuario no registrado")
+            else:
+                form= LoginForm()
         else:
             form= LoginForm()
+            print(form)
         return render(request,'helpmapp/cliente/not_logged/login.html',{'form': form})
     else:
         print(request.session['member_id'])
@@ -112,26 +114,26 @@ def listar_centroAcopioHM(request):
 
 #estadistica Grafico pra cliente
 def mostrar_GraficoEstadistico(request):
-    comida=Producto.objects.filter(idCategoria=1) #id de comida
-    kg=0
-    for c in comida:
-        kg+=c.cantidad
-    ropas=Producto.objects.filter(idCategoria=2) # id de ropa
-    ropa=0
-    for r in ropas:
-        ropa+=r.cantidad
-    agua=Producto.objects.filter(idCategoria=3) #id de agua
-    l=0
-    for a in agua:
-        l+=a.cantidad
-    lista2=[]
-    lista2.append(float(kg))
-    lista2.append(float(ropa))
-    lista2.append(float(l))
-    print (lista2)
-    #lista=json.dumps(lista2)
-    lista=lista2
-    return render(request,'helpmapp/cliente/helpmapper/statistics.html',{'lista':lista})
+    # comida=Producto.objects.filter(id_categoria=1) #id de comida
+    # kg=0
+    # for c in comida:
+    #     kg+=c.cantidad
+    # ropas=Producto.objects.filter(id_categoria=2) # id de ropa
+    # ropa=0
+    # for r in ropas:
+    #     ropa+=r.cantidad
+    # agua=Producto.objects.filter(id_categoria=3) #id de agua
+    # l=0
+    # for a in agua:
+    #     l+=a.cantidad
+    # lista2=[]
+    # lista2.append(float(kg))
+    # lista2.append(float(ropa))
+    # lista2.append(float(l))
+    # print (lista2)
+    # #lista=json.dumps(lista2)
+    # lista=lista2
+    return render(request,'helpmapp/cliente/helpmapper/statistics.html')
 
 def mostrar_tutoriales(request):
     return render(request,'helpmapp/cliente/helpmapper/tutoriales.html')
@@ -203,10 +205,10 @@ def mostrar_loginAdmin(request):
             form= LoginForm(request.POST)
             if form.is_valid():
                 try:
-                    m = Administrador.objects.get(nombreUsuario=request.POST['username'])
+                    m = Administrador.objects.get(nombre_usuario=request.POST['username'])
                     print(m.contrasena== request.POST['password'])
                     if m.contrasena == request.POST['password']:
-                        request.session['member_id'] = m.nombreUsuario
+                        request.session['member_id'] = m.nombre_usuario
                         request.session['tipo'] = m.tipo
                         if (m.tipo==0): #es super admin
                             return HttpResponseRedirect('/administradorGeneral/')
@@ -223,7 +225,7 @@ def mostrar_loginAdmin(request):
         if (request.session['tipo']==0): #es super admin
             return render(request,'helpmapp/Administrador/superAdmin/index.html')
         else:#es admin de centro de acopio
-            upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+            upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
             return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 
 
@@ -268,51 +270,52 @@ def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 
 def mostrar_crearProducto(request):
-    print("hola2")
-    if(request.session.get('member_id',None) != None):
-        return render(request,'helpmapp/Administrador/superAdmin/crearProducto.html')
+    if request.method == 'POST':
+        print ('si es post')
+        form = ProductoForm(request.POST)        
+        if form.is_valid():
+            print ('si es valid')
+            producto = form.save(commit=False)
+            producto.save()
+            return render(request, 'helpmapp/Administrador/superAdmin/index.html', {'form': form})
+        else:
+            print ('no es valido')
     else:
-        return HttpResponseRedirect('/loginAdmin/')
-
+        print ('no es post')
+        form = ProductoForm()
+    return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
 
 #PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
         print(request.session["member_id"])
-        upc = CentroDeAcopio.objects.get(idAdmin=request.session['member_id'])
+        upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
         return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
 #     if('member_id' in list(request.session.keys())):
 
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
-    # if('member_id' in request.session.keys()):
-    #     m = Administrador.objects.get(nombreUsuario=request.session["member_id"])
-    #     if (m.tipo==1): #si es administrador de centro
-    #         if(request.method=="POST"):
-    #             form = CapacidadesForm(request.POST)
-    #             if form.is_valid():
-    #                 centro=CentroAcopio.objects.get(id=m.idCentro)
-    #                 data = form.cleaned_data
-    #                 cagua=data["maxagua"]
-    #                 cropa=data["maxropa"]
-    #                 ccomida=data["maxcom"]
-    #                 centro.capacidad_agua=cagua
-    #                 centro.capacidad_ropa=cropa
-    #                 centro.capacidad_comida=ccomida
-    #                 centro.save()
-            
-    #                 return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
-    #             else:
-    #                 print ('no es valido')
+    if request.method=='GET':
+        form = configurarCapacidadesForm()
+        return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
 
-    #         else:
-    #             print ('no es post')
-    #             form = CapacidadesForm()
-    #             return render(request,'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
-    #     return HttpResponseRedirect('/administradorGeneral/')
-    # return HttpResponseRedirect('/loginAdmin/')
-    return render(request,"helpmapp/Administrador/adminCentro/configuracionCapacidades.html")
+    elif request.method=='POST':
+        form = configurarCapacidadesForm(request.POST)
+        if form.is_valid():
+            print("is valid")
+            data = form.cleaned_data
+            ca = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) #data['correo']
+            ca.almacenamiento_agua = data['almacenamiento_agua']
+            ca.almacenamiento_ropa = data['almacenamiento_ropa']
+            ca.almacenamiento_comida = data['almacenamiento_comida']
+            ca.save()
+            print(ca)
+            upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
+            return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
+    form = configurarCapacidadesForm()      
+    return render(request, 'helpmapp/Administrador/adminCentro/index.html', {'form':form})
+
 
 def mostrar_configuracionCuenta(request):
     return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
@@ -324,15 +327,15 @@ def mostrar_inventarioAgua(request):
 def mostrar_inventarioComida(request):
     if(request.session["member_id"]):
         if(request.session["tipo"]==1):
-            comida=Producto.objects.filter(idCategoria=1) #id de comida
+            comida=Producto.objects.filter(id_categoria=1) #id de comida
             kg=0
             for c in comida:
                 kg+=c.cantidad
-            ropas=Producto.objects.filter(idCategoria=2) # id de ropa
+            ropas=Producto.objects.filter(id_categoria=2) # id de ropa
             ropa=0
             for r in ropas:
                 ropa+=r.cantidad
-            agua=Producto.objects.filter(idCategoria=3) #id de agua
+            agua=Producto.objects.filter(id_categoria=3) #id de agua
             l=0
             for a in agua:
                 l+=a.cantidad
@@ -357,7 +360,12 @@ def profile(request,nombre_usuario):
     return render(request,'helpmapp/cliente/helpmapper/profile.html', {'hm':helpmapper})
 
 def logout(request):
-    return redirect(request,'helpmapp/cliente/not_logged/index.html')
+    try:
+        del request.session['member_id']
+    except KeyError:
+        pass
+    
+    return HttpResponseRedirect('/login/')
 
 def change_password(request,nombre_usuario):
     helpmapper = HelpMapper.objects.get(nombre_usuario = nombre_usuario)
@@ -385,58 +393,73 @@ def registrar_helpmapper(request):
             print ('si es valid')
             helpmapper = form.save(commit=False)
             helpmapper.save()
-            return render(request, 'helpmapp/cliente/donar.html', {'form': form})
+            return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
         else:
             print ('no es valido')
     else:
         print ('no es post')
         form = HelpMapperForm()
-    return render(request, 'helpmapp/cliente/donar.html', {'form': form})
+    return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
 
-def actualizar_contrasena(request, nombreUsuario):
-    helpmapper = get_object_or_404(HelpMapper, pk=nombreUsuario)
-    if request.method == "POST":
-        form = HelpMapperForm(request.POST,instance=helpmapper)
+
+def actualizar_contrasena(request):
+    if request.method=='POST':
+        form = ChangePassForm(request.POST)
+        print(request.POST)
         if form.is_valid():
-            helpmapper = form.save(commit=False)
-            helpmapper.save()
-            return redirect('helpmapp/cliente/index.html')
-    else:
-            form = HelpMapperForm(instance=helpmapper)
-    return render(request, 'helpmapp/cliente/index.html', {'form': form})
+            print("is valid")
+            data = form.cleaned_data
+            try:
+                hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
+                if data['contrasena'] == data['confirm_password']:
+                    new_contrasena = data['contrasena']
+                    hm.contrasena = new_contrasena
+                    hm.save()
+                    return render(request, 'helpmapp/cliente/helpmapper/profile.html', {'title': 'Contrasena modificada', 'message':'Contrasena modificada exitosamente.'} )
+                else:
+                    return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Contrasenas distintas', 'message':'Error: Las contrasenas ingresadas no coinciden.'})                    
 
-def eliminar_helpmapper(request, nombreUsuario):
-    
-    helpmapper  = get_object_or_404(HelpMapper, pk = nombreUsuario).delete()
+            except Exception as e:
+                return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Error', 'message':'Error: No se modifico la contrasena correctamente.'})
+                pass
+    return render(request, 'helpmapp/cliente/helpmapper/index.html', {'form':form})
 
+def eliminar_helpmapper(request):
+    hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
+    helpmapper  = get_object_or_404(HelpMapper, pk = hm.nombre_usuario).delete()
     return HttpResponseRedirect('/')
 
 def obtener_datos(request):
    
     response_data={}
     l=[] #diccionario que contendrá la cantidad de cada prenda de ropa
-    ropa=Producto.objects.filter(idCategoria=2) #filtro todos los productos que sean ropa
+    ropa=Producto.objects.filter(id_categoria=2) #filtro todos los productos que sean ropa
+    print(ropa)
     maxropa=0
     for r in ropa:
-        prendas=ExistenciaInventario.objects.filter(idProducto=r.id) #filtro todos los inventariados por cada prenda
-        c=prendas.cantidad.sum()
+        prendas=ExistenciaInventario.objects.filter(id_producto=r.id) #filtro todos los inventariados por cada prenda
+        print(prendas)
+        c=0
+        for p in prendas:
+            c+=int(p.cantidad)
+        #c=prendas.cantidad.sum()
         if(c>maxropa):
             maxropa=c
         d={}
-        d["dept"]=r.nombre
+        d["dept"]=r.nombre_producto
         d["age"]=c
         l.append(d)
     response_data["cantidad_ropa"]=l
     response_data["max_ropa"]=maxropa
 
     
-    comida=Producto.objects.filter(idCategoria=1)
-    hoy=datetime.date.today()
-    fecha=hoy-datetime.timedelta(days=7)
-    cursor=connection.cursor()
-    resultados=cursor.execute("SELECT fecha, SUM(IF(accion=\'enviar\',cantidad,0)) as \'enviar\' FROM CambioInventario,Producto WHERE CambioInventario.idProducto=Producto.idProducto and idCategoria=1 and fecha>="+fecha)
-    resultados=dictfetchall(cursor) #de la forma [{'fecha': jfahsdf,'enviar':239},{'fecha': jferwsdf,'enviar':230}]
-    response_data["comida_enviada"]=resultados
+    # comida=Producto.objects.filter(id_categoria=1)
+    # hoy=datetime.date.today()
+    # fecha=hoy-datetime.timedelta(days=7)
+    # cursor=connection.cursor()
+    # resultados=cursor.execute("SELECT fecha, SUM(IF(accion=\'enviar\',cantidad,0)) as \'enviar\' FROM CambioInventario,Producto WHERE CambioInventario.id_producto=Producto.id_producto and id_categoria=1 and fecha>="+fecha)
+    # resultados=dictfetchall(cursor) #de la forma [{'fecha': jfahsdf,'enviar':239},{'fecha': jferwsdf,'enviar':230}]
+    # response_data["comida_enviada"]=resultados
     return HttpResponse(
             json.dumps(response_data),
             content_type="application/json"
@@ -445,5 +468,4 @@ def obtener_datos(request):
    
 
 
- 
 

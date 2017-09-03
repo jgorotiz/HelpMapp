@@ -4,7 +4,7 @@ arreglar estructuras de páginas de super admin
 
 class HelpMapper(models.Model):
 	idHelpMapper=models.CharField(default="-", primary_key=True,max_length=16)
-	nombreUsuario = models.CharField(max_length=12)
+	nombre_usuario = models.ChsarField(max_length=12)
 	contrasena = models.CharField(max_length=15)
 	correo = models.EmailField(max_length=100)
 	estado = models.IntegerField(default=1)
@@ -32,35 +32,35 @@ class HabilidadHelpMapper(models.Model):
 		return self.idHabilidadHelpMapper
 
 class Categoria(models.Model):
-	idCategoria = models.CharField(default="-", primary_key=True,max_length=16)	
-	nombreCategoria = models.CharField(max_length=30)
+	id_categoria = models.CharField(default="-", primary_key=True,max_length=16)	
+	nombre_categoria = models.CharField(max_length=30)
 	unidad = models.CharField(max_length=20)
 
 	def save(self,*args, **kwargs):
 		super(Categoria,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.idCategoria
+		return self.id_categoria
 
 class Producto(models.Model):
-	idProducto = models.CharField(default="-", primary_key=True,max_length=16)	
-	nombreProducto = models.CharField(max_length=30)
+	id_producto = models.CharField(default="-", primary_key=True,max_length=16)	
+	nombre_producto = models.CharField(max_length=30)
 	cantidad = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	idCategoria = models.ForeignKey(Categoria, to_field='idCategoria', default="-")
+	id_categoria = models.ForeignKey(Categoria, to_field='id_categoria', default="-")
 	idCentro = models.ForeignKey(CentroDeAcopio, to_field='idCentro', default="-")
 
 	def save(self,*args, **kwargs):
 		super(Producto,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.idProducto
+		return self.id_producto
 
 
 class CambioInventario(models.Model):
 	idCambioInventario = models.CharField(default="-", primary_key=True,max_length=16)
 	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
-	idProducto = models.ForeignKey(Producto, to_field='idProducto', default="-")
+	id_producto = models.ForeignKey(Producto, to_field='id_producto', default="-")
 	fecha = models.DateField(default=datetime.date.today)
 
 	def save(self,*args, **kwargs):
@@ -70,8 +70,8 @@ class CambioInventario(models.Model):
 		return self.idCambioInventario
 
 class Administrador(models.Model):
-	idAdministrador = models.CharField(default="-", primary_key=True,max_length=16)
-	nombreUsuario = models.CharField(max_length=12)
+	id_administrador = models.CharField(default="-", primary_key=True,max_length=16)
+	nombre_usuario = models.CharField(max_length=12)
 	contrasena = models.CharField( max_length=15)
 	correo = models.EmailField(max_length=254)
 	tipo = models.IntegerField()
@@ -82,4 +82,4 @@ class Administrador(models.Model):
 		super(Administrador,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.idAdministrador
+		return self.id_administrador

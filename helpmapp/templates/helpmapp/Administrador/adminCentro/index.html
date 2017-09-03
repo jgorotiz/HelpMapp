@@ -17,7 +17,7 @@
       </div>
      {% if upc %}
         <div class="container col-sm-12 col-md-12" id="info-centro">
-       <h4>{{upc.nombreUPC}} </h4>
+       <h4>{{upc.nombre_upc}} </h4>
        <p><b>Dirección:</b> {{upc.direccion}}</p>
        <p><b>Ciudad:</b>{{upc.canton}}</p>
        <p><b>Provincia:</b>{{upc.provincia}}</p>
@@ -25,16 +25,16 @@
        </div>
        <div class="container col-sm-12 col-md-12 contenedor-recuadros">
          <div class="recuadro col-md-3 col-sm-3">
-           <span id="cantidad-comida">{{upc.almacenamientoComida}}</span>
+           <span id="cantidad-comida">{{upc.almacenamiento_comida}}</span>
            <p>de alimentos</p>
          </div>
 
          <div class="recuadro col-md-3 col-sm-3">
-           <span id="cantidad-agua">{{upc.almacenamientoAgua}}</span>
+           <span id="cantidad-agua">{{upc.almacenamiento_agua}}</span>
            <p>de agua</p>
          </div>
          <div class="recuadro col-md-3 col-sm-3">
-           <span id="cantidad-ropa">{{upc.almacenamientoRopa}}</span>
+           <span id="cantidad-ropa">{{upc.almacenamiento_ropa}}</span>
            <p>de ropa</p>
          </div>
        </div>

@@ -47,7 +47,7 @@ class HelpMapper(models.Model):
 		return self.nombre_usuario
 
 class Categoria(models.Model):
-	nombreCategoria = models.CharField(default="-",max_length=30)
+	nombre_categoria = models.CharField(default="-",max_length=30)
 	unidad = models.CharField(default="-",max_length=20)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
@@ -55,21 +55,21 @@ class Categoria(models.Model):
 		super(Categoria,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.nombreCategoria
+		return self.nombre_categoria
 
 class Producto(models.Model):
-	nombreProducto = models.CharField(default="-",max_length=30)
-	idCategoria = models.ForeignKey(Categoria, to_field='id', default=0)
+	nombre_producto = models.CharField(default="-",max_length=30)
+	id_categoria = models.ForeignKey(Categoria, to_field='id', default=0)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
 		super(Producto,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.nombreProducto
+		return self.nombre_producto
 		
 class Administrador(models.Model):
-	nombreUsuario = models.CharField(default="-",max_length=12, primary_key=True)
+	nombre_usuario = models.CharField(default="-",max_length=12, primary_key=True)
 	contrasena = models.CharField(default="-", max_length=15)
 	correo = models.EmailField(default="-",max_length=254)
 	tipo = models.IntegerField(default=1) #(1) superAdmin, (0) adminCentro
@@ -79,43 +79,43 @@ class Administrador(models.Model):
 		super(Administrador,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.nombreUsuario
+		return self.nombre_usuario
 
 class CentroDeAcopio(models.Model):
-	nombreUPC = models.CharField(default="-",max_length=30)
+	nombre_upc = models.CharField(default="-",max_length=30)
 	direccion = models.CharField(default="-",max_length=100)
 	latitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
 	longitud = models.DecimalField(default=0.0,max_digits=15,decimal_places=10)
 	provincia = models.CharField(default="-",max_length=30)
 	canton = models.CharField(default="-",max_length=30)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
-	almacenamientoAgua = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	almacenamientoRopa = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	almacenamientoComida = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	idAdmin = models.ForeignKey(Administrador, to_field='nombreUsuario', default=1)
+	almacenamiento_agua = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
+	almacenamiento_ropa = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
+	almacenamiento_comida = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
+	usuario_admin = models.ForeignKey(Administrador, to_field='nombre_usuario', default='-')
 
 	def save(self,*args, **kwargs):
 		super(CentroDeAcopio,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.nombreUPC
+		return self.nombre_upc
 
 class ExistenciaInventario(models.Model):
-	idProducto = models.ForeignKey(Producto, to_field='id', default=0)
-	idCentro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
+	id_producto = models.ForeignKey(Producto, to_field='id', default=0)
+	id_centro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
 	def save(self,*args, **kwargs):
 		super(ExistenciaInventario,self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)+"centro: "+str(self.id_centro)
 
 class CambioInventario(models.Model):
 	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
-	idProducto = models.ForeignKey(Producto, to_field='id', default=0)
-	idCentro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
-	fecha = models.DateField(default=datetime.date.today)
+	id_producto = models.ForeignKey(Producto, to_field='id', default=0)
+	id_centro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
+	fecha = models.DateField(auto_now=True)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
@@ -123,7 +123,3 @@ class CambioInventario(models.Model):
 
 	def __str__(self):
 		return self.id
-
-
-
-
