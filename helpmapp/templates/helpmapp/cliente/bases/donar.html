@@ -55,13 +55,11 @@
                     content: "{{centro.nombre_upc}} \n Cantidad Maxima de Agua: {{centro.almacenamiento_agua}} \n Cantidad Maxima de Ropa: {{centro.almacenamiento_ropa}} \n Cantidad Maxima de Comida: {{centro.almacenamiento_comida}}"
                   });
                   var marker = new google.maps.Marker({
-                    position: {lat: {{centro.latitud}}, lng: {{centro.longitud}}},
+                    position: {lat: parseFloat("{{centro.latitud}}".replace(",",".")), lng: parseFloat("{{centro.longitud}}".replace(",","."))},
                     map: map,
                     title: "{{centro.nombre_upc}} \n Cantidad Maxima de Agua: {{centro.almacenamiento_agua}} \n Cantidad Maxima de Ropa: {{centro.almacenamiento_ropa}} \n Cantidad Maxima de Comida: {{centro.almacenamiento_comida}}"
                   });
-                  marker.addListener('click', function () {
-                    infowindow1.open(map, marker);
-                  });
+                  
      
                 {% endfor %}
                 {% else %}
@@ -103,7 +101,7 @@
     </div>
 {% endblock %}
 {% block scripts %}
-    <script src="{% static 'js/mapa.js' %}"></script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKUreK6wFQ5A4NFLa15dZSEH85f5XytWo&callback=initMap"
     async defer></script>
     

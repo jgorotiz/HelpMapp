@@ -21,6 +21,7 @@ def mostrar_indice(request):
 #devolver todos los centros de acopios
 def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
+    print(centros[0].latitud)
     return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros})
 
 
