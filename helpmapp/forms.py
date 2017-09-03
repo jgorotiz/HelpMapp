@@ -15,4 +15,4 @@ class LoginForm(forms.Form):
    
 class RecoveryForm(forms.Form):
     correo = forms.CharField(label='Correo Electrónico', max_length=100,required=True)
-    
+

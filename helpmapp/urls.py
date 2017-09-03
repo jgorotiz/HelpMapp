@@ -14,10 +14,11 @@ urlpatterns = [
 
         #For HelpMapper
         url(r'^home/', views.index_hm,name="home"),
-        url(r'^hm/donar/', views.listar_centroAcopioHM,name="donar"),
+        url(r'^hm/donar/', views.listar_centroAcopioHM,name="donarHM"),
         url(r'^hm/estadistica/', views.mostrar_GraficoEstadistico,name="mostrar_GraficoEstadistico"),
         url(r'^hm/tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
-        url(r'^hm/equipo/', views.mostrar_sobreNosotrosHM,name="mostrar_sobreNosotros"),
+        url(r'^hm/equipo/', views.mostrar_sobreNosotrosHM,name="mostrar_sobreNosotrosHM"),
+        url(r'^newPassword/(?P<nombre_usuario>\S+)$', views.change_password,name="cambiar_password"),
         
         
         
@@ -46,7 +47,7 @@ urlpatterns = [
        
         url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta,name="mostrar_recuperarCuenta"),
 
-        url(r'^profile/', views.profile,name="profile"),
+        url(r'^profile/(?P<nombre_usuario>\S+)$', views.profile),
         url(r'^logout/', views.logout,name="logout"),
         
         url(r'^cerrarSesion/', views.cerrarSesion,name="cerrarSesion"),
