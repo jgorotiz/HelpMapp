@@ -6,23 +6,24 @@
      <section class="col-sm-9 col-md-9">
        <div class="container col-sm-9 col-md-9 ">
         <h3>Configuración de cuenta</h3>
-        <form class="form-horizontal" action="#">
+        <form method="Post" class="form-horizontal" action="{% url 'helpmapp.views.mostrar_configCuenta' %}">
+          {% csrf_token %}
           <div class="form-group">
             <label class="control-label col-sm-4" for="oldpass">Contraseña actual:</label>
             <div class="col-sm-6">
-              <input type="password" class="form-control" id="oldpass" placeholder="contraseña" name="viejaclave">
+              {{ form.password_actual }}
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-4" for="newpass">Nueva contraseña:</label>
             <div class="col-sm-6">          
-              <input type="password" class="form-control" id="newpass" placeholder="nueva contraseña" name="nuevaclave">
+              {{ form.password }}
             </div>
           </div>
            <div class="form-group">
             <label class="control-label col-sm-4" for="pwd">Confirmar contraseña:</label>
             <div class="col-sm-6">          
-              <input type="password" class="form-control" id="pwd" placeholder="nueva contraseña" name="pwd">
+              {{ form.confirm_password }}
             </div>
           </div>
           <div class="form-group">        
@@ -32,6 +33,13 @@
         </div>
         </form>
       </div>
+      {% if mensaje %}
+        <div>
+          <p> {{mensaje}}</p>
+        </div>
+      {% else %}
+        
+      {% endif %} 
      </section>
           
      {% endblock %}

@@ -28,9 +28,7 @@ class ChangePassForm(forms.Form):
 	confirm_password = forms.CharField(widget=forms.PasswordInput,label='Confirmar contrasena', max_length=16)
 
 
-class HelpMapperForm(forms.ModelForm):
-    class Meta:
-        model = HelpMapper
-        fields = ('nombre', 'apellido', 'nombre_usuario', 'contrasena', 'sexo', 'cedula',
-                    'tipo_sangre', 'telefono', 'correo', 'habilidad', 'estado')
-
+class ChangePassAdminForm(forms.Form):
+    password_actual = forms.CharField(widget=forms.PasswordInput,label='Contrasena Actual', max_length=16)
+    password = forms.CharField(widget=forms.PasswordInput,label='Contrasena', max_length=16)
+    confirm_password = forms.CharField(widget=forms.PasswordInput,label='Confirmar contrasena', max_length=16)
