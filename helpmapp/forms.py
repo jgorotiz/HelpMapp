@@ -32,3 +32,13 @@ class ChangePassAdminForm(forms.Form):
     password_actual = forms.CharField(widget=forms.PasswordInput,label='Contrasena Actual', max_length=16)
     password = forms.CharField(widget=forms.PasswordInput,label='Contrasena', max_length=16)
     confirm_password = forms.CharField(widget=forms.PasswordInput,label='Confirmar contrasena', max_length=16)
+
+
+
+class AdminForm(forms.ModelForm):
+    class Meta:
+        model = Administrador
+        widgets = {
+            'contrasena': forms.PasswordInput(),
+        }
+        fields = ( 'nombre_usuario', 'contrasena', 'correo')

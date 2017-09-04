@@ -298,18 +298,21 @@ def mostrar_configCuenta(request):
     
 #CREAR UNA CUENTA DE ADMINISTRADOR    
 def mostrar_crearAdministrador(request):
-    # if request.method == 'POST':
-        
-    #     form = AdministradorForm(request.POST)
-    #     if form.is_valid():
-
-    #         user = form.save(commit=False)
-    #         user.save()
-
-    # else:    
-    #     form = AdministradorForm()
+    if request.method=='GET':
+        form = AdminForm()
+        return render(request, 'helpmapp/Administrador/superAdmin/crearAdmin.html', {'form': form})
+    elif request.method=='POST':
+        form = AdminForm(request.POST)
+        if form.is_valid():
+            print ('si es valid')
+            admin = form.save(commit=False)
+            admin.save()
+            return render(request, 'helpmapp/Administrador/superAdmin/crearAdmin.html', {'form':form} )
+        else:
+            print ('no es valido')
+    form = AdminForm()         
+    return render(request, 'helpmapp/Administrador/superAdmin/crearAdmin.html', {'form':form})
    
-    return render(request,'helpmapp/Administrador/superAdmin/crearAdmin.html')
 def mostrar_verCentro(request):
     return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
 

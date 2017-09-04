@@ -72,7 +72,7 @@ class Administrador(models.Model):
 	nombre_usuario = models.CharField(default="-",max_length=12, primary_key=True)
 	contrasena = models.CharField(default="-", max_length=15)
 	correo = models.EmailField(default="-",max_length=254)
-	tipo = models.IntegerField(default=1) #(1) superAdmin, (0) adminCentro
+	tipo = models.IntegerField(default=1) #(0) superAdmin, (1) adminCentro
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
