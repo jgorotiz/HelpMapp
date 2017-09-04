@@ -21,7 +21,6 @@ def mostrar_indice(request):
 #devolver todos los centros de acopios
 def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
-    print(centros[0].latitud)
     return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros})
 
 
@@ -31,7 +30,6 @@ def mostrar_sobreNosotros(request):
 
 def mostrar_login(request):
     if (not "member_id" in request.session.keys()):
-        print("request.session['member_id']")
         if request.method == 'POST':
             form= LoginForm(request.POST)
             if form.is_valid():
@@ -212,7 +210,8 @@ def mostrar_loginAdmin(request):
                         request.session['member_id'] = m.nombre_usuario
                         request.session['tipo'] = m.tipo
                         if (m.tipo==0): #es super admin
-                            return HttpResponseRedirect('/administradorGeneral/')
+                            centros =  CentroDeAcopio.objects.all()
+                            return render(request,'helpmapp/Administrador/superAdmin/index.html',{'centros':centros})
                         else:#es admin de centro de acopio
                             return HttpResponseRedirect('/administradorZonal/')
                     else:
@@ -224,7 +223,8 @@ def mostrar_loginAdmin(request):
         return render(request,'helpmapp/Administrador/index.html',{'form': form})
     else:
         if (request.session['tipo']==0): #es super admin
-            return render(request,'helpmapp/Administrador/superAdmin/index.html')
+            centros =  CentroDeAcopio.objects.all()
+            return render(request,'helpmapp/Administrador/superAdmin/index.html',{'centros':centros})
         else:#es admin de centro de acopio
             upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
             return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
@@ -243,8 +243,27 @@ def cerrarSesion(request):
 #PÁGINAS DEL ADMINISTRADOR GENERAL
 def mostrar_administradorGeneral(request):
     if('member_id' in list(request.session.keys())):
-        print("hola")
-        return render(request,'helpmapp/Administrador/superAdmin/index.html')
+        comida=Producto.objects.filter(id_categoria=1) #id de comida
+        kg=0
+        for c in comida:
+            productos = ExistenciaInventario.objects.filter(id_producto = c.id)
+            for p in productos:
+                kg+=p.cantidad
+
+        ropas=Producto.objects.filter(id_categoria=2) # id de ropa
+        ropa=0
+        for r in ropas:
+            productos = ExistenciaInventario.objects.filter(id_producto = r.id)
+            for p in productos:
+                ropa+=p.cantidad
+        aguas=Producto.objects.filter(id_categoria=3) #id de agua
+        agua=0
+        for a in aguas:
+            productos = ExistenciaInventario.objects.filter(id_producto = a.id)
+            for p in productos:
+                agua+=p.cantidad
+        centros =  CentroDeAcopio.objects.all()
+        return render(request,'helpmapp/Administrador/superAdmin/index.html',{'centros':centros,"ropa":ropa,"comida":comida,"agua":agua})
     else:
         return HttpResponseRedirect('/loginAdmin/')
 
