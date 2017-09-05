@@ -18,7 +18,7 @@ urlpatterns = [
         url(r'^hm/estadistica/', views.mostrar_GraficoEstadistico,name="mostrar_GraficoEstadistico"),
         url(r'^hm/tutoriales/', views.mostrar_tutoriales,name="mostrar_tutoriales"),
         url(r'^hm/equipo/', views.mostrar_sobreNosotrosHM,name="mostrar_sobreNosotrosHM"),
-        url(r'^newPassword/(?P<nombre_usuario>\S+)$', views.change_password,name="cambiar_password"),
+        url(r'^newPassword/', views.change_password,name="cambiar_password"),
         
         
         
@@ -56,9 +56,12 @@ urlpatterns = [
 
         #CRUD HelpMapper
         url(r'^voluntario/$', views.registrar_helpmapper,name='registrar_helpmapper'),
-        url(r'^voluntario/change_pass/$', views.actualizar_contrasena,name='actualizar_contrasena'),
+        #url(r'^voluntario/change_pass/$', views.actualizar_contrasena,name='actualizar_contrasena'),
         url(r'^voluntario/delete/(?P<nombreUsuario>\w+)/$', views.eliminar_helpmapper,name='eliminar_helpmapper'),
 
         #Datos para graficos D3JS
         url(r'^datos/$', views.obtener_datos,name='obtener_datos'),
+
+        #Datos para provincias
+        #url(r'^datosProvincias/$', views.datos_provincias,name='datos_provincias'),
     ]

@@ -324,7 +324,8 @@ def mostrar_crearProducto(request):
             print ('si es valid')
             producto = form.save(commit=False)
             producto.save()
-            return render(request, 'helpmapp/Administrador/superAdmin/index.html', {'form': form})
+            centros=CentroDeAcopio.objects.all()
+            return render(request, 'helpmapp/Administrador/superAdmin/index.html', {'centros': centros})
         else:
             print ('no es valido')
     else:
@@ -373,27 +374,9 @@ def mostrar_inventarioAgua(request):
 
 def mostrar_inventarioComida(request):
     if(request.session["member_id"]):
-        if(request.session["tipo"]==1):
-            comida=Producto.objects.filter(id_categoria=1) #id de comida
-            kg=0
-            for c in comida:
-                kg+=c.cantidad
-            ropas=Producto.objects.filter(id_categoria=2) # id de ropa
-            ropa=0
-            for r in ropas:
-                ropa+=r.cantidad
-            agua=Producto.objects.filter(id_categoria=3) #id de agua
-            l=0
-            for a in agua:
-                l+=a.cantidad
-            lista2=[]
-            lista2.append(float(kg))
-            lista2.append(float(ropa))
-            lista2.append(float(l))
-            print (lista2)
-            #lista=json.dumps(lista2)
-            lista=lista2
-            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'lista':lista})
+        if(request.session["tipo"]!=1):
+            
+            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html')
 
     return HttpResponseRedirect('/loginAdmin/')
 
@@ -414,9 +397,7 @@ def logout(request):
     
     return HttpResponseRedirect('/')
 
-def change_password(request,nombre_usuario):
-    helpmapper = HelpMapper.objects.get(nombre_usuario = nombre_usuario)
-    return render(request,'helpmapp/cliente/helpmapper/change_password.html', {'hm':helpmapper})
+
 
 
 def mostrar_recuperarCuenta(request):
@@ -449,27 +430,30 @@ def registrar_helpmapper(request):
     return render(request, 'helpmapp/cliente/not_logged/voluntario.html', {'form': form})
 
 
-def actualizar_contrasena(request):
-    if request.method=='POST':
+def change_password(request):
+    if request.method=='GET':
+        form = ChangePassForm()
+        return render(request, 'helpmapp/cliente/helpmapper/change_password.html', {'form': form})
+
+    elif request.method=='POST':
         form = ChangePassForm(request.POST)
-        print(request.POST)
         if form.is_valid():
             print("is valid")
             data = form.cleaned_data
-            try:
-                hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
-                if data['contrasena'] == data['confirm_password']:
-                    new_contrasena = data['contrasena']
-                    hm.contrasena = new_contrasena
-                    hm.save()
-                    return render(request, 'helpmapp/cliente/helpmapper/profile.html', {'title': 'Contrasena modificada', 'message':'Contrasena modificada exitosamente.'} )
-                else:
-                    return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Contrasenas distintas', 'message':'Error: Las contrasenas ingresadas no coinciden.'})                    
+            admin = HelpMapper.objects.get(nombre_usuario=request.session['member_id'])
+            if data['password'] == data['confirm_password']:
+                admin.contrasena = data['password']
+                admin.save()
+                form = ChangePassForm()
+                return render(request, 'helpmapp/cliente/helpmapper/change_password.html', {'form':form, 'mensaje':'Su contraseña ha sido cambiada.'} )
+            else:
+                form = ChangePassForm()
+                return render(request, 'helpmapp/cliente/helpmapper/change_password.html', {'form':form, 'mensaje':'Las contraseñas no coinciden.'} )
+            
+               
+    return render(request, 'helpmapp/cliente/helpmapper/change_password.html', {'form':form})
 
-            except Exception as e:
-                return render(request, 'helpmapp/cliente/helpmapper/index.html', {'title': 'Error', 'message':'Error: No se modifico la contrasena correctamente.'})
-                pass
-    return render(request, 'helpmapp/cliente/helpmapper/index.html', {'form':form})
+    
 
 def eliminar_helpmapper(request):
     hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
@@ -562,6 +546,5 @@ def obtener_datos(request):
         )
     
    
-
 
 

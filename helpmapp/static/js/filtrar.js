@@ -1,25 +1,28 @@
 function capturar(){
-    $.getJSON("{% static '../data/provincias.json' %}", function(data) {
+    
+    $.getJSON("provicias.json", function(data) {
     	let opcion = $('<option></option>');
         opcion.attr("value", "")
         opcion.text("Provincia");
         $("#province").append(opcion)
+        alert("entrooo");
         $.each(data["rows"], function(key,val) {
             let nombre = val["nombre"];
             let opcion = $('<option></option>');
             opcion.attr("value", val["id_provincia"])
             opcion.text(nombre);
              $("#province").append(opcion);
+
         });
     });
-     
+    
 }
 
 function cargarCiudades(){
 	$('#province').click(function(){
         var valor = $("#province").val();
         $("#city").empty();
-        $.getJSON("{% static '../data/ciudades.json' %}", function(data) {
+        $.getJSON("ciudades.json", function(data) {
         	if(valor != ""){
 	        	let opcion = $('<option></option>');
 		        opcion.attr("value", "")

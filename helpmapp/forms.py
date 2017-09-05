@@ -42,3 +42,9 @@ class AdminForm(forms.ModelForm):
             'contrasena': forms.PasswordInput(),
         }
         fields = ( 'nombre_usuario', 'contrasena', 'correo')
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ( 'nombre_producto', 'id_categoria')
+
