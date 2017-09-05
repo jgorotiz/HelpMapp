@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -521,8 +521,11 @@ def change_password(request):
     
 
 def eliminar_helpmapper(request):
-    hm = HelpMapper.objects.get(nombre_usuario = request.session['member_id'])
-    helpmapper  = get_object_or_404(HelpMapper, pk = hm.nombre_usuario).delete()
+    if request.method=='POST':
+        usuario = request.session['member_id']
+        del request.session['member_id']
+        hm = HelpMapper.objects.get(nombre_usuario = usuario)
+        helpmapper  = get_object_or_404(HelpMapper, pk = hm.nombre_usuario).delete()
     return HttpResponseRedirect('/')
 
 def obtener_datos(request):

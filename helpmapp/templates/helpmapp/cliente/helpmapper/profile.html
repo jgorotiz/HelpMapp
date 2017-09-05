@@ -1,4 +1,4 @@
-{% extends "helpmapp/cliente/bases/base_hm.html" %}
+	{% extends "helpmapp/cliente/bases/base_hm.html" %}
 
 {% load staticfiles %}
 
@@ -24,8 +24,12 @@
 			<h4> 	Cédula &middot; {{hm.cedula}} <br></h4>
 			<h4>	Teléfono &middot; {{hm.telefono}}<br></h4>
 				<a  href="https://mail.espol.edu.ec/" >{{hm.correo}}<br></a>
-<br>
-			<button type="submit" id="eliminar" value="Eliminar Cuenta" >Eliminar Cuenta</button>				
+			<br>
+			<form method="Post" action="{% url 'helpmapp.views.eliminar_helpmapper' %}">
+			{% csrf_token %}
+				<input type="submit" id="eliminar" value="Eliminar Cuenta" ">
+			</form>
+			
 
 
 		</div><!-- /.col-lg-6 -->

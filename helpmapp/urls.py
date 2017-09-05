@@ -57,7 +57,7 @@ urlpatterns = [
         #CRUD HelpMapper
         url(r'^voluntario/$', views.registrar_helpmapper,name='registrar_helpmapper'),
         #url(r'^voluntario/change_pass/$', views.actualizar_contrasena,name='actualizar_contrasena'),
-        url(r'^voluntario/delete/(?P<nombreUsuario>\w+)/$', views.eliminar_helpmapper,name='eliminar_helpmapper'),
+        url(r'^voluntario/delete/$', views.eliminar_helpmapper,name='eliminar_helpmapper'),
 
         #Datos para graficos D3JS
         url(r'^datos/$', views.obtener_datos,name='obtener_datos'),
