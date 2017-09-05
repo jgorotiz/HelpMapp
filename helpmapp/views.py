@@ -389,7 +389,32 @@ def mostrar_configuracionCapacidades(request):
 
 
 def mostrar_configuracionCuenta(request):
-    return render(request,'helpmapp/Administrador/adminCentro/configuracionCuenta.html')
+    if request.method=='GET':
+        form = ChangePassAdminForm()
+        return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form': form})
+
+    elif request.method=='POST':
+        form = ChangePassAdminForm(request.POST)
+        if form.is_valid():
+            print("is valid")
+            data = form.cleaned_data
+            admin = Administrador.objects.get(nombre_usuario=request.session['member_id'])
+            if data['password_actual'] == admin.contrasena:
+                if data['password'] == data['confirm_password']:
+                    admin.contrasena = data['password']
+                    admin.save()
+                    form = ChangePassAdminForm()
+                    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form, 'mensaje':'Su contraseña ha sido cambiada.'} )
+                else:
+                    form = ChangePassAdminForm()
+                    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form, 'mensaje':'Las contraseñas no coinciden.'} )
+            else:
+                form = ChangePassAdminForm()
+                return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form,'mensaje':'La contraseña actual que ingreso es incorrecta.'})
+               
+    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form})
+    
+    
 
 
 def mostrar_inventarioAgua(request):
