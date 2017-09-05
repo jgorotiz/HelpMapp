@@ -7,6 +7,7 @@
 
 {% block css %}
     <link href="{% static 'styles/donar.css' %}" rel="stylesheet">
+
 {% endblock %}
 
 {% block body %}
@@ -20,7 +21,7 @@
         <h2>
           Busca el UPC en el lugar que deseas:
         </h2>
-      <form>
+      <form id="form">
           <div class="form-group row">
               <label for="province" class="col-sm-2 col-form-label">Provincia: </label>
             <div class="col-sm-10">
@@ -35,8 +36,13 @@
             </select>
               </div>
           </div>
+          <div class="form-group row">
+            <form id="coordenadas" method="Post" action="{% url 'helpmapp.views.listar_centroAcopio' %}">
+            </form>
+          </div>
       </form>
       </div>
+      
       <div class="col-md-8"  id ="map">
       <script>
         var map;
@@ -69,10 +75,18 @@
               // Try HTML5 geolocation.
               if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                  var pos = {
+                  {% if latitud %}
+                    var pos = {
+                    lat: {{latitud}},
+                    lng: {{longitud}}
+                  };
+                  {% else %}
+                    var pos = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                   };
+                  {% endif %}
+                  
                   infoWindow.setPosition(pos);
                   infoWindow.setContent('Tu Ubicacion');
                   map.setCenter(pos);

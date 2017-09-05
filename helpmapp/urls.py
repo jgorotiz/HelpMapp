@@ -63,5 +63,5 @@ urlpatterns = [
         url(r'^datos/$', views.obtener_datos,name='obtener_datos'),
 
         #Datos para provincias
-        #url(r'^datosProvincias/$', views.datos_provincias,name='datos_provincias'),
+        #url(r'^datosProvincias/$', views.obtener_datosProvincias,name='obtener_datosProvincias'),
     ]

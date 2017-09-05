@@ -1,20 +1,42 @@
 function capturar(){
-    
-    $.getJSON("provicias.json", function(data) {
-    	let opcion = $('<option></option>');
-        opcion.attr("value", "")
-        opcion.text("Provincia");
-        $("#province").append(opcion)
-        alert("entrooo");
-        $.each(data["rows"], function(key,val) {
-            let nombre = val["nombre"];
-            let opcion = $('<option></option>');
-            opcion.attr("value", val["id_provincia"])
-            opcion.text(nombre);
-             $("#province").append(opcion);
+    $.ajax({
+        url : "/static/data/provincias.json", // the endpoint
+        type:"get",
 
-        });
+        // handle a successful response
+        success : function(json) {
+            
+            console.log(json); // log the returned json to the console
+            console.log("success"); // another sanity check
+            let opcion = $('<option></option>');
+            opcion.attr("value", "")
+            opcion.text("Provincia");
+            $("#province").append(opcion)
+            $.each(json["rows"], function(key,val) {
+                let nombre = val["nombre"];
+                let opcion = $('<option></option>');
+                opcion.attr("value", val["id_provincia"])
+                opcion.text(nombre);
+                 $("#province").append(opcion);
+            });
+       }
     });
+
+    // $.getJSON("provicias.json", function(data) {
+    	// let opcion = $('<option></option>');
+     //    opcion.attr("value", "")
+     //    opcion.text("Provincia");
+     //    $("#province").append(opcion)
+     //    alert("entrooo");
+     //    $.each(data["rows"], function(key,val) {
+     //        let nombre = val["nombre"];
+     //        let opcion = $('<option></option>');
+     //        opcion.attr("value", val["id_provincia"])
+     //        opcion.text(nombre);
+     //         $("#province").append(opcion);
+
+    //     });
+    // });
     
 }
 
@@ -22,7 +44,8 @@ function cargarCiudades(){
 	$('#province').click(function(){
         var valor = $("#province").val();
         $("#city").empty();
-        $.getJSON("ciudades.json", function(data) {
+        $.getJSON("/static/data/ciudades.json", function(data) {
+            console.log(data);
         	if(valor != ""){
 	        	let opcion = $('<option></option>');
 		        opcion.attr("value", "")
@@ -42,6 +65,40 @@ function cargarCiudades(){
 	    });
     });
 }
+
+
+function centrarMapa(){
+    $('#city').click(function(){
+        var valor = $("#city").val();
+        $("#coordenadas").empty();
+        $.getJSON("/static/data/coordenadas_ciudades.json", function(data) {
+            if(valor != ""){
+                $.each(data["rows"], function(key,val) {
+                    if (valor == val["id_ciudad"]){
+                        let lat = $('<input></input>');
+                        let long = $('<input></input>');
+                        lat.attr("id", "lat");
+                        long.attr("id", "long");
+                        lat.attr("type", "hidden");
+                        long.attr("type", "hidden");
+                        lat.attr("value", "lat");
+                        long.attr("value", "long");
+                        $("#coordenadas").append(lat);
+                        $("#coordenadas").append(long);
+
+                    }
+                });
+                let button = $('<input></input>');
+                button.attr("type", "submit");
+                button.attr("id", "hola");
+                button.attr("value", "Centrar Mapa");
+                $("#coordenadas").append(button);
+            }
+        });
+    });
+}
+
+
 
 
 function cargarCentros(){
@@ -83,4 +140,5 @@ function cargarCentros(){
 $(window).load(function() {
  	capturar();
  	cargarCiudades();
+    centrarMapa();
 });

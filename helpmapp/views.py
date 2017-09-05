@@ -21,6 +21,13 @@ def mostrar_indice(request):
 #devolver todos los centros de acopios
 def listar_centroAcopio(request):
     centros =  CentroDeAcopio.objects.all()
+    if(request.method=='POST'):
+        form= coordenadasForm(request.POST)
+        data = form.cleaned_data
+        if form.is_valid():
+            latitud = data['latitud']
+            longitud = data['longitud']
+            return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros,'latitud': latitud,'longitud':longitud})
     return render(request, 'helpmapp/cliente/not_logged/donar.html', {'centros': centros})
 
 
@@ -268,7 +275,23 @@ def mostrar_administradorGeneral(request):
         return HttpResponseRedirect('/loginAdmin/')
 
 def buscarCentroAcopio(request):
+    if request.method=='POST':
+        form = filtroForm(request.POST)
+        print(form)
+        if form.is_valid():
+            print("is valid")
+            data = form.cleaned_data
+            centros = CentroDeAcopio.objects.get(provincia=data['provincia'])
+            upc =[]
+            for c in centros:
+                if c.canton == data['ciudad']:
+                    upc.append(c)
+            print(upc)
+            return render(request, 'helpmapp/Administrador/superAdmin/configCuenta.html', {'upc':upc})
+               
     return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
+    
+    
 
 def mostrar_configCuenta(request):
     if request.method=='GET':
@@ -564,4 +587,14 @@ def obtener_datos(request):
     
    
 
+# def obtener_datosProvincias(request):
+#     json_data = open('file:///home/helpmapp/helpmapp/static/data/provincias.json')
+#     data1 = json.load(json_data)    # deserializes it
+#     data2 = json.dumps(json_data)   # json formatted string
+
+#     json_data.close()
+#     return HttpResponse(
+#             json.dumps(data2),
+#             content_type="application/json"
+#         )
 

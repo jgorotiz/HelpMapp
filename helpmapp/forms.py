@@ -49,6 +49,11 @@ class ProductoForm(forms.ModelForm):
         fields = ( 'nombre_producto', 'id_categoria')
 
 
+class filtroForm(forms.Form):
+    provincia = forms.CharField()
+    ciudad = forms.CharField()
+
+
 class agregarComida(forms.Form):
     id_producto = forms.CharField( label='id producto')
     id_centro = forms.CharField( label='id centro')
