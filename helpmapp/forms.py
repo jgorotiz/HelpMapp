@@ -48,3 +48,9 @@ class ProductoForm(forms.ModelForm):
         model = Producto
         fields = ( 'nombre_producto', 'id_categoria')
 
+
+class agregarComida(forms.Form):
+    id_producto = forms.CharField( label='id producto')
+    id_centro = forms.CharField( label='id centro')
+    cantidad = forms.DecimalField(label='Cantidad',max_digits=6)
+

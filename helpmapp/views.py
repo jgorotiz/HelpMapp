@@ -370,18 +370,35 @@ def mostrar_configuracionCuenta(request):
 
 
 def mostrar_inventarioAgua(request):
-    return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html')
+    if(request.session["member_id"]):
+        if(request.session["tipo"]!=1):
+            if request.method=='GET':
+                aguas=Producto.objects.filter(id_categoria=3)
+                centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
+                return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html',{'aguas':aguas,'centro':centro})
+    return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_inventarioComida(request):
     if(request.session["member_id"]):
         if(request.session["tipo"]!=1):
+            if request.method=='GET':
+                comidas=Producto.objects.filter(id_categoria=1)
+                centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
+                return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'comidas':comidas,'centro':centro})
             
-            return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html')
 
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_inventarioRopa(request):
-    return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html')
+    if(request.session["member_id"]):
+        if(request.session["tipo"]!=1):
+            if request.method=='GET':
+                ropas=Producto.objects.filter(id_categoria=2)
+                centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
+                return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html',{'ropas':ropas,'centro':centro})
+            
+
+    return HttpResponseRedirect('/loginAdmin/')
 
 
 
