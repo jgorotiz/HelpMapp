@@ -53,9 +53,9 @@ class filtroForm(forms.Form):
     provincia = forms.CharField()
     ciudad = forms.CharField()
 
+class ExistenciaInventarioForm(forms.ModelForm):
+    class Meta:
+        model = ExistenciaInventario
+        fields = ( 'id_producto', 'id_centro','cantidad')
 
-class agregarComida(forms.Form):
-    id_producto = forms.CharField( label='id producto')
-    id_centro = forms.CharField( label='id centro')
-    cantidad = forms.DecimalField(label='Cantidad',max_digits=6)
 

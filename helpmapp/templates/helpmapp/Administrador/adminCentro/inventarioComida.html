@@ -33,21 +33,15 @@
           <tr>
           <form = method="Post">
             {% csrf_token %}
-            <td>{{comida.nombre_producto}}</td>
-             <input type="hidden" id="name" name="name" value ='{{comida.id}}'> 
+            <label>{{comida.nombre_producto}}</label>
+             <input type="hidden" id="name" name="id_producto" value ='{{comida.id}}'> 
              {% if centro %}
-            <input type="hidden" id="centro" name="centro" value ='{{centro.id}}'>
+            <input type="hidden" id="centro" name="id_centro" value ='{{centro.id}}'>
             {% else %}
             {% endif %}
-            <td><input type="number" id="cantidad" name="cantidad" ></td>
+            <input type="number" id="cantidad" name="cantidad" >
 
-            <td>
-              <select class="form-control lista-acciones">
-                <option>Agregar</option>
-                <option>Enviar</option>
-                <option>Eliminar</option>
-              </select>
-            </td>
+            <input type="submit" name="Enviar" value="Enviar">
           </form>
           </tr>
        
