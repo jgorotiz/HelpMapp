@@ -13,6 +13,7 @@ import json
 from .forms import *
 from django.db import connection
 from .models import *
+import pdb
 
 #Controllers for everyone
 def mostrar_indice(request):
@@ -281,17 +282,16 @@ def buscarCentroAcopio(request):
         if form.is_valid():
             print("is valid")
             data = form.cleaned_data
-            centros = CentroDeAcopio.objects.get(provincia=data['provincia'])
-            upc =[]
-            for c in centros:
-                if c.canton == data['ciudad']:
-                    upc.append(c)
+            ciudad = data['ciudad'].capitalize()
+            upc = CentroDeAcopio.objects.filter(canton=ciudad)
             print(upc)
-            return render(request, 'helpmapp/Administrador/superAdmin/configCuenta.html', {'upc':upc})
-               
+            return render(request, 'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html', {'upc':upc})
+        else:
+            print("Not valid")    
+
     return render(request,'helpmapp/Administrador/superAdmin/buscarCentroAcopio.html')
     
-    
+  
 
 def mostrar_configCuenta(request):
     if request.method=='GET':
@@ -336,26 +336,43 @@ def mostrar_crearAdministrador(request):
     form = AdminForm()         
     return render(request, 'helpmapp/Administrador/superAdmin/crearAdmin.html', {'form':form})
    
-def mostrar_verCentro(request):
-    return render(request,'helpmapp/Administrador/superAdmin/verCentro.html')
+def mostrar_verCentro(request,id_centro):
+    if('member_id' in list(request.session.keys())):
+        if(request.session["tipo"]==0):
+            centro=CentroDeAcopio.objects.get(id=id_centro)
+            if(centro):
+                print ("Centro encontrado")
+                print(centro)
+            return render(request,'helpmapp/Administrador/superAdmin/verCentro.html',{"centro":centro})
+            
+        else:
+            return HttpResponseRedirect('/administradorZonal/')
+    else:
+        return HttpResponseRedirect('/loginAdmin/')
+    
 
 def mostrar_crearProducto(request):
-    if request.method == 'POST':
-        print ('si es post')
-        form = ProductoForm(request.POST)        
-        if form.is_valid():
-            print ('si es valid')
-            producto = form.save(commit=False)
-            producto.save()
-            centros=CentroDeAcopio.objects.all()
-            return render(request, 'helpmapp/Administrador/superAdmin/index.html', {'centros': centros})
+    if('member_id' in list(request.session.keys())):
+        if(request.session["tipo"]==0):
+            if request.method == 'POST':
+                print ('si es post')
+                form = ProductoForm(request.POST)        
+                if form.is_valid():
+                    print ('si es valid')
+                    producto = form.save(commit=False)
+                    producto.save()
+                    centros=CentroDeAcopio.objects.all()
+                    return render(request, 'helpmapp/Administrador/superAdmin/index.html', {'centros': centros})
+                else:
+                    print ('no es valido')
+            else:
+                print ('no es post')
+                form = ProductoForm()
+            return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
         else:
-            print ('no es valido')
+            return HttpResponseRedirect('/administradorZonal/')
     else:
-        print ('no es post')
-        form = ProductoForm()
-    return render(request, 'helpmapp/Administrador/superAdmin/crearProducto.html', {'form': form})
-
+        return HttpResponseRedirect('/loginAdmin/')
 #PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):

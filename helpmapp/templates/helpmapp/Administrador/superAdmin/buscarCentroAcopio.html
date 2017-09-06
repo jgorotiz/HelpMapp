@@ -18,10 +18,10 @@
           <form method="Post" class="form-vertical list" action="{% url 'helpmapp.views.buscarCentroAcopio' %}">
           {% csrf_token %}
             <div class="form-group col-sm-5 col-md-5 ">
-              <select id="province" class="questionsList"></select>
+              <select id="province" name="provincia" class="questionsList"></select>
             </div>
             <div class="form-group col-sm-5 col-md-5">
-               <select id='city' class="questionsList"></select>
+               <select id='city' name= "ciudad" class="questionsList"></select>
             </div>
             <div class="form-group col-sm-2 col-md-2" id="div_submit">
               <button type="submit" class="btn btn-primary" id="btn-submit">Buscar</button>
@@ -60,10 +60,12 @@
                 </tbody>
                   {% if upc %}
                   {% for u in upc %}
-                  v<td>{{u.id}}</td>
-                      <td>{{u.nombre}}</td>
-                      <td>{{u.ciudad}}</td>
-                      <td>hola</td>
+                  <tr>
+                    <td>{{u.id}}</td>
+                    <td>{{u.nombre_upc}}</td>
+                    <td>{{u.canton}}</td>
+                    <td><a href="{% url 'helpmapp.views.mostrar_verCentro' id_centro=u.pk %}">Ver centro</a></td>
+                  </tr>
                 {% endfor %}
                 {% else %}
                    

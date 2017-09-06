@@ -55,7 +55,7 @@ function cargarCiudades(){
 		        	if (valor == val["id_provincia"]){
 			            let nombre = val["nombre"];
 			            let opcion = $('<option></option>');
-			            opcion.attr("value", val["id_ciudad"])
+			            opcion.attr("value", val["nombre"])
 			            opcion.attr("id","ciudad");
 			            opcion.text(nombre);
 			            $("#city").append(opcion);

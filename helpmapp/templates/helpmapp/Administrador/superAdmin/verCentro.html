@@ -10,39 +10,42 @@
        <div class="container col-sm-9 col-md-9 ">
         <h3>Ver centro de acopio</h3> 
       </div>
-     
+     {% if centro %}
      <div class="container col-sm-9 col-md-9" id="info-centro">
-       <h4>UPC SALINAS #4</h4>
-       <p><b>Dirección: </b>Maria Luis Gonzalez Rubio Serrano 0 Y Calle Los Almendros</p>
-       <p><b>Ciudad: </b>Salinas</p>
-       <p><b>Provincia: </b>Santa Elena</p>
+       <h4>{{centro.nombre_upc}}</h4>
+       <p><b>Dirección: </b>{{centro.direccion}}</p>
+       <p><b>Cant&oacute;n: </b>{{centro.canton}}</p>
+       <p><b>Provincia: </b>{{centro.provincia}}</p>
 
      </div>
      <div class="container col-sm-9 col-md-9 contenedor-recuadros">
        <div class="recuadro col-md-3 col-sm-3">
-         <span id="cantidad">1234 kits</span>
-         <p>de alimentos</p>
+         <span id="cantidad">{{centro.almacenamiento_ropa}}</span>
+         <p>kg de comida</p>
        </div>
        <div class="recuadro col-md-3 col-sm-3">
-         <span id="cantidad2">1234 kits</span>
-         <p>de alimentos</p>
+         <span id="cantidad2">{{centro.almacenamiento_ropa}}</span>
+         <p>prendas</p>
        </div>
        <div class="recuadro col-md-3 col-sm-3">
-         <span id="cantidad3">1234 kits</span>
-         <p>de alimentos</p>
+         <span id="cantidad3">{{centro.almacenamiento_agua}}</span>
+         <p>l de agua</p>
        </div>
      </div>
 
       </section>    
+      {% else %}
+        <p>No se encontró el centro :(</p>
+      {% endif %}
      <section class="col-sm-5 col-md-5 col-md-offset-3" id="seccion-graficos">
-        <div class="panel panel-default">
+       <!--  <div class="panel panel-default">
           
             <button type="button" class="btn btn-info panel-title" data-toggle="collapse" data-target="#grafico1">Número de kits donados por provincia</button>
           
           <div class="panel-body" id="grafico1">
             <img src="img/grafico2.jpg" lt="grafico2">
           </div>
-        </div>
+        </div> -->
 
      </section>
 
