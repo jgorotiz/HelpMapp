@@ -219,7 +219,28 @@ def mostrar_loginAdmin(request):
                         request.session['tipo'] = m.tipo
                         if (m.tipo==0): #es super admin
                             centros =  CentroDeAcopio.objects.all()
-                            return render(request,'helpmapp/Administrador/superAdmin/index.html',{'centros':centros})
+                            comida=Producto.objects.filter(id_categoria=1) #id de comida
+                            kg=0
+                            for c in comida:
+                                productos = ExistenciaInventario.objects.filter(id_producto = c.id)
+                                for p in productos:
+                                    kg+=p.cantidad
+
+                            ropas=Producto.objects.filter(id_categoria=2) # id de ropa
+                            ropa=0
+                            for r in ropas:
+                                productos = ExistenciaInventario.objects.filter(id_producto = r.id)
+                                for p in productos:
+                                    ropa+=p.cantidad
+                            aguas=Producto.objects.filter(id_categoria=3) #id de agua
+                            agua=0
+                            for a in aguas:
+                                productos = ExistenciaInventario.objects.filter(id_producto = a.id)
+                                for p in productos:
+                                    agua+=p.cantidad
+                            centros =  CentroDeAcopio.objects.all()
+                            return render(request,'helpmapp/Administrador/superAdmin/index.html',{'centros':centros,"ropa":ropa,"comida":kg,"agua":agua})
+                            
                         else:#es admin de centro de acopio
                             return HttpResponseRedirect('/administradorZonal/')
                     else:
@@ -271,7 +292,7 @@ def mostrar_administradorGeneral(request):
             for p in productos:
                 agua+=p.cantidad
         centros =  CentroDeAcopio.objects.all()
-        return render(request,'helpmapp/Administrador/superAdmin/index.html',{'centros':centros,"ropa":ropa,"comida":comida,"agua":agua})
+        return render(request,'helpmapp/Administrador/superAdmin/index.html',{'centros':centros,"ropa":ropa,"comida":kg,"agua":agua})
     else:
         return HttpResponseRedirect('/loginAdmin/')
 
@@ -436,27 +457,37 @@ def mostrar_configuracionCuenta(request):
 
 def mostrar_inventarioAgua(request):
     if(request.session["member_id"]):
-        if(request.session["tipo"]!=1):
+        if(request.session["tipo"]!=0):
             if request.method=='GET':
                 aguas=Producto.objects.filter(id_categoria=3)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
                 return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html',{'aguas':aguas,'centro':centro})
+            elif  request.method == 'POST':
+                form = ExistenciaInventarioForm(request.POST)
+                print(form)
+                if form.is_valid():
+                    print ('si es valid')
+                    inventario = form.save(commit=False)
+                    inventario.save()
+                    aguas=Producto.objects.filter(id_categoria=3)
+                    centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
+                    return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html',{'aguas':aguas,'centro':centro})
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_inventarioComida(request):
     if(request.session["member_id"]):
-        if(request.session["tipo"]!=1):
+        if(request.session["tipo"]!=0):
             if request.method=='GET':
                 comidas=Producto.objects.filter(id_categoria=1)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
                 return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'comidas':comidas,'centro':centro})
-            
+
 
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_inventarioRopa(request):
     if(request.session["member_id"]):
-        if(request.session["tipo"]!=1):
+        if(request.session["tipo"]!=0):
             if request.method=='GET':
                 ropas=Producto.objects.filter(id_categoria=2)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
