@@ -481,6 +481,16 @@ def mostrar_inventarioComida(request):
                 comidas=Producto.objects.filter(id_categoria=1)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
                 return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'comidas':comidas,'centro':centro})
+            elif request.method=='POST':
+                form = ExistenciaInventarioForm(request.POST)
+                print(form)
+                if form.is_valid():
+                    print ('si es valid')
+                    inventario = form.save(commit=False)
+                    inventario.save()
+                    comidas=Producto.objects.filter(id_categoria=1)
+                    centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
+                    return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'comidas':comidas,'centro':centro})
 
 
     return HttpResponseRedirect('/loginAdmin/')
@@ -492,7 +502,16 @@ def mostrar_inventarioRopa(request):
                 ropas=Producto.objects.filter(id_categoria=2)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
                 return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html',{'ropas':ropas,'centro':centro})
-            
+            elif request.method=='POST':
+                form = ExistenciaInventarioForm(request.POST)
+                print(form)
+                if form.is_valid():
+                    print ('si es valid')
+                    inventario = form.save(commit=False)
+                    inventario.save()
+                    ropas=Producto.objects.filter(id_categoria=2)
+                    centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
+                    return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html',{'ropas':ropas,'centro':centro})
 
     return HttpResponseRedirect('/loginAdmin/')
 

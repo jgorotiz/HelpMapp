@@ -15,23 +15,13 @@
           <br>
           
      </div>
-    >
      <div class="col-md-5">
        <div  id="contenedor-tabla">
        {% if comidas %}
-         <table class="table table-bordered">
-      <thead>
-        <tr class="info">
-          <th>Producto</th>
-          <th>Cantidad (kg)</th>
-          <th>Accion</th>
-        </tr>
-      </thead>
-      <tbody>
+         
       {% for comida in comidas %}
         
-          <tr>
-          <form = method="Post">
+          <form = method="Post" action="{% url 'helpmapp.views.mostrar_inventarioComida' %}">
             {% csrf_token %}
             <label>{{comida.nombre_producto}}</label>
              <input type="hidden" id="name" name="id_producto" value ='{{comida.id}}'> 
@@ -43,18 +33,9 @@
 
             <input type="submit" name="Enviar" value="Enviar">
           </form>
-          </tr>
        
         {% endfor %}
-      </tbody>
-    </table>
-    <form method="post" action="#">
-   <div class="form-group row">
-      <div class="offset-sm-2 col-sm-10">
-        <button type="submit" class="btn btn-primary"> Actualizar</button>
-      </div>
-    </div>
-    </form>
+    
     {% else %}
         
       {% endif %} 
