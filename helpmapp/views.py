@@ -397,67 +397,79 @@ def mostrar_crearProducto(request):
 #PÁGINAS DEL ADMINISTRADOR ZONAL
 def mostrar_administradorZonal(request):
     if('member_id' in list(request.session.keys())):
-        print(request.session["member_id"])
-        upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
-        return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
+        if('tipo' in list(request.session.keys()) and request.session['tipo'] == 1):
+            print(request.session["member_id"])
+            upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
+            return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
+        if('tipo' in list(request.session.keys())):
+            return HttpResponseRedirect('/administradorGeneral/')            
+
 #     if('member_id' in list(request.session.keys())):
 
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_configuracionCapacidades(request):
-    if request.method=='GET':
-        form = configurarCapacidadesForm()
-        return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
+    if('member_id' in list(request.session.keys())):
+        if('tipo' in list(request.session.keys()) and request.session['tipo'] == 1):
+            if request.method=='GET':
+                form = configurarCapacidadesForm()
+                return render(request, 'helpmapp/Administrador/adminCentro/configuracionCapacidades.html', {'form': form})
 
-    elif request.method=='POST':
-        form = configurarCapacidadesForm(request.POST)
-        if form.is_valid():
-            print("is valid")
-            data = form.cleaned_data
-            ca = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) #data['correo']
-            ca.almacenamiento_agua = data['almacenamiento_agua']
-            ca.almacenamiento_ropa = data['almacenamiento_ropa']
-            ca.almacenamiento_comida = data['almacenamiento_comida']
-            ca.save()
-            print(ca)
-            upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
-            return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
-    form = configurarCapacidadesForm()      
-    return render(request, 'helpmapp/Administrador/adminCentro/index.html', {'form':form})
+            elif request.method=='POST':
+                form = configurarCapacidadesForm(request.POST)
+                if form.is_valid():
+                    print("is valid")
+                    data = form.cleaned_data
+                    ca = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) #data['correo']
+                    ca.almacenamiento_agua = data['almacenamiento_agua']
+                    ca.almacenamiento_ropa = data['almacenamiento_ropa']
+                    ca.almacenamiento_comida = data['almacenamiento_comida']
+                    ca.save()
+                    print(ca)
+                    upc = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id'])
+                    return render(request,'helpmapp/Administrador/adminCentro/index.html',{'upc':upc})
+            form = configurarCapacidadesForm()      
+            return render(request, 'helpmapp/Administrador/adminCentro/index.html', {'form':form})
+        if('tipo' in list(request.session.keys())):
+            return HttpResponseRedirect('/administradorGeneral/')
+    return HttpResponseRedirect('/loginAdmin/')
+
 
 
 def mostrar_configuracionCuenta(request):
-    if request.method=='GET':
-        form = ChangePassAdminForm()
-        return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form': form})
-
-    elif request.method=='POST':
-        form = ChangePassAdminForm(request.POST)
-        if form.is_valid():
-            print("is valid")
-            data = form.cleaned_data
-            admin = Administrador.objects.get(nombre_usuario=request.session['member_id'])
-            if data['password_actual'] == admin.contrasena:
-                if data['password'] == data['confirm_password']:
-                    admin.contrasena = data['password']
-                    admin.save()
-                    form = ChangePassAdminForm()
-                    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form, 'mensaje':'Su contraseña ha sido cambiada.'} )
-                else:
-                    form = ChangePassAdminForm()
-                    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form, 'mensaje':'Las contraseñas no coinciden.'} )
-            else:
+    if('member_id' in list(request.session.keys())):
+        if('tipo' in list(request.session.keys()) and request.session['tipo'] == 1):
+            if request.method=='GET':
                 form = ChangePassAdminForm()
-                return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form,'mensaje':'La contraseña actual que ingreso es incorrecta.'})
-               
-    return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form})
-    
-    
+                return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form': form})
+            elif request.method=='POST':
+                form = ChangePassAdminForm(request.POST)
+                if form.is_valid():
+                    print("is valid")
+                    data = form.cleaned_data
+                    admin = Administrador.objects.get(nombre_usuario=request.session['member_id'])
+                    if data['password_actual'] == admin.contrasena:
+                        if data['password'] == data['confirm_password']:
+                            admin.contrasena = data['password']
+                            admin.save()
+                            form = ChangePassAdminForm()
+                            return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form, 'mensaje':'Su contraseña ha sido cambiada.'} )
+                        else:
+                            form = ChangePassAdminForm()
+                            return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form, 'mensaje':'Las contraseñas no coinciden.'} )
+                    else:
+                        form = ChangePassAdminForm()
+                        return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form,'mensaje':'La contraseña actual que ingreso es incorrecta.'})
+                       
+            return render(request, 'helpmapp/Administrador/adminCentro/configuracionCuenta.html', {'form':form})
+        if('tipo' in list(request.session.keys())):
+            return HttpResponseRedirect('/administradorGeneral/')
+    return HttpResponseRedirect('/loginAdmin/')
 
 
 def mostrar_inventarioAgua(request):
-    if(request.session["member_id"]):
-        if(request.session["tipo"]!=0):
+    if('member_id' in list(request.session.keys())):
+        if('tipo' in list(request.session.keys()) and request.session['tipo'] == 1):
             if request.method=='GET':
                 aguas=Producto.objects.filter(id_categoria=3)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
@@ -472,11 +484,15 @@ def mostrar_inventarioAgua(request):
                     aguas=Producto.objects.filter(id_categoria=3)
                     centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
                     return render(request,'helpmapp/Administrador/adminCentro/inventarioAgua.html',{'aguas':aguas,'centro':centro})
+        if('tipo' in list(request.session.keys())):
+            return HttpResponseRedirect('/administradorGeneral/')    
     return HttpResponseRedirect('/loginAdmin/')
 
+
+
 def mostrar_inventarioComida(request):
-    if(request.session["member_id"]):
-        if(request.session["tipo"]!=0):
+    if('member_id' in list(request.session.keys())):
+        if('tipo' in list(request.session.keys()) and request.session['tipo'] == 1):
             if request.method=='GET':
                 comidas=Producto.objects.filter(id_categoria=1)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
@@ -491,13 +507,13 @@ def mostrar_inventarioComida(request):
                     comidas=Producto.objects.filter(id_categoria=1)
                     centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
                     return render(request,'helpmapp/Administrador/adminCentro/inventarioComida.html',{'comidas':comidas,'centro':centro})
-
-
+        if('tipo' in list(request.session.keys())):
+            return HttpResponseRedirect('/administradorGeneral/')    
     return HttpResponseRedirect('/loginAdmin/')
 
 def mostrar_inventarioRopa(request):
-    if(request.session["member_id"]):
-        if(request.session["tipo"]!=0):
+    if('member_id' in list(request.session.keys())):
+        if('tipo' in list(request.session.keys()) and request.session['tipo'] == 1):
             if request.method=='GET':
                 ropas=Producto.objects.filter(id_categoria=2)
                 centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
@@ -512,9 +528,9 @@ def mostrar_inventarioRopa(request):
                     ropas=Producto.objects.filter(id_categoria=2)
                     centro = CentroDeAcopio.objects.get(usuario_admin=request.session['member_id']) 
                     return render(request,'helpmapp/Administrador/adminCentro/inventarioRopa.html',{'ropas':ropas,'centro':centro})
-
+        if('tipo' in list(request.session.keys())):
+            return HttpResponseRedirect('/administradorGeneral/')    
     return HttpResponseRedirect('/loginAdmin/')
-
 
 
 def profile(request,nombre_usuario):
