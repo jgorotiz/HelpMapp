@@ -58,4 +58,6 @@ class ExistenciaInventarioForm(forms.ModelForm):
         model = ExistenciaInventario
         fields = ( 'id_producto', 'id_centro','cantidad')
 
-
+class CoordenadasForm(forms.Form):
+    latitud = forms.DecimalField(max_digits=8)
+    longitud = forms.DecimalField(max_digits=8)

@@ -21,7 +21,8 @@
         <h2>
           Busca el UPC en el lugar que deseas:
         </h2>
-      <form id="form">
+      <form id="form" method="Post" action="">
+      {% csrf_token %}
           <div class="form-group row">
               <label for="province" class="col-sm-2 col-form-label">Provincia: </label>
             <div class="col-sm-10">
@@ -35,10 +36,6 @@
               <select class=" form-control custom-select mb-2 mr-sm-2 mb-sm-0" id="city">
             </select>
               </div>
-          </div>
-          <div class="form-group row">
-            <form id="coordenadas" method="Post" action="{% url 'helpmapp.views.listar_centroAcopio' %}">
-            </form>
           </div>
       </form>
       </div>

@@ -616,7 +616,6 @@ def obtener_datos(request):
     response_data={}
     l=[] #diccionario que contendrá la cantidad de cada prenda de ropa
     ropa=Producto.objects.filter(id_categoria=2) #filtro todos los productos que sean ropa
-    print(ropa)
     maxropa=0
     for r in ropa:
         prendas=ExistenciaInventario.objects.filter(id_producto=r.id) #filtro todos los inventariados por cada prenda
