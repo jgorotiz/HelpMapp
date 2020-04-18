@@ -59,7 +59,7 @@ class Categoria(models.Model):
 
 class Producto(models.Model):
 	nombre_producto = models.CharField(default="-",max_length=30)
-	id_categoria = models.ForeignKey(Categoria, to_field='id', default=0)
+	id_categoria = models.ForeignKey(Categoria, to_field='id', default=0, on_delete=models.CASCADE)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 
 	def save(self,*args, **kwargs):
@@ -92,7 +92,7 @@ class CentroDeAcopio(models.Model):
 	almacenamiento_agua = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
 	almacenamiento_ropa = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
 	almacenamiento_comida = models.DecimalField(default=0.0,max_digits=8,decimal_places=2)
-	usuario_admin = models.ForeignKey(Administrador, to_field='nombre_usuario', default='-')
+	usuario_admin = models.ForeignKey(Administrador, to_field='nombre_usuario', default='-', on_delete=models.CASCADE)
 
 	def save(self,*args, **kwargs):
 		super(CentroDeAcopio,self).save(*args, **kwargs)
@@ -101,8 +101,8 @@ class CentroDeAcopio(models.Model):
 		return self.nombre_upc
 
 class ExistenciaInventario(models.Model):
-	id_producto = models.ForeignKey(Producto, to_field='id', default=0)
-	id_centro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
+	id_producto = models.ForeignKey(Producto, to_field='id', default=0, on_delete=models.CASCADE)
+	id_centro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0, on_delete=models.CASCADE)
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
 	def save(self,*args, **kwargs):
 		super(ExistenciaInventario,self).save(*args, **kwargs)
@@ -113,8 +113,8 @@ class ExistenciaInventario(models.Model):
 class CambioInventario(models.Model):
 	tipo = models.IntegerField(default=1) #(-1) correccion  (0) envio  (1) ingreso
 	cantidad = models.DecimalField(default=0.0,max_digits=6,decimal_places=2)
-	id_producto = models.ForeignKey(Producto, to_field='id', default=0)
-	id_centro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0)
+	id_producto = models.ForeignKey(Producto, to_field='id', default=0, on_delete=models.CASCADE)
+	id_centro = models.ForeignKey(CentroDeAcopio, to_field='id', default=0, on_delete=models.CASCADE)
 	fecha = models.DateField(auto_now=True)
 	estado = models.IntegerField(default=1) #(1) activo   (0) inactivo
 

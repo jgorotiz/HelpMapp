@@ -25,7 +25,7 @@ SECRET_KEY = 'zcke=$s($s*i=um6b+4vv71q+4rewf(vcvw7id$rs9(b(lt&um'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,12 +41,12 @@ INSTALLED_APPS = (
     
 	)
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -80,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'helpmapp_db',
-	'USER': 'root',
-	'PASSWORD': '0000',
+	'USER': 'postgres',
+	'PASSWORD': '1234',
 	'HOST': 'localhost',
 	'PORT': '',
     }
