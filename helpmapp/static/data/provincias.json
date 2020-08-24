@@ -16,7 +16,7 @@
 		},
 		{
 			"id_provincia": 1024,
-			"nombre": "CaÒar",
+			"nombre": "Ca√±ar",
 			"id_pais": 63,
 			"active": 1
 		},
@@ -142,7 +142,7 @@
 		},
 		{
 			"id_provincia": 4122,
-			"nombre": "Santo Domingo de los Ts·chilas",
+			"nombre": "Santo Domingo de los Ts√°chilas",
 			"id_pais": 63,
 			"active": 1
 		}

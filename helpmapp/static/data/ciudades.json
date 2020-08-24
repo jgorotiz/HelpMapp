@@ -58,7 +58,7 @@
 		},
 		{
 			"id_ciudad": 48324,
-			"nombre": "OÑA",
+			"nombre": "OÃ‘A",
 			"id_provincia": 1022,
 			"active": 1
 		},
@@ -142,7 +142,7 @@
 		},
 		{
 			"id_ciudad": 48338,
-			"nombre": "CAÑAR",
+			"nombre": "CAÃ‘AR",
 			"id_provincia": 1024,
 			"active": 1
 		},
@@ -364,7 +364,7 @@
 		},
 		{
 			"id_ciudad": 48375,
-			"nombre": "PIÑAS",
+			"nombre": "PIÃ‘AS",
 			"id_provincia": 1028,
 			"active": 1
 		},
@@ -442,7 +442,7 @@
 		},
 		{
 			"id_ciudad": 48388,
-			"nombre": "SAN CRISTÓBAL",
+			"nombre": "SAN CRISTÃ“BAL",
 			"id_provincia": 1030,
 			"active": 1
 		},
@@ -580,7 +580,7 @@
 		},
 		{
 			"id_ciudad": 48411,
-			"nombre": "CORONEL MARCELINO MARIDUEÑA",
+			"nombre": "CORONEL MARCELINO MARIDUEÃ‘A",
 			"id_provincia": 1031,
 			"active": 1
 		},
@@ -970,7 +970,7 @@
 		},
 		{
 			"id_ciudad": 48476,
-			"nombre": "LOGROÑO",
+			"nombre": "LOGROÃ‘O",
 			"id_provincia": 1036,
 			"active": 1
 		},
@@ -1138,7 +1138,7 @@
 		},
 		{
 			"id_ciudad": 48504,
-			"nombre": "RUMIÑAHUI",
+			"nombre": "RUMIÃ‘AHUI",
 			"id_provincia": 1040,
 			"active": 1
 		},
@@ -1222,7 +1222,7 @@
 		},
 		{
 			"id_ciudad": 48518,
-			"nombre": "BAÑOS",
+			"nombre": "BAÃ‘OS",
 			"id_provincia": 1042,
 			"active": 1
 		},
