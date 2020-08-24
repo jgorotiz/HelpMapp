@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
@@ -26,14 +26,14 @@
       <div >
         <div class="col-sm-4 col-sm-offset-4" id="logoDiv" >
           <img src="{% static 'img/helpmappLogo.png' %}" alt="logo">
-        <a href="{% url 'helpmapp.views.mostrar_administradorGeneral' %}">
+        <a href="{% url 'helpmapp:mostrar_administradorGeneral' %}">
 
         </div>
         
           <div class="col-md-2 col-md-offset-2 logout">
           <p id="pe-logout">
           <span class="pull-left showopacity glyphicon glyphicon-off"></span>
-           <a href="{% url 'helpmapp.views.cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
+           <a href="{% url 'helpmapp:cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
           </p>
         </div>
 
@@ -57,11 +57,11 @@
   <div>
    <div class="col-sm-3 col-md-3 navbar-div navSuperAdmin">
             <ul class="nav nav-sidebar">
-              <li class="active"><a href="{% url 'helpmapp.views.mostrar_administradorGeneral' %}">Inicio <span class="sr-only">(current)</span></a></li>
-              <li><a href="{% url 'helpmapp.views.buscarCentroAcopio' %}">Buscar centro de acopio</a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_crearProducto' %}">Agregar producto<span class="pull-right showopacity glyphicon glyphicon-plus"></span></a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_configCuenta' %}">Configuración</a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_crearAdministrador' %}">Crear cuenta administrador</a></li>
+              <li class="active"><a href="{% url 'helpmapp:mostrar_administradorGeneral' %}">Inicio <span class="sr-only">(current)</span></a></li>
+              <li><a href="{% url 'helpmapp:buscarCentroAcopio' %}">Buscar centro de acopio</a></li>
+              <li><a href="{% url 'helpmapp:mostrar_crearProducto' %}">Agregar producto<span class="pull-right showopacity glyphicon glyphicon-plus"></span></a></li>
+              <li><a href="{% url 'helpmapp:mostrar_configCuenta' %}">Configuración</a></li>
+              <li><a href="{% url 'helpmapp:mostrar_crearAdministrador' %}">Crear cuenta administrador</a></li>
               
             </ul>
        </div>

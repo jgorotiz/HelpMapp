@@ -1,5 +1,5 @@
 {% extends "helpmapp/Administrador/superAdmin/base.html" %}
-{% load staticfiles %}
+{% load static %}
     {% block title %}HelpMapp-Admin:Buscar centro{% endblock %}
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/verCentro-estilo.css' %}">
@@ -15,7 +15,7 @@
           <h4 class="col-sm-5 locacion">Provincia:</h4>
           <h4 class="col-sm-5 locacion">Canton: </h4> 
 
-          <form method="Post" class="form-vertical list" action="{% url 'helpmapp.views.buscarCentroAcopio' %}">
+          <form method="Post" class="form-vertical list" action="{% url 'helpmapp:buscarCentroAcopio' %}">
           {% csrf_token %}
             <div class="form-group col-sm-5 col-md-5 ">
               <select id="province" name="provincia" class="questionsList"></select>
@@ -64,7 +64,7 @@
                     <td>{{u.id}}</td>
                     <td>{{u.nombre_upc}}</td>
                     <td>{{u.canton}}</td>
-                    <td><a href="{% url 'helpmapp.views.mostrar_verCentro' id_centro=u.pk %}">Ver centro</a></td>
+                    <td><a href="{% url 'helpmapp:mostrar_verCentro' id_centro=u.pk %}">Ver centro</a></td>
                   </tr>
                 {% endfor %}
                 {% else %}

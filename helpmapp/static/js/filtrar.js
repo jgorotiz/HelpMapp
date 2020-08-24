@@ -1,6 +1,7 @@
 function capturar(){
     $.ajax({
-        url : "/static/data/provincias.json", // the endpoint
+        url : "/static/data/provincias.json",// the endpoint
+        contentType: "application/json; charset=utf-8",
         type:"get",
 
         // handle a successful response

@@ -1,12 +1,12 @@
 {% extends "helpmapp/Administrador/superAdmin/base.html" %}
-{% load staticfiles %}
+{% load static %}
     {% block title %}HelpMapp-Admin:Configurar cuenta{% endblock %}
 {% block css %}{% endblock %}
         {% block body %}
      <section class="col-sm-9 col-md-9">
        <div class="container col-sm-9 col-md-9 ">
         <h3>Configuración de cuenta</h3>
-        <form method="Post" class="form-horizontal" action="{% url 'helpmapp.views.mostrar_configCuenta' %}">
+        <form method="Post" class="form-horizontal" action="{% url 'helpmapp:mostrar_configCuenta' %}">
           {% csrf_token %}
           <div class="form-group">
             <label class="control-label col-sm-4" for="oldpass">Contraseña actual:</label>

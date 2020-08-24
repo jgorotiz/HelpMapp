@@ -1,5 +1,5 @@
 {% extends "helpmapp/Administrador/superAdmin/base.html" %}
-{% load staticfiles %}
+{% load static %}
     {% block title %}HelpMapp-Admin:Crear admin{% endblock %}
 {% block css %}
     <link href="{% static 'css/estiloCrearAdmin.css' %}" rel="stylesheet">
@@ -8,7 +8,7 @@
      <section class="col-sm-9 col-md-9">
        <div class="container col-sm-9 col-md-9 ">
         <h3>Crear administrador</h3>
-        <form method="Post" class="form-horizontal" action="{% url 'helpmapp.views.mostrar_crearAdministrador' %}">
+        <form method="Post" class="form-horizontal" action="{% url 'helpmapp:mostrar_crearAdministrador' %}">
         {% csrf_token %}
           <div class="form-group">
             <label class="control-label col-sm-4" for="oldpass">Nombre de usuario:</label>

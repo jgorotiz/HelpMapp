@@ -1,6 +1,6 @@
 {% extends "helpmapp/cliente/bases/base.html" %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block title %}helpMapp - Recovering Password {% endblock %}
 
@@ -11,11 +11,11 @@
 {% endblock %}
 {% block menu%}
   <!--AQUI VA UN CSRF PARA RECOGER EL NOMBRE DEL USUARIO Y LA SESION-->
-  <li><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_indice' %}"> Inicio </a></li>
-  <li ><a class="labels h4 " href="{% url 'helpmapp.views.listar_centroAcopio' %}" > Donar</a></li>
-  <li><a class="labels h4 " href="{% url 'helpmapp.views.registrar_helpmapper' %}" > Voluntario</a></li>
-  <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
-  <li ><a class="labels h4 " href="{% url 'helpmapp.views.mostrar_login' %}"> Ingresar</a> </li>
+  <li><a class="labels h4 " href="{% url 'helpmapp:mostrar_indice' %}"> Inicio </a></li>
+  <li ><a class="labels h4 " href="{% url 'helpmapp:listar_centroAcopio' %}" > Donar</a></li>
+  <li><a class="labels h4 " href="{% url 'helpmapp:registrar_helpmapper' %}" > Voluntario</a></li>
+  <li ><a class="labels h4 " href="{% url 'helpmapp:mostrar_sobreNosotros' %}"> Sobre Nosotros</a> </li>
+  <li ><a class="labels h4 " href="{% url 'helpmapp:mostrar_login' %}"> Ingresar</a> </li>
 {% endblock %}
 {% block body %}
 <div class="top"></div>
@@ -26,7 +26,7 @@
 
 			<div class="login-box">
 				<hr class="featurette-divider">
-				<form method="Post" class="form-horizontal formLogin" action="{% url 'helpmapp.views.mostrar_login' %}">
+				<form method="Post" class="form-horizontal formLogin" action="{% url 'helpmapp:mostrar_login' %}">
         			{% csrf_token %}
 					<div class="row">
 						<div class="col-md-5">
@@ -55,7 +55,7 @@
 					<hr class="featurette-divider">
 					<div class="box-footer">
 						<button type="submit" class="pt-20">Entrar!</button>
-						<a  href="{% url 'helpmapp.views.recovery'%}" class="small link"><p  id="link-recover">¿Olvidaste tu contraseña?</p></a>
+						<a  href="{% url 'helpmapp:recovery'%}" class="small link"><p  id="link-recover">¿Olvidaste tu contraseña?</p></a>
 					</form>
 
 				</div>

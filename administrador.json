@@ -1,1 +1,0 @@
-[{"fields": {"contrasena": "0000", "estado": 1, "tipo": 0, "correo": "admin1@gmail.com"}, "model": "helpmapp.administrador", "pk": "admin1"}, {"fields": {"contrasena": "0000", "estado": 1, "tipo": 1, "correo": "admin2@gmail.com"}, "model": "helpmapp.administrador", "pk": "admin2"}]
