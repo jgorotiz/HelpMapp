@@ -1,5 +1,6 @@
 myvenv
 myvenv/*
+venv
 *.pyc
 \*.pyc
 *~
