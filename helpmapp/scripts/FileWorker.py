@@ -29,9 +29,9 @@ class FileWorker(object):
 			fd = open(filename, 'w')
 			fd.write(jsondata)
 			fd.close()
-			print filename + " ha sido escrito exitosamente"
+			print(filename + " ha sido escrito exitosamente")
 		except:
-			print 'ERROR writing', filename
+			print('ERROR writing', filename)
 			pass
 
 	def write(self,filename,dataList):# write data like .txt file
@@ -42,7 +42,7 @@ class FileWorker(object):
 				line = "%s\n"%(item)
 				fd.write(line)
 			except:
-				print item
+				print(item)
 				pass
 		fd.close()
-		print filename + " ha sido escrito exitosamente"
+		print(filename + " ha sido escrito exitosamente")
