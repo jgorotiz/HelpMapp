@@ -1,6 +1,6 @@
 {% extends "helpmapp/Administrador/adminCentro/base.html" %}
 
-{% load staticfiles %}
+{% load static %}
 {% block title %} HelpMapp-CAcopio:Ropa Inventario {% endblock %}
 {% block css %}
 
@@ -21,7 +21,7 @@
          
       {% for ropa in ropas %}
         
-          <form = method="Post" action="{% url 'helpmapp.views.mostrar_inventarioRopa' %}">
+          <form = method="Post" action="{% url 'helpmapp:mostrar_inventarioRopa' %}">
             {% csrf_token %}
             <label>{{ropa.nombre_producto}}</label>
              <input type="hidden" id="name" name="id_producto" value ='{{ropa.id}}'> 

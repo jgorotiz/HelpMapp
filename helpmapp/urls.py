@@ -1,12 +1,12 @@
 from django.conf.urls import include, url
-from django.contrib import admin
+
 from . import views
 urlpatterns = [
         #For Everyone
         url(r'^$', views.mostrar_indice, name='mostrar_indice'),
         #url(r'^lol$', views.get_name),
         #url(r'^thanks/', views.show_name),
-        url(r'^donar/', views.listar_centroAcopio,name="donar"),
+        url(r'^donar/', views.listar_centroAcopio,name="listar_centroAcopio"),
 #        url(r'^voluntario/', views.mostrar_voluntario,name="mostrar_voluntario"),
         url(r'^equipo/', views.mostrar_sobreNosotros,name="mostrar_sobreNosotros"),
         url(r'^login/', views.mostrar_login,name="mostrar_login"),

@@ -1,1 +1,0 @@
-[{"model": "helpmapp.categoria", "fields": {"nombre_categoria": "comida", "estado": 1, "unidad": "kg"}, "pk": 1}, {"model": "helpmapp.categoria", "fields": {"nombre_categoria": "ropa", "estado": 1, "unidad": "unidades"}, "pk": 2}, {"model": "helpmapp.categoria", "fields": {"nombre_categoria": "agua", "estado": 1, "unidad": "l"}, "pk": 3}]

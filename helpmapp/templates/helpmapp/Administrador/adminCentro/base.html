@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="es">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-2 col-md-offset-2 logout">
             <p id="pe-logout">
-            <span class="pull-left showopacity glyphicon glyphicon-off"></span><a href="{% url 'helpmapp.views.cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
+            <span class="pull-left showopacity glyphicon glyphicon-off"></span><a href="{% url 'helpmapp:cerrarSesion' %}"> Cerrar sesi&oacute;n</a>
             </p>
           </div>
 
@@ -52,13 +52,13 @@
    
      <div class="col-sm-2 col-md-2 navSuperAdmin sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="{% url 'helpmapp.views.mostrar_administradorZonal' %}">Inicio <span class="sr-only">(current)</span><span class="pull-right showopacity glyphicon glyphicon-home"></span></a></li>
+            <li class="active"><a href="{% url 'helpmapp:mostrar_administradorZonal' %}">Inicio <span class="sr-only">(current)</span><span class="pull-right showopacity glyphicon glyphicon-home"></span></a></li>
            <li class="dropdown">
               <a href="#demo" class="dropdown-toggle" data-toggle="collapse">Inventario <span class="caret"></span><span class="pull-right showopacity glyphicon glyphicon-th-list"></span></a>
               <ul class="nav nav-sidebar sidebar-secundario panel-collapse collapse" id="demo" role="menu">
-              <li ><a href="{% url 'helpmapp.views.mostrar_inventarioComida' %}">Comida </a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_inventarioRopa' %}">Ropa</a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_inventarioAgua' %}">Agua</a></li>
+              <li ><a href="{% url 'helpmapp:mostrar_inventarioComida' %}">Comida </a></li>
+              <li><a href="{% url 'helpmapp:mostrar_inventarioRopa' %}">Ropa</a></li>
+              <li><a href="{% url 'helpmapp:mostrar_inventarioAgua' %}">Agua</a></li>
             </ul>
 
            </li>
@@ -71,8 +71,8 @@
              <li class="dropdown">
               <a href="#demo2" class="dropdown-toggle" data-toggle="collapse">Configuraci&oacute;n <span class="caret"></span><span class="pull-right showopacity glyphicon glyphicon-cog"></span></a>
               <ul class="nav nav-sidebar sidebar-secundario panel-collapse collapse" id="demo2" role="menu">
-              <li ><a href="{% url 'helpmapp.views.mostrar_configuracionCuenta' %}">Configuraci&oacute;n de cuenta </a></li>
-              <li><a href="{% url 'helpmapp.views.mostrar_configuracionCapacidades' %}">Configuraci&oacute;n de centro</a></li>
+              <li ><a href="{% url 'helpmapp:mostrar_configuracionCuenta' %}">Configuraci&oacute;n de cuenta </a></li>
+              <li><a href="{% url 'helpmapp:mostrar_configuracionCapacidades' %}">Configuraci&oacute;n de centro</a></li>
               
             </ul>
 
@@ -81,7 +81,7 @@
 
 
 
-            <li id="cerrar-sesion"><a href="{% url 'helpmapp.views.cerrarSesion' %}">Cerrar sesi&oacute;n<span class="pull-right showopacity glyphicon glyphicon-off"></span></a></li>
+            <li id="cerrar-sesion"><a href="{% url 'helpmapp:cerrarSesion' %}">Cerrar sesi&oacute;n<span class="pull-right showopacity glyphicon glyphicon-off"></span></a></li>
             
           </ul>
      </div>

@@ -1,6 +1,6 @@
 	{% extends "helpmapp/cliente/bases/base_hm.html" %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block css%}
 		<link href="{% static 'styles/profile.css' %}" rel="stylesheet">
@@ -25,7 +25,7 @@
 			<h4>	Teléfono &middot; {{hm.telefono}}<br></h4>
 				<a  href="https://mail.espol.edu.ec/" >{{hm.correo}}<br></a>
 			<br>
-			<form method="Post" action="{% url 'helpmapp.views.eliminar_helpmapper' %}">
+			<form method="Post" action="{% url 'helpmapp:eliminar_helpmapper' %}">
 			{% csrf_token %}
 				<input type="submit" id="eliminar" value="Eliminar Cuenta" ">
 			</form>

@@ -1,6 +1,6 @@
 {% extends "helpmapp/Administrador/adminCentro/base.html" %}
 
-{% load staticfiles %}
+{% load static %}
 {% block title %} HelpMapp-CAcopio:Comida Inventario {% endblock %}
 {% block css %}
    
@@ -21,7 +21,7 @@
          
       {% for comida in comidas %}
         
-          <form = method="Post" action="{% url 'helpmapp.views.mostrar_inventarioComida' %}">
+          <form = method="Post" action="{% url 'helpmapp:mostrar_inventarioComida' %}">
             {% csrf_token %}
             <label>{{comida.nombre_producto}}</label>
              <input type="hidden" id="name" name="id_producto" value ='{{comida.id}}'> 

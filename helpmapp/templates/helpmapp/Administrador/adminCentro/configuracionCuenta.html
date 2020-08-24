@@ -1,6 +1,6 @@
 {% extends "helpmapp/Administrador/adminCentro/base.html" %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block title %}HelpMapp-CAcopio:Configurar cuenta {% endblock %}
 
@@ -8,7 +8,7 @@
      
        <div class="container col-sm-9 col-md-9 ">
         <h3>Configuración de cuenta</h3>
-        <form method="Post" class="form-horizontal" action="{% url 'helpmapp.views.mostrar_configuracionCuenta' %}">
+        <form method="Post" class="form-horizontal" action="{% url 'helpmapp:mostrar_configuracionCuenta' %}">
           {% csrf_token %}
           <div class="form-group">
             <label class="control-label col-sm-4" for="oldpass">Contraseña actual:</label>
