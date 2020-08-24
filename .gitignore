@@ -1,6 +1,7 @@
 myvenv
 myvenv/*
 venv
+.idea
 *.pyc
 \*.pyc
 *~
