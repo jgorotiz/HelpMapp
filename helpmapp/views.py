@@ -7,11 +7,29 @@ import string
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 
 from daw.settings import EMAIL_HOST_USER
 from .forms import *
 from .models import *
+
+
+# Decorator for authentication.
+def authenticated(func):
+    """
+    Receives a django view function and decorates it with an session cookie check
+    :param func:
+    :return:
+    """
+
+    def _wrapped_func(*args, **kwargs):
+        request = args[0]
+        if 'member_id' in request.session:
+            return func(*args, **kwargs)
+        else:
+            return redirect('/')
+
+    return _wrapped_func
 
 
 # Controllers for everyone
@@ -38,7 +56,7 @@ def mostrar_sobreNosotros(request):
 
 
 def mostrar_login(request):
-    if (not "member_id" in request.session.keys()):
+    if "member_id" not in request.session.keys():
         if request.method == 'POST':
             form = LoginForm(request.POST)
             if form.is_valid():
@@ -68,7 +86,7 @@ def mostrar_login(request):
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
+@authenticated
 def recovery(request):
     if request.method == 'GET':
         form = RecoveryForm()
@@ -113,14 +131,13 @@ def recovery(request):
                 pass
     return render(request, 'helpmapp/cliente/not_logged/message.html', {'form': form})
 
-
-# For HelpMappers
-
+@authenticated
 def index_hm(request):
     return render(request, 'helpmapp/cliente/helpmapper/index.html')
 
 
 # devolver todos los centros de acopios
+@authenticated
 def listar_centroAcopioHM(request):
     centros = CentroDeAcopio.objects.all()
 
@@ -154,11 +171,11 @@ def mostrar_GraficoEstadistico(request):
 def mostrar_tutoriales(request):
     return render(request, 'helpmapp/cliente/helpmapper/tutoriales.html')
 
-
+@authenticated
 def mostrar_sobreNosotrosHM(request):
     return render(request, 'helpmapp/cliente/helpmapper/aboutus.html')
 
-
+### TODO: Arreglar este endpoint.
 def listar_voluntario(request):
     voluntarios = AyudadorMapa.objects.all()
 
@@ -558,7 +575,7 @@ def mostrar_inventarioRopa(request):
 
 
 def profile(request, nombre_usuario):
-    helpmapper = HelpMapper.objects.get(nombre_usuario=nombre_usuario)
+    helpmapper = get_object_or_404(HelpMapper, pk=nombre_usuario)
     return render(request, 'helpmapp/cliente/helpmapper/profile.html', {'hm': helpmapper})
 
 

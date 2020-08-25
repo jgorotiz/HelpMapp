@@ -14,19 +14,19 @@ urlpatterns = [
     url(r'^recovery/', views.recovery, name="recovery"),
 
     # For HelpMapper
-    url(r'^home/', views.index_hm, name="home"),
-    url(r'^hm/donar/', views.listar_centroAcopioHM, name="donarHM"),
+    url(r'^home/', views.index_hm, name="index_hm"),
+    url(r'^hm/donar/', views.listar_centroAcopioHM, name="listar_centroAcopioHM"),
     url(r'^hm/estadistica/', views.mostrar_GraficoEstadistico, name="mostrar_GraficoEstadistico"),
     url(r'^hm/tutoriales/', views.mostrar_tutoriales, name="mostrar_tutoriales"),
     url(r'^hm/equipo/', views.mostrar_sobreNosotrosHM, name="mostrar_sobreNosotrosHM"),
-    url(r'^newPassword/', views.change_password, name="cambiar_password"),
+    url(r'^newPassword/', views.change_password, name="change_password"),
 
-    url(r'^listar/', views.listar_voluntario, name="listar_voluntario"),
+#    url(r'^listar/', views.listar_voluntario, name="listar_voluntario"),
 
     url(r'^loginAdmin/', views.mostrar_loginAdmin, name="mostrar_loginAdmin"),
 
     url(r'^administradorGeneral/$', views.mostrar_administradorGeneral, name="mostrar_administradorGeneral"),
-    url(r'^administradorGeneral/buscarCentroAcopio/$', views.buscarCentroAcopio),
+    url(r'^administradorGeneral/buscarCentroAcopio/$', views.buscarCentroAcopio, name="buscarCentroAcopio"),
     url(r'^administradorGeneral/configuracionCuenta/$', views.mostrar_configCuenta, name="mostrar_configCuenta"),
     url(r'^administradorGeneral/crearAdmin/$', views.mostrar_crearAdministrador, name="mostrar_crearAdministrador"),
     url(r'^administradorGeneral/verCentro/(?P<id_centro>\d+)/$', views.mostrar_verCentro, name="mostrar_verCentro"),
@@ -45,7 +45,7 @@ urlpatterns = [
 
     url(r'^admin/recuperarCuenta', views.mostrar_recuperarCuenta, name="mostrar_recuperarCuenta"),
 
-    url(r'^profile/(?P<nombre_usuario>\S+)$', views.profile),
+    url(r'^profile/(?P<nombre_usuario>\S+)$', views.profile, name='profile'),
     url(r'^logout/', views.logout, name="logout"),
 
     url(r'^cerrarSesion/', views.cerrarSesion, name="cerrarSesion"),
