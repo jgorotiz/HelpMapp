@@ -20,10 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'zcke=$s($s*i=um6b+4vv71q+4rewf(vcvw7id$rs9(b(lt&um'
+SECRET_KEY = os.environ.get('SECRET_KEY', "DEBUG_SESSION_KEY_HEY_IM_NOT_A_VULNERABILITY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.environ.get('DATABASE_URL', None) is not None else True
+if os.environ.get("DATABASE_URL", None) is None:  # If the ENVVAR is not set, then run in debug mode, else production
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
