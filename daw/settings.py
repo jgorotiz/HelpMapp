@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', "DEBUG_SESSION_KEY_HEY_IM_NOT_A_VULNERABILITY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get("DATABASE_URL", None) is None:  # If the ENVVAR is not set, then run in debug mode, else production
+if os.environ.get("PROD", None) is None:  # If the ENVVAR is not set, then run in debug mode, else production
     DEBUG = True
 else:
     DEBUG = False
@@ -77,10 +77,19 @@ WSGI_APPLICATION = 'daw.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': dj_database_url.config(default='postgres://postgres:1234@localhost/helpmapp_db')
-}
+DATABASES = {}
+if os.environ.get("DATABASE_URL", None) is not None:
+    DATABASES['default'] = dj_database_url.config()
+elif os.environ.get("INSTANCE_URL", None) is not None:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'helpmapp_db',
+        'USER': os.environ.get('DB_USER'),
+        'HOST': os.environ.get("INSTANCE_URL"),
+        'PASSWORD': os.environ.get('DB_PASS')
+    }
+else:
+    DATABASES["default"] = dj_database_url.parse('postgresql://localhost/helpmapp_db')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
